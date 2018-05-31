@@ -3,6 +3,7 @@ package com.besafx.app.rest;
 import com.besafx.app.auditing.PersonAwareUserDetails;
 import com.besafx.app.config.CustomException;
 import com.besafx.app.entity.Person;
+import com.besafx.app.init.Initializer;
 import com.besafx.app.service.ContactService;
 import com.besafx.app.service.PersonService;
 import com.besafx.app.util.JSONConverter;
@@ -70,6 +71,7 @@ public class PersonRest {
         person.setTokenExpired(false);
         person.setActive(false);
         person.setEnabled(true);
+        person.setCompany(Initializer.company);
         person.setOptions(JSONConverter
                                   .toString(Options.builder()
                                                    .lang("AR")
