@@ -235,7 +235,7 @@ public class ContractRest {
             productPurchase.setSeller(contract.getSeller());
             productPurchase.setProduct(productService.findOne(jsonObject_productPurchase.getJSONObject("product").getLong("id")));
             productPurchase.setQuantity(jsonObject_productPurchase.getDouble("quantity"));
-            productPurchase.setUnitPurchasePrice(jsonObject_productPurchase.getDouble("unitPurchasePrice"));
+            productPurchase.setUnitPurchasePrice(jsonObject_productPurchase.getDouble("unitSellPrice"));
 
             LOG.info("إنشاء عملية السحب للشراء");
             BankTransaction bankTransactionWithdrawPurchase = new BankTransaction();

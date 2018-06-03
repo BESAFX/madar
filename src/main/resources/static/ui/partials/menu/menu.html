@@ -585,7 +585,7 @@
             <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
                href=""
                ng-show="contains(me.team.authorities, ['ROLE_COMPANY_UPDATE'])"
-               ng-click="openStateCompany()"
+               ng-click="openStateCompany();toggleDrawer();"
                ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='company'}">
                 <span class="mdl-list__item-primary-content">
                     <img class="material-icons mdl-list__item-icon"
@@ -606,7 +606,7 @@
                             'ROLE_CUSTOMER_DELETE',
                             'ROLE_CUSTOMER_NOTE_CREATE'
                             ])"
-               ng-click="openStateCustomer()"
+               ng-click="openStateCustomer();toggleDrawer();"
                ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='customer'}">
                 <span class="mdl-list__item-primary-content">
                     <img class="material-icons mdl-list__item-icon"
@@ -624,7 +624,7 @@
                             'ROLE_SELLER_UPDATE',
                             'ROLE_SELLER_DELETE'
                             ])"
-               ng-click="openStateSeller()"
+               ng-click="openStateSeller();toggleDrawer();"
                ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='seller'}">
                 <span class="mdl-list__item-primary-content">
                     <img class="material-icons mdl-list__item-icon"
@@ -643,7 +643,7 @@
                             'ROLE_PRODUCT_DELETE',
                             'ROLE_PRODUCT_PURCHASE_CREATE'
                             ])"
-               ng-click="openStateProductPurchase()"
+               ng-click="openStateProductPurchase();toggleDrawer();"
                ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='productPurchase'}">
                 <span class="mdl-list__item-primary-content">
                     <img class="material-icons mdl-list__item-icon"
@@ -663,7 +663,7 @@
                             'ROLE_CONTRACT_DELETE',
                             'ROLE_PRODUCT_PURCHASE_CREATE'
                             ])"
-               ng-click="openStateContract()"
+               ng-click="openStateContract();toggleDrawer();"
                ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='contract'}">
                 <span class="mdl-list__item-primary-content">
                     <img class="material-icons mdl-list__item-icon"
@@ -679,7 +679,7 @@
                ng-show="contains(me.team.authorities, [
                             'ROLE_COMPANY_UPDATE',
                             ])"
-               ng-click="openStateBankTransaction()"
+               ng-click="openStateBankTransaction();toggleDrawer();"
                ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='bankTransaction'}">
                 <span class="mdl-list__item-primary-content">
                     <img class="material-icons mdl-list__item-icon"
@@ -699,7 +699,7 @@
                             'ROLE_PERSON_UPDATE',
                             'ROLE_PERSON_DELETE'
                             ])"
-               ng-click="openStatePerson()"
+               ng-click="openStatePerson();toggleDrawer();"
                ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='person'}">
                 <span class="mdl-list__item-primary-content">
                     <img class="material-icons mdl-list__item-icon"
@@ -717,7 +717,7 @@
                             'ROLE_TEAM_UPDATE',
                             'ROLE_TEAM_DELETE'
                             ])"
-               ng-click="openStateTeam()"
+               ng-click="openStateTeam();toggleDrawer();"
                ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='team'}">
                 <span class="mdl-list__item-primary-content">
                     <img class="material-icons mdl-list__item-icon"

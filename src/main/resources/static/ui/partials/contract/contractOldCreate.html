@@ -453,10 +453,6 @@
                             </th>
 
                             <th>
-                                <span>سعر شراء الوحدة</span>
-                            </th>
-
-                            <th>
                                 <span>سعر بيع الوحدة</span>
                             </th>
 
@@ -465,10 +461,6 @@
                                 <i uib-tooltip="القيمة المضافة للوحدة"
                                    tooltip-append-to-body="true"
                                    class="fa fa-info-circle"></i>
-                            </th>
-
-                            <th>
-                                <span>مجموع الشراء</span>
                             </th>
 
                             <th>
@@ -564,19 +556,9 @@
                                        required="required"
                                        disable-validation-message=""
                                        class="form-control"
-                                       ng-model="productPurchase.unitPurchasePrice">
-                            </td>
-                            <td width="10%">
-                                <input dir="rtl"
-                                       type="number"
-                                       min="1"
-                                       required="required"
-                                       disable-validation-message=""
-                                       class="form-control"
                                        ng-model="productPurchase.unitSellPrice">
                             </td>
                             <td>{{productPurchase.unitVat = (productPurchase.unitSellPrice * selectedCompany.vatFactor) | currency:'':2}}</td>
-                            <td>{{productPurchase.totalPurchase = (productPurchase.quantity * productPurchase.unitPurchasePrice) | currency:' SAR ':2}}</td>
                             <td>{{productPurchase.totalSell = (productPurchase.quantity * productPurchase.unitSellPrice) | currency:' SAR ':2}}</td>
                             <td>
                                 <div class="row">
@@ -601,7 +583,7 @@
                         </tr>
                         <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
                             ng-show="!productPurchases || productPurchases.length ==0">
-                            <td colspan="9">
+                            <td colspan="7">
                                 <p>
                                     <span>قم باضافة السلع من خلال هذا الرابط </span>
                                     <a href="" ng-click="addProductPurchase()">اضغط هنا</a>
