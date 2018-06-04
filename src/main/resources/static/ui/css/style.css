@@ -797,6 +797,10 @@ WebKit inertia scrolling is being added here for any present/future devices that
         font-family: 'Droid Arabic Naskh', 'Roboto Condensed', sans-serif;
     }
 
+    html p {
+        padding: 5px!important;
+    }
+
     html,
     body{
         background: white!important;
@@ -845,8 +849,8 @@ WebKit inertia scrolling is being added here for any present/future devices that
     .template-box{
         background-color: white;
         border: thin solid;
-        border-radius: 8px;
-        padding: 10px;
+        border-radius: 3px;
+        padding: 5px;
     }
 
     .template-border{
@@ -871,8 +875,8 @@ WebKit inertia scrolling is being added here for any present/future devices that
 .template-box{
     background-color: white;
     border: thin solid;
-    border-radius: 8px;
-    padding: 10px;
+    border-radius: 3px;
+    padding: 5px;
 }
 
 .template-border{
