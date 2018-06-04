@@ -53,7 +53,7 @@ public class ContractRest {
     private final String FILTER_DETAILS = "" +
             "**," +
             "seller[id,contact[id,mobile,shortName]]," +
-            "customer[id,contact[id,mobile,identityNumber,address,shortName]]," +
+            "customer[id,contact[id,mobile,identityNumber,address,shortName,qualification]]," +
             "sponsor1[id,contact[id,mobile,shortName,qualification]]," +
             "sponsor2[id,contact[id,mobile,shortName,qualification]]," +
             "contractProducts[**,-contract,productPurchase[id,product[id,name]]]," +
