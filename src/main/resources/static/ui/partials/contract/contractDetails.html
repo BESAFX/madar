@@ -647,6 +647,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <p class="text-right">
                                         <span>نعم أنا الطرف الثاني لقد اشتريت من الطرف الأول: </span>
+                                        {{contract.contractProductsNames}}
                                     </p>
                                 </div>
 
@@ -669,6 +670,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <p class="text-right">
                                         <span>على أن يكون السداد على أقساط شهرية بمعدل:</span>
+                                        {{contract.premiumAmount | currency:'':2}}
                                     </p>
                                 </div>
 
@@ -679,6 +681,8 @@
                                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                     <p class="text-right">
                                         <span>لكل شهر اعتباراً من:</span>
+                                        <span ng-show="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.premiumStartDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                        <span ng-show="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contract.premiumStartDate | date: 'yyyy-MM-dd'}}</span>
                                     </p>
                                 </div>
 
@@ -687,6 +691,7 @@
                                 <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                                     <p class="text-right">
                                         <span>وقمت بدفع دفعة مالية مقدمة وقدرها:</span>
+                                        {{contract.advancedAmount | currency:'':2}}
                                     </p>
                                 </div>
 
@@ -721,20 +726,22 @@
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                         <p class="text-right">
                                             <span>أقر أنا المدعو:</span>
-                                            {{contract.sponsor1.contact.shortName}}
                                         </p>
                                     </div>
 
-                                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"></div>
+                                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                        {{contract.sponsor1.contact.shortName}}
+                                    </div>
 
                                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                         <p class="text-right">
                                             <span>العمل:</span>
-                                            {{contract.sponsor1.contact.qualification}}
                                         </p>
                                     </div>
 
-                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+                                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                        {{contract.sponsor1.contact.qualification}}
+                                    </div>
 
                                 </div>
 
@@ -775,7 +782,7 @@
                                         <p class="text-right">
                                             <span>أقر وأعترف أنني أكفل المدعو/ </span>
                                             <strong>{{contract.customer.contact.shortName}}</strong>
-                                            <span>، كفالة غارمية فى حالة الحياة والممات بمبلغ وقدره/ </span>
+                                            <span>، كفالة غرامية فى حالة الحياة والممات بمبلغ وقدره/ </span>
                                             {{contract.totalPrice | currency:'':2}}
                                             <span> ريال سعودي فقط لا غير ، دون أي تهاون أو تأخير</span>
                                         </p>
@@ -848,7 +855,7 @@
                                         <p class="text-right">
                                             <span>أقر وأعترف أنني أكفل المدعو/ </span>
                                             <strong>{{contract.customer.contact.shortName}}</strong>
-                                            <span>، كفالة غارمية فى حالة الحياة والممات بمبلغ وقدره/ </span>
+                                            <span>، كفالة غرامية فى حالة الحياة والممات بمبلغ وقدره/ </span>
                                             {{contract.totalPrice | currency:'':2}}
                                             <span> ريال سعودي فقط لا غير ، دون أي تهاون أو تأخير</span>
                                         </p>

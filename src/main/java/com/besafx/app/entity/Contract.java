@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -43,6 +44,10 @@ public class Contract implements Serializable {
 
     private Double discount;
 
+    private Double premiumAmount;
+
+    private Double advancedAmount;
+
     @ManyToOne
     @JoinColumn(name = "seller")
     private Seller seller;
@@ -61,6 +66,9 @@ public class Contract implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date writtenDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date premiumStartDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
@@ -191,6 +199,17 @@ public class Contract implements Serializable {
             return (this.getProfit() / this.getCapitalCash()) * 100;
         } catch (Exception ex) {
             return 0.0;
+        }
+    }
+
+    public String getContractProductsNames() {
+        try {
+            return String.join(", ", this.contractProducts
+                    .stream()
+                    .map(contractProduct -> contractProduct.getProductPurchase().getProduct().getName())
+                    .toArray(String[]::new));
+        } catch (Exception ex) {
+            return "";
         }
     }
 

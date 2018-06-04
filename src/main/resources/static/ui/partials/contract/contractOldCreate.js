@@ -152,6 +152,10 @@ app.controller('contractOldCreateCtrl', ['ContractService', 'CustomerService', '
 
             $scope.contract.discount = 0;
 
+            $scope.contract.premiumAmount = 0;
+
+            $scope.contract.advancedAmount = 0;
+
             $scope.contract.paid = 0;
 
             $scope.customers = [];

@@ -26,6 +26,11 @@ app.factory("ContractService",
                     return response.data;
                 });
             },
+            update: function (contract) {
+                return $http.put("/api/contract/update", contract).then(function (response) {
+                    return response.data;
+                });
+            },
             remove: function (id) {
                 return $http.delete("/api/contract/delete/" + id);
             },

@@ -902,12 +902,6 @@ WebKit inertia scrolling is being added here for any present/future devices that
     text-transform: unset !important;
 }
 
-.alert-danger {
-    background-color: #e74c3c !important;
-    font-size: 16px !important;
-    border-radius: 5px !important;
-}
-
 .modal-body {
     max-height: 400px !important;
     overflow: auto !important;

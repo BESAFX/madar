@@ -1108,6 +1108,18 @@ app.controller("menuCtrl", [
             },
             {
                 html: '<div class="drop-menu">' +
+                '<img src="/ui/img/' + $rootScope.iconSet + '/edit.' + $rootScope.iconSetType + '" width="24" height="24">' +
+                '<span>تعديل...</span>' +
+                '</div>',
+                enabled: function () {
+                    return $rootScope.contains($rootScope.me.team.authorities, ['ROLE_CONTRACT_UPDATE']);
+                },
+                click: function ($itemScope, $event, value) {
+                    ModalProvider.openContractUpdateModel($itemScope.contract);
+                }
+            },
+            {
+                html: '<div class="drop-menu">' +
                 '<img src="/ui/img/' + $rootScope.iconSet + '/product.' + $rootScope.iconSetType + '" width="24" height="24">' +
                 '<span>اضافة سلعة...</span>' +
                 '</div>',

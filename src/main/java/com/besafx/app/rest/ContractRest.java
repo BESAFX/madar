@@ -54,8 +54,8 @@ public class ContractRest {
             "**," +
             "seller[id,contact[id,mobile,shortName]]," +
             "customer[id,contact[id,mobile,identityNumber,address,shortName]]," +
-            "sponsor1[id,contact[id,mobile,shortName]]," +
-            "sponsor2[id,contact[id,mobile,shortName]]," +
+            "sponsor1[id,contact[id,mobile,shortName,qualification]]," +
+            "sponsor2[id,contact[id,mobile,shortName,qualification]]," +
             "contractProducts[**,-contract,productPurchase[id,product[id,name]]]," +
             "contractPremiums[**,-contract,-contractPayments]," +
             "contractPayments[**,person[id,contact[id,shortName]],-contract,-contractPremium,-bankTransaction]," +
@@ -134,6 +134,27 @@ public class ContractRest {
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contract);
     }
 
+    @PutMapping(value = "update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @PreAuthorize("hasRole('ROLE_CONTRACT_UPDATE')")
+    @Transactional
+    public String update(@RequestBody Contract contract) {
+        if (contractService.findByCodeAndIdIsNot(contract.getCode(), contract.getId()) != null) {
+            throw new CustomException("هذا الكود مستخدم سابقاً، فضلاً قم بتغير الكود.");
+        }
+        Contract object = contractService.findOne(contract.getId());
+        if (object != null) {
+            contract = contractService.save(contract);
+            notificationService.notifyAll(Notification
+                                                  .builder()
+                                                  .message("تم تعديل بيانات العقد الأساسية بنجاح")
+                                                  .type("success").build());
+            return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contract);
+        } else {
+            return null;
+        }
+    }
+
     @PostMapping(value = "createOld", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_CONTRACT_CREATE')")
@@ -159,7 +180,10 @@ public class ContractRest {
         contract.setPaperFees(jsonObject_contract.has("paperFees") ? jsonObject_contract.getDouble("paperFees") : null);
         contract.setCommissionFees(jsonObject_contract.has("commissionFees") ? jsonObject_contract.getDouble("commissionFees") : null);
         contract.setLawFees(jsonObject_contract.has("lawFees") ? jsonObject_contract.getDouble("lawFees") : null);
+        contract.setPremiumAmount(jsonObject_contract.has("premiumAmount") ? jsonObject_contract.getDouble("premiumAmount") : null);
+        contract.setAdvancedAmount(jsonObject_contract.has("advancedAmount") ? jsonObject_contract.getDouble("advancedAmount") : null);
         contract.setWrittenDate(DateConverter.parseJsonStringDate(jsonObject_contract.getString("writtenDate")));
+        contract.setPremiumStartDate(DateConverter.parseJsonStringDate(jsonObject_contract.getString("premiumStartDate")));
         contract.setCustomer(customerService.findOne(jsonObject_contract.getJSONObject("customer").getLong("id")));
         contract.setSeller(sellerService.findOne(jsonObject_contract.getJSONObject("seller").getLong("id")));
         contract.setSponsor1(jsonObject_contract.has("sponsor1") ? customerService.findOne(jsonObject_contract.getJSONObject("sponsor1").getLong("id")) : null);

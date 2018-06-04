@@ -134,6 +134,12 @@ app.controller('teamCreateUpdateCtrl', ['TeamService', '$scope', '$rootScope', '
             category: 'الإدارة'
         });
         $scope.roles.push({
+            name: 'تعديل العقود',
+            value: 'ROLE_CONTRACT_UPDATE',
+            selected: false,
+            category: 'الإدارة'
+        });
+        $scope.roles.push({
             name: 'حذف العقود',
             value: 'ROLE_CONTRACT_DELETE',
             selected: false,

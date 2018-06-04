@@ -248,6 +248,26 @@ app.service('ModalProvider', ['$uibModal', '$log', function ($uibModal, $log) {
         });
     };
 
+    this.openContractUpdateModel = function (contract) {
+        return $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: '/ui/partials/contract/contractUpdate.html',
+            controller: 'contractUpdateCtrl',
+            backdrop: 'static',
+            keyboard: false,
+            windowClass: 'xlg',
+            resolve: {
+                contract: ['ContractService', function (ContractService) {
+                    return ContractService.findOne(contract.id).then(function (data) {
+                        return contract = data;
+                    });
+                }]
+            }
+        });
+    };
+
     this.openContractOldCreateModel = function () {
         return $uibModal.open({
             animation: true,

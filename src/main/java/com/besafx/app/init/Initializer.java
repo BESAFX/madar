@@ -183,6 +183,7 @@ public class Initializer implements CommandLineRunner {
                                             "ROLE_PRODUCT_DELETE",
                                             "ROLE_PRODUCT_PURCHASE_CREATE",
                                             "ROLE_CONTRACT_CREATE",
+                                            "ROLE_CONTRACT_UPDATE",
                                             "ROLE_CONTRACT_DELETE",
                                             "ROLE_CONTRACT_PRODUCT_CREATE",
                                             "ROLE_CONTRACT_PRODUCT_DELETE",
