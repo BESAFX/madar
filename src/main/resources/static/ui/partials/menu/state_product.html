@@ -201,7 +201,7 @@
                             <td>{{product.totalQuantity}}</td>
                             <td>{{product.soledQuantity}}</td>
                             <td
-                                ng-class="{'success': product.remain > 0, 'danger': product.remain <=0}">
+                                ng-class="{'success': product.remainQuantity > 0, 'danger': product.remainQuantity <=0}">
                                 <span>{{product.remainQuantity}}</span>
                             </td>
                             <td>{{product.person.contact.shortName}}</td>
