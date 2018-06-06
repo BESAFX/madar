@@ -2,6 +2,7 @@ app.controller("menuCtrl", [
     'CompanyService',
     'CustomerService',
     'SellerService',
+    'ProductService',
     'ProductPurchaseService',
     'ContractService',
     'ContractPremiumService',
@@ -21,6 +22,7 @@ app.controller("menuCtrl", [
     function (CompanyService,
               CustomerService,
               SellerService,
+              ProductService,
               ProductPurchaseService,
               ContractService,
               ContractPremiumService,
@@ -54,6 +56,10 @@ app.controller("menuCtrl", [
                 }
                 case 'seller': {
                     $scope.pageTitle = 'المستثمرين';
+                    break;
+                }
+                case 'product': {
+                    $scope.pageTitle = 'السلع';
                     break;
                 }
                 case 'productPurchase': {
@@ -122,6 +128,11 @@ app.controller("menuCtrl", [
         $scope.openStateSeller = function () {
             $scope.toggleState = 'seller';
             $scope.searchSellers({});
+            $rootScope.refreshGUI();
+        };
+        $scope.openStateProduct = function () {
+            $scope.toggleState = 'product';
+            $scope.searchProducts({});
             $rootScope.refreshGUI();
         };
         $scope.openStateProductPurchase = function () {
@@ -670,6 +681,133 @@ app.controller("menuCtrl", [
 
         /**************************************************************************************************************
          *                                                                                                            *
+         * Product                                                                                                    *
+         *                                                                                                            *
+         **************************************************************************************************************/
+        $scope.products = [];
+        $scope.paramProduct = {};
+        $scope.products.checkAll = false;
+        $scope.parents = [];
+
+        $scope.pageProduct = {};
+        $scope.pageProduct.sorts = [];
+        $scope.pageProduct.page = 0;
+        $scope.pageProduct.totalPages = 0;
+        $scope.pageProduct.currentPage = $scope.pageProduct.page + 1;
+        $scope.pageProduct.currentPageString = ($scope.pageProduct.page + 1) + ' / ' + $scope.pageProduct.totalPages;
+        $scope.pageProduct.size = 25;
+        $scope.pageProduct.first = true;
+        $scope.pageProduct.last = true;
+
+        $scope.openProductsFilter = function () {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: '/ui/partials/product/productFilter.html',
+                controller: 'productFilterCtrl',
+                scope: $scope,
+                backdrop: 'static',
+                keyboard: false
+            });
+
+            modalInstance.result.then(function (paramProduct) {
+                $scope.searchProducts(paramProduct);
+            }, function () {});
+        };
+        $scope.searchProducts = function (paramProduct) {
+            var search = [];
+            search.push('size=');
+            search.push($scope.pageProduct.size);
+            search.push('&');
+            search.push('page=');
+            search.push($scope.pageProduct.page);
+            search.push('&');
+            angular.forEach($scope.pageProduct.sorts, function (sortBy) {
+                search.push('sort=');
+                search.push(sortBy.name + ',' + sortBy.direction);
+                search.push('&');
+            });
+            if ($scope.pageProduct.sorts.length === 0) {
+                search.push('sort=name,asc&');
+            }
+            //Product Filters
+            if (paramProduct.codeFrom) {
+                search.push('codeFrom=');
+                search.push(paramProduct.codeFrom);
+                search.push('&');
+            }
+            if (paramProduct.codeTo) {
+                search.push('codeTo=');
+                search.push(paramProduct.codeTo);
+                search.push('&');
+            }
+            if (paramProduct.registerDateTo) {
+                search.push('registerDateTo=');
+                search.push(paramProduct.registerDateTo.getTime());
+                search.push('&');
+            }
+            if (paramProduct.registerDateFrom) {
+                search.push('registerDateFrom=');
+                search.push(paramProduct.registerDateFrom.getTime());
+                search.push('&');
+            }
+            if (paramProduct.name) {
+                search.push('name=');
+                search.push(paramProduct.name);
+                search.push('&');
+            }
+            if (paramProduct.parent) {
+                search.push('parentId=');
+                search.push(paramProduct.parent.id);
+                search.push('&');
+            }
+
+            ProductService.filter(search.join("")).then(function (data) {
+                $scope.products = data.content;
+
+                $scope.pageProduct.currentPage = $scope.pageProduct.page + 1;
+                $scope.pageProduct.first = data.first;
+                $scope.pageProduct.last = data.last;
+                $scope.pageProduct.number = data.number;
+                $scope.pageProduct.numberOfElements = data.numberOfElements;
+                $scope.pageProduct.size = data.size;
+                $scope.pageProduct.totalElements = data.totalElements;
+                $scope.pageProduct.totalPages = data.totalPages;
+                $scope.pageProduct.currentPageString = ($scope.pageProduct.page + 1) + ' / ' + $scope.pageProduct.totalPages;
+
+                $timeout(function () {
+                    window.componentHandler.upgradeAllRegistered();
+                }, 300);
+            });
+        };
+        $scope.selectNextProductsPage = function () {
+            $scope.pageProduct.page++;
+            $scope.searchProducts($scope.paramProduct);
+        };
+        $scope.selectPrevProductsPage = function () {
+            $scope.pageProduct.page--;
+            $scope.searchProducts($scope.paramProduct);
+        };
+        $scope.newProduct = function () {
+            ModalProvider.openProductCreateModel().result.then(function (data) {
+                $scope.products.splice(0, 0, data);
+                $timeout(function () {
+                    window.componentHandler.upgradeAllRegistered();
+                }, 300);
+            });
+        };
+        $scope.newParent = function () {
+            ModalProvider.openParentCreateModel().result.then(function (data) {
+                $scope.parents.splice(0, 0, data);
+                $timeout(function () {
+                    window.componentHandler.upgradeAllRegistered();
+                }, 300);
+            });
+        };
+
+        /**************************************************************************************************************
+         *                                                                                                            *
          * ProductPurchase                                                                                            *
          *                                                                                                            *
          **************************************************************************************************************/
@@ -810,31 +948,6 @@ app.controller("menuCtrl", [
             $scope.pageProductPurchase.page--;
             $scope.searchProductPurchases($scope.paramProductPurchase);
         };
-
-        /**************************************************************************************************************
-         *                                                                                                            *
-         * Product                                                                                                    *
-         *                                                                                                            *
-         **************************************************************************************************************/
-        $scope.products = [];
-        $scope.newProduct = function () {
-            ModalProvider.openProductCreateModel().result.then(function (data) {
-                $scope.products.splice(0, 0, data);
-                $timeout(function () {
-                    window.componentHandler.upgradeAllRegistered();
-                }, 300);
-            });
-        };
-        $scope.parents = [];
-        $scope.newParent = function () {
-            ModalProvider.openParentCreateModel().result.then(function (data) {
-                $scope.parents.splice(0, 0, data);
-                $timeout(function () {
-                    window.componentHandler.upgradeAllRegistered();
-                }, 300);
-            });
-        };
-        $scope.productPurchases = [];
         $scope.newProductPurchase = function () {
             ModalProvider.openProductPurchaseCreateModel().result.then(function (data) {
                 // $scope.productPurchases.splice(0, 0, data);

@@ -28,6 +28,11 @@ app.factory("ProductService",
                 return $http.put("/api/product/update", product).then(function (response) {
                     return response.data;
                 });
+            },
+            filter: function (search) {
+                return $http.get("/api/product/filter?" + search).then(function (response) {
+                    return response.data;
+                });
             }
         };
     }]);

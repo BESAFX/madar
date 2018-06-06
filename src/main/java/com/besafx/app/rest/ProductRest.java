@@ -4,6 +4,7 @@ import com.besafx.app.auditing.PersonAwareUserDetails;
 import com.besafx.app.config.CustomException;
 import com.besafx.app.entity.Person;
 import com.besafx.app.entity.Product;
+import com.besafx.app.search.ProductSearch;
 import com.besafx.app.service.ProductService;
 import com.besafx.app.ws.Notification;
 import com.besafx.app.ws.NotificationService;
@@ -14,6 +15,7 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,6 +49,9 @@ public class ProductRest {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductSearch productSearch;
 
     @Autowired
     private NotificationService notificationService;
@@ -133,5 +138,30 @@ public class ProductRest {
     public String findChilds(@PathVariable(value = "parentId") Long parentId) {
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_CHILD),
                                        productService.findByParentId(parentId));
+    }
+
+    @GetMapping(value = "filter", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String filter(
+            //Product Filters
+            @RequestParam(value = "codeFrom", required = false) final Integer codeFrom,
+            @RequestParam(value = "codeTo", required = false) final Integer codeTo,
+            @RequestParam(value = "registerDateFrom", required = false) final Long registerDateFrom,
+            @RequestParam(value = "registerDateTo", required = false) final Long registerDateTo,
+            @RequestParam(value = "name", required = false) final String name,
+            @RequestParam(value = "parentId", required = false) final Long parentId,
+            Pageable pageable) {
+        return SquigglyUtils.stringify(
+                Squiggly.init(
+                        new ObjectMapper(),
+                        "**,".concat("content[").concat(FILTER_TABLE).concat("]")),
+                productSearch.filter(
+                        codeFrom,
+                        codeTo,
+                        registerDateFrom,
+                        registerDateTo,
+                        name,
+                        parentId,
+                        pageable));
     }
 }

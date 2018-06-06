@@ -56,6 +56,23 @@
             'ROLE_PRODUCT_UPDATE',
             'ROLE_PRODUCT_DELETE',
             ])"
+             ng-click="openStateProduct()">
+            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/product.{{iconSetType}}')">
+                <div class="mdl-card__title mdl-card--expand"></div>
+            </div>
+            <div class="mdl-card__actions">
+                <a class="card-image__filename">
+                    <span>السلع</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 parent text-center"
+             ng-show="contains(me.team.authorities, [
+            'ROLE_PRODUCT_CREATE',
+            'ROLE_PRODUCT_UPDATE',
+            'ROLE_PRODUCT_DELETE',
+            ])"
              ng-click="openStateProductPurchase()">
             <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/productPurchase.{{iconSetType}}')">
                 <div class="mdl-card__title mdl-card--expand"></div>

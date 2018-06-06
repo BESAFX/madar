@@ -114,6 +114,21 @@
                             ng-show="contains(me.team.authorities, [
                             'ROLE_PRODUCT_CREATE',
                             'ROLE_PRODUCT_UPDATE',
+                            'ROLE_PRODUCT_DELETE'
+                            ])"
+                            ng-click="openStateProduct()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/product.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                               <span>السلع</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-show="contains(me.team.authorities, [
+                            'ROLE_PRODUCT_CREATE',
+                            'ROLE_PRODUCT_UPDATE',
                             'ROLE_PRODUCT_DELETE',
                             'ROLE_PRODUCT_PURCHASE_CREATE'
                             ])"
@@ -635,6 +650,26 @@
                 </span>
             </a>
 
+            <div class="mdl-menu__item--full-bleed-divider"></div>
+
+            <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
+               href=""
+               ng-show="contains(me.team.authorities, [
+                            'ROLE_PRODUCT_CREATE',
+                            'ROLE_PRODUCT_UPDATE',
+                            'ROLE_PRODUCT_DELETE'
+                            ])"
+               ng-click="openStateProduct();toggleDrawer();"
+               ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='product'}">
+                <span class="mdl-list__item-primary-content">
+                    <img class="material-icons mdl-list__item-icon"
+                         ng-src="/ui/img/{{iconSet}}/product.{{iconSetType}}"
+                         width="24"
+                         height="24">
+                    <span>السلع</span>
+                </span>
+            </a>
+
             <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
                href=""
                ng-show="contains(me.team.authorities, [
@@ -755,6 +790,12 @@
         <div ng-if="toggleState==='seller'" class="row" style="margin-top: 10px">
 
             <div ng-include="'ui/partials/menu/state_seller.html'"></div>
+
+        </div>
+
+        <div ng-if="toggleState==='product'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_product.html'"></div>
 
         </div>
 

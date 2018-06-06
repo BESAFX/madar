@@ -154,6 +154,7 @@ gulp.task('scripts', function () {
         './partials/bankTransaction/withdrawCashCreate.js',
         './partials/product/parentCreateUpdate.js',
         './partials/product/productCreateUpdate.js',
+        './partials/product/productFilter.js',
         './partials/product/productPurchaseCreate.js',
         './partials/person/personCreateUpdate.js',
         './partials/team/teamCreateUpdate.js',
