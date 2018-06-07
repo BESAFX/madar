@@ -84,12 +84,12 @@
                                    ng-model="paramProduct.codeTo">
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-init="paramProduct.calendar='H'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-init="buffer={};buffer.calendar='H'">
                             <label for="calendar" class="control-label">نوع التقويم</label>
                             <select id="calendar"
                                     style="height: 40px"
                                     class="form-control"
-                                    ng-model="paramProduct.calendar"
+                                    ng-model="buffer.calendar"
                                     required="required"
                                     disable-validation-message="">
                                 <option value="H">تقويم هجري</option>
@@ -97,7 +97,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramProduct.calendar==='H'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='H'">
                             <label for="registerDateFrom" class="control-label">تاريخ التسجيل من</label>
                             <div dir="ltr" class="input-group">
                                 <input dir="rtl"
@@ -114,7 +114,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramProduct.calendar==='H'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='H'">
                             <label for="registerDateTo" class="control-label">تاريخ التسجيل إلى</label>
                             <div dir="ltr" class="input-group">
                                 <input dir="rtl"
@@ -131,7 +131,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramProduct.calendar==='G'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='G'">
                             <label for="G-registerDateFrom" class="control-label">تاريخ التسجيل من</label>
                             <input id="G-registerDateFrom"
                                    class="form-control"
@@ -142,7 +142,7 @@
                                    datetime="yyyy-MM-dd"/>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramProduct.calendar==='G'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='G'">
                             <label for="G-registerDateTo" class="control-label">تاريخ التسجيل إلى</label>
                             <input id="G-registerDateTo"
                                    class="form-control"

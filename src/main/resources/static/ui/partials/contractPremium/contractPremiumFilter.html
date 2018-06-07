@@ -32,12 +32,12 @@
 
                     <div class="form-group row">
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-init="paramContractPremium.calendar='H'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-init="buffer={};buffer.calendar='H'">
                             <label for="calendar" class="control-label">نوع التقويم</label>
                             <select id="calendar"
                                     style="height: 40px"
                                     class="form-control"
-                                    ng-model="paramContractPremium.calendar"
+                                    ng-model="buffer.calendar"
                                     required="required"
                                     disable-validation-message="">
                                 <option value="H">تقويم هجري</option>
@@ -45,7 +45,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramContractPremium.calendar==='H'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='H'">
                             <label for="dueDateFrom" class="control-label">تاريخ الاستحقاق من</label>
                             <div dir="ltr" class="input-group">
                                 <input dir="rtl"
@@ -62,7 +62,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramContractPremium.calendar==='H'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='H'">
                             <label for="dueDateTo" class="control-label">تاريخ الاستحقاق إلى</label>
                             <div dir="ltr" class="input-group">
                                 <input dir="rtl"
@@ -79,7 +79,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramContractPremium.calendar==='G'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='G'">
                             <label for="G-dueDateFrom" class="control-label">تاريخ الاستحقاق من</label>
                             <input id="G-dueDateFrom"
                                    class="form-control"
@@ -90,7 +90,7 @@
                                    datetime="yyyy-MM-dd"/>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramContractPremium.calendar==='G'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='G'">
                             <label for="G-dueDateTo" class="control-label">تاريخ الاستحقاق إلى</label>
                             <input id="G-dueDateTo"
                                    class="form-control"

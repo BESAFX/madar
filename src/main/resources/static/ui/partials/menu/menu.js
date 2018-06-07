@@ -271,6 +271,7 @@ app.controller("menuCtrl", [
             });
 
             modalInstance.result.then(function (paramCustomer) {
+                $scope.paramCustomer = paramCustomer;
                 $scope.searchCustomers(paramCustomer);
             }, function () {
             });
@@ -502,6 +503,7 @@ app.controller("menuCtrl", [
             });
 
             modalInstance.result.then(function (paramSeller) {
+                $scope.paramSeller = paramSeller;
                 $scope.searchSellers(paramSeller);
             }, function () {
             });
@@ -712,6 +714,7 @@ app.controller("menuCtrl", [
             });
 
             modalInstance.result.then(function (paramProduct) {
+                $scope.paramProduct = paramProduct;
                 $scope.searchProducts(paramProduct);
             }, function () {});
         };
@@ -838,6 +841,7 @@ app.controller("menuCtrl", [
             });
 
             modalInstance.result.then(function (paramProductPurchase) {
+                $scope.paramProductPurchase = paramProductPurchase;
                 $scope.searchProductPurchases(paramProductPurchase);
             }, function () {
             });
@@ -989,6 +993,7 @@ app.controller("menuCtrl", [
             });
 
             modalInstance.result.then(function (paramContract) {
+                $scope.paramContract = paramContract;
                 $scope.searchContracts(paramContract);
             }, function () {
             });
@@ -1313,6 +1318,7 @@ app.controller("menuCtrl", [
             });
 
             modalInstance.result.then(function (paramContractPremium) {
+                $scope.paramContractPremium = paramContractPremium;
                 $scope.searchContractPremiums(paramContractPremium);
             }, function () {
             });
@@ -1519,6 +1525,7 @@ app.controller("menuCtrl", [
             });
 
             modalInstance.result.then(function (paramContractPayment) {
+                $scope.paramContractPayment = paramContractPayment;
                 $scope.searchContractPayments(paramContractPayment);
             }, function () {
             });
@@ -1627,7 +1634,6 @@ app.controller("menuCtrl", [
         $scope.bankTransactions = [];
         $scope.paramBankTransaction = {};
         $scope.paramBankTransaction.transactionTypeCodes = [];
-        $scope.bankTransactions.checkAll = false;
 
         $scope.pageBankTransaction = {};
         $scope.pageBankTransaction.sorts = [];
@@ -1652,6 +1658,7 @@ app.controller("menuCtrl", [
             });
 
             modalInstance.result.then(function (paramBankTransaction) {
+                $scope.paramBankTransaction = paramBankTransaction;
                 $scope.searchBankTransactions(paramBankTransaction);
             }, function () {
             });

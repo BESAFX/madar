@@ -67,12 +67,12 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-init="paramBankTransaction.calendar='H'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-init="buffer={};buffer.calendar='H'">
                             <label for="calendar" class="control-label">نوع التقويم</label>
                             <select id="calendar"
                                     style="height: 40px"
                                     class="form-control"
-                                    ng-model="paramBankTransaction.calendar"
+                                    ng-model="buffer.calendar"
                                     required="required"
                                     disable-validation-message="">
                                 <option value="H">تقويم هجري</option>
@@ -80,7 +80,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramBankTransaction.calendar==='H'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='H'">
                             <label for="dateFrom" class="control-label">التاريخ من</label>
                             <div dir="ltr" class="input-group">
                                 <input dir="rtl"
@@ -97,7 +97,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramBankTransaction.calendar==='H'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='H'">
                             <label for="dateTo" class="control-label">التاريخ إلى</label>
                             <div dir="ltr" class="input-group">
                                 <input dir="rtl"
@@ -114,7 +114,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramBankTransaction.calendar==='G'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='G'">
                             <label for="G-dateFrom" class="control-label">التاريخ من</label>
                             <input id="G-dateFrom"
                                    class="form-control"
@@ -125,7 +125,7 @@
                                    datetime="yyyy-MM-dd"/>
                         </div>
 
-                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="paramBankTransaction.calendar==='G'">
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='G'">
                             <label for="G-dateTo" class="control-label">التاريخ إلى</label>
                             <input id="G-dateTo"
                                    class="form-control"
@@ -253,7 +253,7 @@
             <button uib-tooltip="مسح الحقول"
                     tooltip-append-to-body="true"
                     type="reset"
-                    ng-click="form.$setPristine()"
+                    ng-click="paramBankTransaction={};form.$setPristine()"
                     class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
                 <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/delete.{{iconSetType}}" width="24" height="24">
             </button>
