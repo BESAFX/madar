@@ -1250,7 +1250,7 @@ app.controller("menuCtrl", [
             },
             {
                 html: '<div class="drop-menu">' +
-                '<img src="/ui/img/' + $rootScope.iconSet + '/calendar.' + $rootScope.iconSetType + '" width="24" height="24">' +
+                '<img src="/ui/img/' + $rootScope.iconSet + '/contractPremium.' + $rootScope.iconSetType + '" width="24" height="24">' +
                 '<span>اضافة قسط...</span>' +
                 '</div>',
                 enabled: function () {

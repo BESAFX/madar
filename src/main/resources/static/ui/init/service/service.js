@@ -44,9 +44,11 @@ app.service('ModalProvider', ['$uibModal', '$log', function ($uibModal, $log) {
                 action: function () {
                     return 'update';
                 },
-                customer: function () {
-                    return customer;
-                }
+                customer: ['CustomerService', function (CustomerService) {
+                    return CustomerService.findOne(customer.id).then(function (data) {
+                        return customer = data;
+                    });
+                }]
             }
         });
     };
@@ -113,9 +115,11 @@ app.service('ModalProvider', ['$uibModal', '$log', function ($uibModal, $log) {
                 action: function () {
                     return 'update';
                 },
-                seller: function () {
-                    return seller;
-                }
+                seller: ['SellerService', function (SellerService) {
+                    return SellerService.findOne(seller.id).then(function (data) {
+                        return seller = data;
+                    });
+                }]
             }
         });
     };

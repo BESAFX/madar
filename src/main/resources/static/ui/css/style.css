@@ -869,6 +869,15 @@ WebKit inertia scrolling is being added here for any present/future devices that
     .template-body > p{
         line-height: 1.6!important;
     }
+
+    .row{
+        margin-left: 5px!important;
+        margin-right: 5px!important;
+    }
+
+    hr{
+        margin: 2px!important;
+    }
 }
 
 /***********************************************************/
