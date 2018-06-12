@@ -118,49 +118,36 @@
                                 </ui-select>
                             </div>
 
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-init="contractPayment.calendar='H'">
-                                <label for="calendar" class="control-label">نوع التقويم</label>
-                                <select id="calendar"
-                                        style="height: 40px"
-                                        class="form-control"
-                                        ng-model="contractPayment.calendar"
-                                        required="required"
-                                        disable-validation-message="">
-                                    <option value="H">تقويم هجري</option>
-                                    <option value="G">تقويم ميلادي</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="contractPayment.calendar==='H'">
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <label for="date" class="control-label">تاريخ الدفعة</label>
-                                <div dir="ltr" class="input-group">
-                                    <input dir="rtl"
-                                           id="date"
+                                <div dir="ltr" class="input-group" id="date" ng-init="calendar='G'">
+                                    <span class="input-group-addon">
+                                        <a href="" ng-click="calendar==='G'?calendar='H':calendar='G'">
+                                            <span ng-show="calendar==='G'">ميلادي</span>
+                                            <span ng-show="calendar==='H'">هجري</span>
+                                        </a>
+                                    </span>
+                                    <input ng-show="calendar==='H'"
                                            type="text"
                                            class="form-control is-calendarPicker"
                                            ng-model="contractPayment.date"
                                            calendarType="ummalqura"
-                                           language="en"
+                                           language="ar"
                                            dateFormat="yyyy/mm/dd"
-                                           showOnFocus="false"
-                                           readonly="readonly"
-                                           required="required"
-                                           disable-validation-message=""
-                                           kdatepicker>
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                    <input ng-show="calendar==='G'"
+                                           type="text"
+                                           class="form-control is-calendarPicker"
+                                           ng-model="contractPayment.date"
+                                           calendarType="gregorian"
+                                           language="ar-EG"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
                                 </div>
-                            </div>
-
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="contractPayment.calendar==='G'">
-                                <label for="G-date" class="control-label">تاريخ الدفعة</label>
-                                <input id="G-date"
-                                       class="form-control"
-                                       dir="ltr"
-                                       type="text"
-                                       name="input"
-                                       ng-model="contractPayment.date"
-                                       required="required"
-                                       disable-validation-message=""
-                                       datetime="yyyy-MM-dd"/>
                             </div>
 
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">

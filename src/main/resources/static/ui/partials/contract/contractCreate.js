@@ -7,15 +7,15 @@ app.controller('contractCreateCtrl', ['ContractService', 'CustomerService', 'Sel
 
         $scope.contract.discount = 0;
 
+        $scope.contract.premiumCount = 1;
+
+        $scope.contract.premiumAmount = 0;
+
         $scope.customers = [];
 
         $scope.sellers = [];
 
         $scope.productPurchases = [];
-
-        $scope.contractPremiums = [];
-
-        $scope.contractPremiumsSum = 0;
 
         $scope.capitalCash = 0;
 
@@ -24,8 +24,6 @@ app.controller('contractCreateCtrl', ['ContractService', 'CustomerService', 'Sel
         $scope.totalPrice = 0;
 
         $scope.totalPriceAfterDiscountAndVat = 0;
-
-        $scope.reaminPrice = 0;
 
         $scope.newCustomer = function () {
             ModalProvider.openCustomerCreateModel().result.then(function (data) {
@@ -177,40 +175,29 @@ app.controller('contractCreateCtrl', ['ContractService', 'CustomerService', 'Sel
             return $scope.totalPrice;
         };
 
+        //حساب مقدار القسط
+        $scope.calculatePremiumAmount = function () {
+            $scope.contract.premiumAmount = ($scope.totalPriceAfterDiscountAndVat - $scope.contract.advancedAmount) / $scope.contract.premiumCount;
+            $scope.calculateLastPremiumAmount();
+        };
+
+        //حساب عدد الأقساط
+        $scope.calculatePremiumCount = function () {
+            $scope.contract.premiumCount = Math.floor(($scope.totalPriceAfterDiscountAndVat - $scope.contract.advancedAmount) / $scope.contract.premiumAmount);
+            $scope.calculateLastPremiumAmount();
+        };
+
+        //حساب القسط الأخير
+        $scope.calculateLastPremiumAmount = function () {
+            var fractionPart = (($scope.totalPriceAfterDiscountAndVat - $scope.contract.advancedAmount) / $scope.contract.premiumAmount) - $scope.contract.premiumCount;
+            $scope.contract.lastPremiumAmount = fractionPart * $scope.contract.premiumAmount;
+        };
+
         //نسبة الربح
         $scope.findProfitPercentage = function () {
             $scope.findCapitalCash();
             $scope.findTotalPrice();
             $scope.profitPercentage = (($scope.totalPrice - $scope.capitalCash) / $scope.capitalCash) * 100;
-        };
-
-        //اضافة قسط
-        $scope.addContractPremium = function () {
-            var contractPremium = {};
-            contractPremium.amount = 0;
-            contractPremium.dueDate = new Date();
-            $scope.contractPremiums.push(contractPremium);
-        };
-
-        //إزالة قسط
-        $scope.removeContractPremium = function (index) {
-            $scope.contractPremiums.splice(index, 1);
-        };
-
-        //حساب إجمالي الاقساط
-        $scope.findContractPremiumsSum = function () {
-            $scope.contractPremiumsSum = 0;
-            angular.forEach($scope.contractPremiums, function (contractPremium) {
-                $scope.contractPremiumsSum = $scope.contractPremiumsSum + contractPremium.amount;
-            });
-            return $scope.contractPremiumsSum;
-        };
-
-        //حساب الباقي من اجمالي العقد عند اضافة الأقساط
-        $scope.findRemainPrice = function () {
-            $scope.findTotalPrice();
-            //يتم حساب الباقي بعد (الخصم + القيمة المضافة)
-            $scope.remainPrice = $scope.totalPriceAfterDiscountAndVat - $scope.findContractPremiumsSum();
         };
 
         $scope.submit = function () {
@@ -224,13 +211,6 @@ app.controller('contractCreateCtrl', ['ContractService', 'CustomerService', 'Sel
                     contractProduct.unitVat = productPurchase.unitVat;
                     contractProduct.productPurchase = productPurchase;
                     $scope.contract.contractProducts.push(contractProduct);
-                }
-            });
-            //ربط الأقساط بالعقد
-            $scope.contract.contractPremiums = [];
-            angular.forEach($scope.contractPremiums, function (contractPremium) {
-                if (contractPremium.amount > 0) {
-                    $scope.contract.contractPremiums.push(contractPremium);
                 }
             });
             ContractService.create($scope.contract).then(function (data) {

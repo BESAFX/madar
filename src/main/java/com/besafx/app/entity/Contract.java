@@ -77,6 +77,18 @@ public class Contract implements Serializable {
     @JoinColumn(name = "person")
     private Person person;
 
+    //جدولة الأقساط بالتقويم الميلادي أو الهجري
+    @Transient
+    private String premiumCalendar;
+
+    //نوع جدولة الأقساط
+    @Transient
+    private String premiumPeriod;
+
+    //عدد الأقساط
+    @Transient
+    private Integer premiumCount;
+
     @OneToMany(mappedBy = "contract")
     private List<ContractProduct> contractProducts = new ArrayList<>();
 

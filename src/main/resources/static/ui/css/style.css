@@ -1021,3 +1021,20 @@ p {
     text-overflow: unset;
     white-space: unset;
 }
+
+.myPicker{
+    width: 300px!important;
+}
+
+.myPicker .calendars-month{
+    width: 100%!important;
+}
+
+.input-group-addon  a{
+    text-decoration: none!important;
+    color: white!important;
+}
+
+.has-success .input-group-addon a{
+    color: #3c763d!important;
+}

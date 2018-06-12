@@ -7,13 +7,11 @@ import com.besafx.app.init.Initializer;
 import com.besafx.app.search.ContractSearch;
 import com.besafx.app.service.*;
 import com.besafx.app.util.DateConverter;
-import com.besafx.app.util.WrapperUtil;
 import com.besafx.app.ws.Notification;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
 import com.github.bohnman.squiggly.util.SquigglyUtils;
-import org.jfree.util.Log;
 import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,8 +25,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
 
@@ -115,6 +111,14 @@ public class ContractRest {
             contractProduct.setContract(contract);
             contractProductListIterator.set(contractProductService.save(contractProduct));
         }
+        {
+            LOG.info("عدد الأقساط = " + contract.getPremiumCount());
+            for (int i = 0; i < contract.getPremiumCount(); i++) {
+                ContractPremium contractPremium = new ContractPremium();
+                contractPremium.setDueDate();
+                contractPremium.setContract(contract);
+            }
+        }
         LOG.info("ربط الأقساط مع العقد");
         ListIterator<ContractPremium> contractPremiumListIterator = contract.getContractPremiums().listIterator();
         while (contractPremiumListIterator.hasNext()) {
@@ -132,27 +136,6 @@ public class ContractRest {
                                               .message(builder.toString())
                                               .type("success").build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contract);
-    }
-
-    @PutMapping(value = "update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_CONTRACT_UPDATE')")
-    @Transactional
-    public String update(@RequestBody Contract contract) {
-        if (contractService.findByCodeAndIdIsNot(contract.getCode(), contract.getId()) != null) {
-            throw new CustomException("هذا الكود مستخدم سابقاً، فضلاً قم بتغير الكود.");
-        }
-        Contract object = contractService.findOne(contract.getId());
-        if (object != null) {
-            contract = contractService.save(contract);
-            notificationService.notifyAll(Notification
-                                                  .builder()
-                                                  .message("تم تعديل بيانات العقد الأساسية بنجاح")
-                                                  .type("success").build());
-            return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contract);
-        } else {
-            return null;
-        }
     }
 
     @PostMapping(value = "createOld", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -186,12 +169,14 @@ public class ContractRest {
         contract.setPremiumStartDate(DateConverter.parseJsonStringDate(jsonObject_contract.getString("premiumStartDate")));
         contract.setCustomer(customerService.findOne(jsonObject_contract.getJSONObject("customer").getLong("id")));
         contract.setSeller(sellerService.findOne(jsonObject_contract.getJSONObject("seller").getLong("id")));
-        contract.setSponsor1(jsonObject_contract.has("sponsor1") ? customerService.findOne(jsonObject_contract.getJSONObject("sponsor1").getLong("id")) : null);
-        contract.setSponsor2(jsonObject_contract.has("sponsor2") ? customerService.findOne(jsonObject_contract.getJSONObject("sponsor2").getLong("id")) : null);
+        contract.setSponsor1(jsonObject_contract.has("sponsor1") ? customerService.findOne(jsonObject_contract.getJSONObject("sponsor1").getLong
+                ("id")) : null);
+        contract.setSponsor2(jsonObject_contract.has("sponsor2") ? customerService.findOne(jsonObject_contract.getJSONObject("sponsor2").getLong
+                ("id")) : null);
         contract.setPerson(caller);
         contract = contractService.save(contract);
 
-        if(jsonObject_contract.getDouble("paid") > 0){
+        if (jsonObject_contract.getDouble("paid") > 0) {
 
             LOG.info("إنشاء القسط");
             ContractPremium contractPremium = new ContractPremium();
@@ -244,7 +229,7 @@ public class ContractRest {
 
         LOG.info("شراء الأصناف");
         JSONArray jsonArray_productPurchases = jsonObject_wrapper.getJSONArray("obj2");
-        for(int i = 0; i < jsonArray_productPurchases.length(); i++){
+        for (int i = 0; i < jsonArray_productPurchases.length(); i++) {
 
             JSONObject jsonObject_productPurchase = jsonArray_productPurchases.getJSONObject(i);
 
@@ -308,6 +293,27 @@ public class ContractRest {
                                               .message(builder.toString())
                                               .type("success").build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contract);
+    }
+
+    @PutMapping(value = "update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @PreAuthorize("hasRole('ROLE_CONTRACT_UPDATE')")
+    @Transactional
+    public String update(@RequestBody Contract contract) {
+        if (contractService.findByCodeAndIdIsNot(contract.getCode(), contract.getId()) != null) {
+            throw new CustomException("هذا الكود مستخدم سابقاً، فضلاً قم بتغير الكود.");
+        }
+        Contract object = contractService.findOne(contract.getId());
+        if (object != null) {
+            contract = contractService.save(contract);
+            notificationService.notifyAll(Notification
+                                                  .builder()
+                                                  .message("تم تعديل بيانات العقد الأساسية بنجاح")
+                                                  .type("success").build());
+            return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contract);
+        } else {
+            return null;
+        }
     }
 
     @DeleteMapping(value = "delete/{id}")
