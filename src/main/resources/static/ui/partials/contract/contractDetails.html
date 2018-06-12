@@ -699,7 +699,7 @@
                             <div class="row">
 
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xs-pull-4 col-sm-pull-4 col-md-pull-4 col-lg-pull-4">
-                                    <h5 class="text-center template-box">إقرار كفالة غرامية</h5>
+                                    <h3 class="text-center template-box">إقرار كفالة غرامية</h3>
                                 </div>
 
                             </div>
@@ -834,16 +834,16 @@
 
                             <div class="row">
 
-                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-right">البائع</h5>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 15px">
+                                    <h5 class="text-center">البائع</h5>
                                 </div>
 
-                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-right">المشتري</h5>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 15px">
+                                    <h5 class="text-center">المشتري</h5>
                                 </div>
 
-                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-right">الكفيل الغارم الأول</h5>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 15px">
+                                    <h5 class="text-center">الكفيل الغارم الأول</h5>
                                 </div>
 
                             </div>
@@ -888,20 +888,22 @@
 
                             </div>
 
+                            <br/>
                             <hr>
+                            <br/>
 
                             <div class="row">
 
-                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-right">الكفيل الغارم الثاني</h5>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 15px">
+                                    <h5 class="text-center">الكفيل الغارم الثاني</h5>
                                 </div>
 
-                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-right">شاهد أول</h5>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 15px">
+                                    <h5 class="text-center">شاهد أول</h5>
                                 </div>
 
-                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-right">فرع مؤسسة فريح التجارية</h5>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 15px">
+                                    <h5 class="text-center">فرع مؤسسة فريح التجارية</h5>
                                 </div>
 
                             </div>
@@ -989,73 +991,37 @@
                             </div>
                         </div>
 
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-
                         <div class="template-body">
 
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <p class="text-right">
-                                    <span>أتعهد بأن أدفع بموجب هذا السند لأمر / </span>
+                                    <span>أتعهد أنا / </span>
+                                    <strong>{{contract.customer.contact.shortName}}</strong>
+                                    <span>الموقع/ ـة أدناه بأن أدفع بموجب هذا السند بدون قيد أو شرط لأمر / </span>
                                     <strong>{{contract.seller.contact.shortName}}</strong>
-                                    <span>، المبلغ الموضح أعلاه ومقداره : </span>
+                                    <span>، المبلغ المذكور أعلاه ومقداره : </span>
                                     <span>{{contract.totalPrice | currency:'':2}}</span>
                                     <span> ريال سعودي فقط لا غير. </span>
-                                </p>
-                                <p class="text-center">ولحامل هذة الورقة حق الرجوع بدون مصروفات أو احتجاج.</p>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <table class="table table-bordered">
-                                    <tbody>
-                                    <tr>
-                                        <td class="fit">اسم المدين</td>
-                                        <td>{{contract.customer.contact.shortName}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>التوقيع</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>رقم الجوال</td>
-                                        <td>{{contract.customer.contact.mobile}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>العنوان</td>
-                                        <td>{{contract.customer.contact.address}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <h3 class="text-center">مقبول كضامن احتياطي</h3>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <p class="text-right">
-                                    <span>أكفـــل السيد / </span>
-                                    <strong>{{contract.customer.contact.shortName}}</strong>
-                                    <span>، كفالة غرم وأداء تضامنية فى تسديد دينه موضوع السند المحرر أعلاه للمكرم / </span>
-                                    <span>{{contract.seller.contact.shortName}}</span>
-                                    <span> في موعد استحقاقه وهذا السند واجب الدفع دون الرجوع بلا مصروفات وبدون احتجاج.</span>
+                                    <span>، وذلك قيمة </span>
+                                    <span>( {{contract.contractProductsNames}} )</span>
+                                    <span>فقط لا غير.</span>
                                 </p>
                             </div>
+
+                            <hr>
 
                             <div class="row">
 
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-center">اسم الضامن</h5>
+                                    <h5 class="text-right">المدين</h5>
                                 </div>
 
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-center">العنوان</h5>
+                                    <h5 class="text-right">الكفيل الغارم</h5>
                                 </div>
 
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-center">التوقيع</h5>
+                                    <h5 class="text-right">الطرف الأول البائع</h5>
                                 </div>
 
                             </div>
@@ -1063,18 +1029,53 @@
                             <div class="row">
 
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-center">-------------------</h5>
+                                    <h5 class="text-right">
+                                        <span>الأسم /</span>
+                                        <span>{{contract.customer.contact.shortName}}</span>
+                                    </h5>
+                                    <br>
+                                    <h5 class="text-right">
+                                        <span>الجوال /</span>
+                                        <span>{{contract.customer.contact.mobile}}</span>
+                                    </h5>
+                                    <br>
+                                    <h5 class="text-right">
+                                        <span>التوقيع /</span>
+                                        <span>...................................</span>
+                                    </h5>
                                 </div>
 
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-center">-------------------</h5>
+                                    <h5 class="text-right">
+                                        <span>الأسم /</span>
+                                        <span>...................................</span>
+                                    </h5>
+                                    <br>
+                                    <h5 class="text-right">
+                                        <span>الجوال /</span>
+                                        <span>...................................</span>
+                                    </h5>
+                                    <br>
+                                    <h5 class="text-right">
+                                        <span>التوقيع /</span>
+                                        <span>...................................</span>
+                                    </h5>
                                 </div>
 
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                    <h5 class="text-center">-------------------</h5>
+                                    <h5 class="text-right">
+                                        <span>التوقيع /</span>
+                                        <span>...................................</span>
+                                    </h5>
+                                    <br>
+                                    <h5 class="text-right">
+                                        <span>الختم /</span>
+                                    </h5>
                                 </div>
 
                             </div>
+
+                            <hr>
 
 
                         </div>

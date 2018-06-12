@@ -66,13 +66,13 @@
                         </div>
 
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='H'">
-                            <label for="dateFrom" class="control-label">تاريخ تسجيل العقد من</label>
+                            <label for="writtenDateFrom" class="control-label">تاريخ تسجيل العقد من</label>
                             <div dir="ltr" class="input-group">
                                 <input dir="rtl"
-                                       id="dateFrom"
+                                       id="writtenDateFrom"
                                        type="text"
                                        class="form-control is-calendarPicker"
-                                       ng-model="paramContract.dateFrom"
+                                       ng-model="paramContract.writtenDateFrom"
                                        calendarType="ummalqura"
                                        language="en"
                                        dateFormat="yyyy/mm/dd"
@@ -83,13 +83,13 @@
                         </div>
 
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='H'">
-                            <label for="dateTo" class="control-label">تاريخ تسجيل العقد إلى</label>
+                            <label for="writtenDateTo" class="control-label">تاريخ تسجيل العقد إلى</label>
                             <div dir="ltr" class="input-group">
                                 <input dir="rtl"
-                                       id="dateTo"
+                                       id="writtenDateTo"
                                        type="text"
                                        class="form-control is-calendarPicker"
-                                       ng-model="paramContract.dateTo"
+                                       ng-model="paramContract.writtenDateTo"
                                        calendarType="ummalqura"
                                        language="en"
                                        dateFormat="yyyy/mm/dd"
@@ -100,24 +100,24 @@
                         </div>
 
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='G'">
-                            <label for="G-dateFrom" class="control-label">تاريخ تسجيل العقد من</label>
-                            <input id="G-dateFrom"
+                            <label for="G-writtenDateFrom" class="control-label">تاريخ تسجيل العقد من</label>
+                            <input id="G-writtenDateFrom"
                                    class="form-control"
                                    dir="ltr"
                                    type="text"
                                    name="input"
-                                   ng-model="paramContract.dateFrom"
+                                   ng-model="paramContract.writtenDateFrom"
                                    datetime="yyyy-MM-dd"/>
                         </div>
 
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="buffer.calendar==='G'">
-                            <label for="G-dateTo" class="control-label">تاريخ تسجيل العقد إلى</label>
-                            <input id="G-dateTo"
+                            <label for="G-writtenDateTo" class="control-label">تاريخ تسجيل العقد إلى</label>
+                            <input id="G-writtenDateTo"
                                    class="form-control"
                                    dir="ltr"
                                    type="text"
                                    name="input"
-                                   ng-model="paramContract.dateTo"
+                                   ng-model="paramContract.writtenDateTo"
                                    datetime="yyyy-MM-dd"/>
                         </div>
 

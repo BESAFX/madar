@@ -1005,7 +1005,7 @@ p {
 }
 
 .long-td{
-    width: 30%;
+    width: 10%;
     max-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;

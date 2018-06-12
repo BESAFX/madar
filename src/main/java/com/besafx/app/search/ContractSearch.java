@@ -29,8 +29,8 @@ public class ContractSearch {
             //Contract Filters
             final Integer codeFrom,
             final Integer codeTo,
-            final Long dateFrom,
-            final Long dateTo,
+            final Long writtenDateFrom,
+            final Long writtenDateTo,
             //Customer Filters
             final Integer customerCodeFrom,
             final Integer customerCodeTo,
@@ -52,10 +52,8 @@ public class ContractSearch {
         //Contract Specification
         Optional.ofNullable(codeFrom).ifPresent(value -> predicates.add((root, cq, cb) -> cb.greaterThanOrEqualTo(root.get("code"), value)));
         Optional.ofNullable(codeTo).ifPresent(value -> predicates.add((root, cq, cb) -> cb.lessThanOrEqualTo(root.get("code"), value)));
-        Optional.ofNullable(dateFrom).ifPresent(value -> predicates.add((root, cq, cb) -> cb.greaterThanOrEqualTo(root.get("date"), new DateTime
-                (value).withTimeAtStartOfDay().toDate())));
-        Optional.ofNullable(dateTo).ifPresent(value -> predicates.add((root, cq, cb) -> cb.lessThanOrEqualTo(root.get("date"), new DateTime(value)
-                .plusDays(1).withTimeAtStartOfDay().toDate())));
+        Optional.ofNullable(writtenDateFrom).ifPresent(value -> predicates.add((root, cq, cb) -> cb.greaterThanOrEqualTo(root.get("writtenDate"), new DateTime(value).withTimeAtStartOfDay().toDate())));
+        Optional.ofNullable(writtenDateTo).ifPresent(value -> predicates.add((root, cq, cb) -> cb.lessThanOrEqualTo(root.get("writtenDate"), new DateTime(value).plusDays(1).withTimeAtStartOfDay().toDate())));
         //Customer Specification
         Optional.ofNullable(customerCodeFrom).ifPresent(value -> predicates.add((root, cq, cb) -> cb.greaterThanOrEqualTo(root.get("customer").get
                 ("code"), value)));

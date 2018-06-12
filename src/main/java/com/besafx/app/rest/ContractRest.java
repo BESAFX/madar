@@ -42,8 +42,8 @@ public class ContractRest {
             "**," +
             "customer[id,contact[id,mobile,shortName]]," +
             "seller[id,contact[id,mobile,shortName]]," +
-            "-sponsor1," +
-            "-sponsor2," +
+            "sponsor1[id,contact[id,mobile,shortName]]," +
+            "sponsor2[id,contact[id,mobile,shortName]]," +
             "-contractProducts," +
             "-contractPremiums," +
             "-contractPayments," +
@@ -369,8 +369,8 @@ public class ContractRest {
             //Contract Filters
             @RequestParam(value = "codeFrom", required = false) final Integer codeFrom,
             @RequestParam(value = "codeTo", required = false) final Integer codeTo,
-            @RequestParam(value = "dateFrom", required = false) final Long dateFrom,
-            @RequestParam(value = "dateTo", required = false) final Long dateTo,
+            @RequestParam(value = "writtenDateFrom", required = false) final Long writtenDateFrom,
+            @RequestParam(value = "writtenDateTo", required = false) final Long writtenDateTo,
             //Customer Filters
             @RequestParam(value = "customerCodeFrom", required = false) final Integer customerCodeFrom,
             @RequestParam(value = "customerCodeTo", required = false) final Integer customerCodeTo,
@@ -394,8 +394,8 @@ public class ContractRest {
                 contractSearch.filter(
                         codeFrom,
                         codeTo,
-                        dateFrom,
-                        dateTo,
+                        writtenDateFrom,
+                        writtenDateTo,
                         customerCodeFrom,
                         customerCodeTo,
                         customerRegisterDateFrom,

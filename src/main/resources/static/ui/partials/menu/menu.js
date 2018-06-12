@@ -1025,14 +1025,14 @@ app.controller("menuCtrl", [
                 search.push(paramContract.codeTo);
                 search.push('&');
             }
-            if (paramContract.dateTo) {
-                search.push('dateTo=');
-                search.push(paramContract.dateTo.getTime());
+            if (paramContract.writtenDateTo) {
+                search.push('writtenDateTo=');
+                search.push(paramContract.writtenDateTo.getTime());
                 search.push('&');
             }
-            if (paramContract.dateFrom) {
-                search.push('dateFrom=');
-                search.push(paramContract.dateFrom.getTime());
+            if (paramContract.writtenDateFrom) {
+                search.push('writtenDateFrom=');
+                search.push(paramContract.writtenDateFrom.getTime());
                 search.push('&');
             }
             //Customer Filters

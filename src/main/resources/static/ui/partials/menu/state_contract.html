@@ -145,14 +145,6 @@
                             <i class="material-icons md-36">keyboard_arrow_left</i>
                         </button>
 
-                        <button uib-tooltip="طباعة"
-                                tooltip-append-to-body="true"
-                                type="button"
-                                ng-click="printToCart('printContractTable', 'سجل العقود')"
-                                class="mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
-                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}" width="24" height="24">
-                        </button>
-
                     </div>
 
                 </div>
@@ -161,7 +153,7 @@
 
                     <input type="text"
                            class="form-control"
-                           placeholder="بحث سريع"
+                           placeholder="بحث سريع(فى بيانات الصفحة الواحدة)"
                            ng-change="refreshGUI()"
                            ng-model="contracts.searchText">
 
@@ -169,7 +161,7 @@
 
             </div>
 
-            <div class="row" ng-show="toggleList===1" id="printContractTable">
+            <div class="row" ng-show="toggleList===1">
 
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
@@ -184,10 +176,6 @@
                             </th>
 
                             <th>
-                                <span>#</span>
-                            </th>
-
-                            <th>
                                 <span>رقم العقد</span>
                             </th>
 
@@ -196,27 +184,19 @@
                             </th>
 
                             <th>
-                                <span>جوال العميل</span>
+                                <span>الكفيل الأول</span>
                             </th>
 
                             <th>
-                                <span>المستثمر</span>
+                                <span>الكفيل الثاني</span>
+                            </th>
+
+                            <th>
+                                <span>تاريخ الإنشاء</span>
                             </th>
 
                             <th>
                                 <span>آخر عملية دفع</span>
-                            </th>
-
-                            <th>
-                                <span>بواسطة</span>
-                            </th>
-
-                            <th>
-                                <span>رأس المال</span>
-                            </th>
-
-                            <th>
-                                <span>الربح</span>
                             </th>
 
                             <th>
@@ -255,28 +235,46 @@
                                            ng-model="contract.isSelected" ng-click="checkContract()">
                                 </label>
                             </td>
-                            <td>{{$index+1}}</td>
-                            <td>{{contract.code}}</td>
-                            <td>{{contract.customer.contact.shortName}}</td>
-                            <td>{{contract.customer.contact.mobile}}</td>
-                            <td>{{contract.seller.contact.shortName}}</td>
+                            <td class="fit">{{contract.code}}</td>
                             <td>
+                                <span>{{contract.customer.contact.shortName}}</span>
+                                <br>
+                                <span class="label label-success">{{contract.customer.contact.mobile}}</span>
+                            </td>
+                            <td ng-class="{'danger': !contract.sponsor1}">
+                                <span ng-if="!contract.sponsor1">---</span>
+                                <span>{{contract.sponsor1.contact.shortName}}</span>
+                                <br>
+                                <span class="label label-success">{{contract.sponsor1.contact.mobile}}</span>
+                            </td>
+                            <td ng-class="{'danger': !contract.sponsor2}">
+                                <span ng-if="!contract.sponsor2">---</span>
+                                <span>{{contract.sponsor2.contact.shortName}}</span>
+                                <br>
+                                <span class="label label-success">{{contract.sponsor2.contact.mobile}}</span>
+                            </td>
+                            <td class="fit">
+                                <span ng-show="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.writtenDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                <span ng-show="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contract.writtenDate | date: 'yyyy-MM-dd'}}</span>
+                                <br>
+                                <span class="label label-info no-print">{{contract.writtenDate | date: 'hh:mm a'}}</span>
+                            </td>
+                            <td class="fit" ng-class="{'danger': !contract.lastPaymentDate}">
+                                <span ng-if="!contract.lastPaymentDate">---</span>
                                 <span ng-show="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.lastPaymentDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                                 <span ng-show="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contract.lastPaymentDate | date: 'yyyy-MM-dd'}}</span>
+                                <br>
                                 <span class="label label-info no-print">{{contract.lastPaymentDate | date: 'hh:mm a'}}</span>
                             </td>
-                            <td>{{contract.person.contact.shortName}}</td>
-                            <td>{{contract.capitalCash | currency:' SAR ':2}}</td>
-                            <td>{{contract.profit | currency:' SAR ':2}}</td>
-                            <td>{{contract.totalVat | currency:' SAR ':2}}</td>
-                            <td>{{contract.discount | currency:' SAR ':2}}</td>
-                            <td>{{contract.totalPriceAfterDiscountAndVat | currency:' SAR ':2}}</td>
-                            <td>{{contract.paid | currency:' SAR ':2}}</td>
-                            <td>{{contract.remain | currency:' SAR ':2}}</td>
+                            <td class="fit">{{contract.totalVat | currency:'':2}}</td>
+                            <td class="fit">{{contract.discount | currency:'':2}}</td>
+                            <td class="fit">{{contract.totalPriceAfterDiscountAndVat | currency:'':2}}</td>
+                            <td class="fit">{{contract.paid | currency:'':2}}</td>
+                            <td class="fit">{{contract.remain | currency:'':2}}</td>
                         </tr>
                         <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
                             ng-if="!contracts || contracts.length ==0">
-                            <td colspan="15">
+                            <td colspan="12">
                                 <p ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_CREATE'])">
                                     <span>لا توجد عقود حتى الآن، يمكنك التسجيل من خلال هذا الرابط </span>
                                     <a href="" ng-click="newContract()">اضغط هنا</a>
@@ -284,16 +282,14 @@
                             </td>
                         </tr>
                         <tr ng-if="contracts.length > 0">
-                            <td class="info" colspan="8">
-                                <span class="pull-left">المجموع الكلي</span>
+                            <td class="info" colspan="7">
+                                <span class="pull-left">المجموع الكلي(جميع القيم بالريال السعودي)</span>
                             </td>
-                            <td class="success" colspan="1">{{contracts | sumByKey:'capitalCash' | currency:' SAR ':2}}</td>
-                            <td class="success" colspan="1">{{contracts | sumByKey:'profit' | currency:' SAR ':2}}</td>
-                            <td class="success" colspan="1">{{contracts | sumByKey:'totalVat' | currency:' SAR ':2}}</td>
-                            <td class="success" colspan="1">{{contracts | sumByKey:'discount' | currency:' SAR ':2}}</td>
-                            <td class="success" colspan="1">{{contracts | sumByKey:'totalPriceAfterDiscountAndVat' | currency:' SAR ':2}}</td>
-                            <td class="success" colspan="1">{{contracts | sumByKey:'paid' | currency:' SAR ':2}}</td>
-                            <td class="success" colspan="1">{{contracts | sumByKey:'remain' | currency:' SAR ':2}}</td>
+                            <td class="success" colspan="1">{{contracts | sumByKey:'totalVat' | currency:'':2}}</td>
+                            <td class="success" colspan="1">{{contracts | sumByKey:'discount' | currency:'':2}}</td>
+                            <td class="success" colspan="1">{{contracts | sumByKey:'totalPriceAfterDiscountAndVat' | currency:'':2}}</td>
+                            <td class="success" colspan="1">{{contracts | sumByKey:'paid' | currency:'':2}}</td>
+                            <td class="success" colspan="1">{{contracts | sumByKey:'remain' | currency:'':2}}</td>
                         </tr>
                         </tbody>
                     </table>
