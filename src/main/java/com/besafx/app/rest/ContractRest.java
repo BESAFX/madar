@@ -113,9 +113,10 @@ public class ContractRest {
         }
         {
             LOG.info("عدد الأقساط = " + contract.getPremiumCount());
+            LOG.info("جدولة الأقساط بالتقويم = " + contract.getPremiumCalendar());
+            LOG.info("فترة جدولة الأقساط = " + contract.getPremiumPeriod());
             for (int i = 0; i < contract.getPremiumCount(); i++) {
                 ContractPremium contractPremium = new ContractPremium();
-                contractPremium.setDueDate();
                 contractPremium.setContract(contract);
             }
         }
