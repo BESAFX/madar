@@ -171,7 +171,6 @@ app.controller('contractCreateCtrl', ['ContractService', 'CustomerService', 'Sel
                     $scope.totalPriceAfterDiscountAndVat = $scope.totalPriceAfterDiscountAndVat +
                         (productPurchase.requiredQuantity * productPurchase.unitSellPrice) +
                         (productPurchase.requiredQuantity * (productPurchase.unitSellPrice * $rootScope.selectedCompany.vatFactor)) - $scope.contract.discount;
-                    console.info($scope.totalPriceAfterDiscountAndVat);
                 }
             });
             return $scope.totalPrice;
