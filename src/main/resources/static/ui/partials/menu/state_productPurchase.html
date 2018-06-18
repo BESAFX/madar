@@ -202,7 +202,7 @@
                             <td>{{productPurchase.code}}</td>
                             <td>{{productPurchase.product.name}}</td>
                             <td>
-                                <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{productPurchase.date | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
+                                <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{productPurchase.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                                 <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{productPurchase.date | date: 'yyyy-MM-dd'}}</span>
                                 <span class="label label-info no-print">{{productPurchase.date | date: 'hh:mm a'}}</span>
                             </td>

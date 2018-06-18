@@ -129,7 +129,7 @@
                         <td>{{contract.customer.contact.mobile}}</td>
                         <td>{{contract.seller.contact.shortName}}</td>
                         <td>
-                            <span ng-show="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.lastPaymentDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-show="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.lastPaymentDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                             <span ng-show="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contract.lastPaymentDate | date: 'yyyy-MM-dd'}}</span>
                         </td>
                         <td>{{contract.capitalCash | currency:' SAR ':2}}</td>

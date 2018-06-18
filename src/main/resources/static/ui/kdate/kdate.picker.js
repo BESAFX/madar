@@ -27,7 +27,7 @@
                         var dateResult = null;
 
                         ngModel.$formatters.push(function (value) {
-                            return $filter('kdate')(value, dateFormat);
+                            return $filter('kdate')(value, dateFormat, language, calendarType);
                         });
 
                         if (ngModel.$modelValue) {

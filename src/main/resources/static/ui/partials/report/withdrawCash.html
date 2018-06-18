@@ -141,12 +141,12 @@
                     <tr>
                         <td width="20%">الفترة من</td>
                         <td width="30%">
-                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{paramWithdrawCash.dateFrom | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{paramWithdrawCash.dateFrom | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                             <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{paramWithdrawCash.dateFrom | date: 'yyyy-MM-dd'}}</span>
                         </td>
                         <td width="20%">الفترة إلى</td>
                         <td width="30%">
-                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{paramWithdrawCash.dateTo | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{paramWithdrawCash.dateTo | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                             <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{paramWithdrawCash.dateTo | date: 'yyyy-MM-dd'}}</span>
                         </td>
                     </tr>
@@ -180,7 +180,7 @@
                     <tbody>
                     <tr ng-repeat="withdrawCash in withdrawCashes">
                         <td>
-                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{withdrawCash.date | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{withdrawCash.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                             <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{withdrawCash.date | date: 'yyyy-MM-dd'}}</span>
                         </td>
                         <td>{{withdrawCash.bank.name}}</td>

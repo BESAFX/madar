@@ -148,7 +148,7 @@
                         <td st-select-row-multi="person">{{person.team.name}}</td>
                         <td st-select-row-multi="person">{{person.contact.mobile}}</td>
                         <td st-select-row-multi="person">
-                            <span>{{person.lastLoginDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
+                            <span>{{person.lastLoginDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                             <span class="label label-success">{{person.lastLoginDate | date:'h:m a'}}</span>
                         </td>
                         <td st-select-row-multi="person">{{person.ipAddress}}</td>
