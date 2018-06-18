@@ -93,26 +93,28 @@
                                             <span ng-show="calendar2==='H'">هجري</span>
                                         </a>
                                     </span>
-                                <input ng-show="calendar2==='H'"
-                                       type="text"
-                                       class="form-control is-calendarPicker"
-                                       ng-model="paramContract.writtenDateTo"
-                                       calendarType="ummalqura"
-                                       language="ar"
-                                       dateFormat="yyyy/mm/dd"
-                                       showOnFocus="true"
-                                       pickerClass="myPicker"
-                                       kdatepicker/>
-                                <input ng-show="calendar2==='G'"
-                                       type="text"
-                                       class="form-control is-calendarPicker"
-                                       ng-model="paramContract.writtenDateTo"
-                                       calendarType="gregorian"
-                                       language="ar-EG"
-                                       dateFormat="yyyy/mm/dd"
-                                       showOnFocus="true"
-                                       pickerClass="myPicker"
-                                       kdatepicker/>
+                                <div style="position: relative">
+                                    <input style="position: absolute" ng-show="calendar2==='H'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="paramContract.writtenDateTo"
+                                           calendarType="ummalqura"
+                                           language="ar"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                    <input style="position: absolute" ng-show="calendar2==='G'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="paramContract.writtenDateTo"
+                                           calendarType="gregorian"
+                                           language="ar-EG"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                </div>
                             </div>
                         </div>
 

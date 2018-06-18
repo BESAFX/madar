@@ -12,6 +12,7 @@ gulp.task('css', function () {
         './css/creative.css',
 
         './css/animate.css',
+        './css/animation.css',
         './css/bootstrap.css',
         './css/fonts.css',
         './css/md-icons.css',
