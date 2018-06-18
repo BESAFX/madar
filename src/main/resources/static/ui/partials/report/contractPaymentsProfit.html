@@ -143,12 +143,12 @@
                     <tr>
                         <td width="20%">الفترة من</td>
                         <td width="30%">
-                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPaymentProfit.dateFrom | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPaymentProfit.dateFrom | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                             <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPaymentProfit.dateFrom | date: 'yyyy-MM-dd'}}</span>
                         </td>
                         <td width="20%">الفترة إلى</td>
                         <td width="30%">
-                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPaymentProfit.dateTo | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPaymentProfit.dateTo | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                             <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPaymentProfit.dateTo | date: 'yyyy-MM-dd'}}</span>
                         </td>
                     </tr>
@@ -212,7 +212,7 @@
                         <td>{{contractPayment.contract.customer.contact.shortName}}</td>
                         <td>{{contractPayment.contract.seller.contact.shortName}}</td>
                         <td>
-                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPayment.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPayment.date | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                             <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPayment.date | date: 'yyyy-MM-dd'}}</span>
                         </td>
                         <td>{{contractPayment.capitalCash | currency:' SAR ':2}}</td>

@@ -93,7 +93,7 @@
                     <tr ng-repeat="bankTransaction in bankTransactions">
                         <td>{{$index+1}}</td>
                         <td>
-                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{bankTransaction.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{bankTransaction.date | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                             <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{bankTransaction.date | date: 'yyyy-MM-dd'}}</span>
                         </td>
                         <td>{{bankTransaction.transactionType.name}}</td>

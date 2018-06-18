@@ -94,7 +94,7 @@
                     <a href=""
                        ng-click="openContractsFilter()"
                        tooltip-append-to-body="true"
-                       uib-tooltip="تحديث البيانات">
+                       uib-tooltip="بحث">
                         <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}" width="24" height="24">
                     </a>
                     <a href=""
@@ -254,14 +254,14 @@
                                 <span class="label label-success">{{contract.sponsor2.contact.mobile}}</span>
                             </td>
                             <td class="fit">
-                                <span ng-show="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.writtenDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                <span ng-show="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.writtenDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                 <span ng-show="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contract.writtenDate | date: 'yyyy-MM-dd'}}</span>
                                 <br>
                                 <span class="label label-info no-print">{{contract.writtenDate | date: 'hh:mm a'}}</span>
                             </td>
                             <td class="fit" ng-class="{'danger': !contract.lastPaymentDate}">
                                 <span ng-if="!contract.lastPaymentDate">---</span>
-                                <span ng-show="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.lastPaymentDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                <span ng-show="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.lastPaymentDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                 <span ng-show="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contract.lastPaymentDate | date: 'yyyy-MM-dd'}}</span>
                                 <br>
                                 <span class="label label-info no-print">{{contract.lastPaymentDate | date: 'hh:mm a'}}</span>

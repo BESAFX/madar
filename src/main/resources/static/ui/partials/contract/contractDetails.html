@@ -84,7 +84,7 @@
                             <tr>
                                 <td>تاريخ كتابة العقد</td>
                                 <td>
-                                    <span ng-show="dateType==='H'">{{contract.writtenDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                    <span ng-show="dateType==='H'">{{contract.writtenDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                     <span ng-show="dateType==='G'">{{contract.writtenDate | date: 'yyyy-MM-dd'}}</span>
                                     <span class="label label-info">{{contract.writtenDate | date: 'hh:mm a'}}</span>
                                 </td>
@@ -372,7 +372,7 @@
                             <tbody>
                             <tr ng-repeat="contractPremium in contract.contractPremiums">
                                 <td>
-                                    <span ng-show="dateType==='H'">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                    <span ng-show="dateType==='H'">{{contractPremium.dueDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                     <span ng-show="dateType==='G'">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
                                 </td>
                                 <td>{{contractPremium.amount | currency:' SAR ':2}}</td>
@@ -459,7 +459,7 @@
                             <tr ng-repeat="contractPayment in contract.contractPayments">
                                 <td>{{contractPayment.code}}</td>
                                 <td>
-                                    <span ng-show="dateType==='H'">{{contractPayment.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                    <span ng-show="dateType==='H'">{{contractPayment.date | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                     <span ng-show="dateType==='G'">{{contractPayment.date | date: 'yyyy-MM-dd'}}</span>
                                 </td>
                                 <td>{{contractPayment.amount | currency:' SAR ':2}}</td>
@@ -568,7 +568,7 @@
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <p class="pull-right template-box">
                                     <strong>التاريخ / </strong>
-                                    <span>{{today | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                    <span>{{today | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                 </p>
                             </div>
 
@@ -677,7 +677,7 @@
                                         <span>على أن يكون السداد على أقساط شهرية بمعدل:</span>
                                         {{contract.premiumAmount | currency:' SAR ':2}}
                                         <span>لكل شهر اعتباراً من / </span>
-                                        <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.premiumStartDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                        <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.premiumStartDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                         <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contract.premiumStartDate | date: 'yyyy-MM-dd'}}</span>
                                         <span>، وقمت بدفع دفعة مالية مقدمة وقدرها:</span>
                                         {{contract.advancedAmount | currency:' SAR ':2}}
@@ -978,7 +978,7 @@
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <p class="pull-right template-box">
                                     <strong>التاريخ / </strong>
-                                    <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{today | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                    <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{today | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                     <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{today | date: 'yyyy-MM-dd'}}</span>
                                 </p>
                             </div>
@@ -1112,7 +1112,7 @@
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <p class="pull-right template-box">
                                     <strong>التاريخ / </strong>
-                                    <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{today | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                    <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{today | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                     <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{today | date: 'yyyy-MM-dd'}}</span>
                                 </p>
                             </div>
@@ -1241,7 +1241,7 @@
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <p class="pull-right template-box">
                                     <strong>التاريخ / </strong>
-                                    <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{today | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                    <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{today | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                     <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{today | date: 'yyyy-MM-dd'}}</span>
                                 </p>
                             </div>

@@ -68,7 +68,7 @@
                                                 </span>
                                                 <span class="mdl-list__item-sub-title">
                                                     <span>تاريخ الاستحقاق / </span>
-                                                    <span ng-show="dateType==='H'">{{$select.selected.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                                    <span ng-show="dateType==='H'">{{$select.selected.dueDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                                     <span ng-show="dateType==='G'">{{$select.selected.dueDate | date: 'yyyy-MM-dd'}}</span>
                                                 </span>
                                                 <span class="mdl-list__item-sub-title">
@@ -99,7 +99,7 @@
                                                 </span>
                                                 <span class="mdl-list__item-sub-title">
                                                     <span>تاريخ الاستحقاق / </span>
-                                                    <span ng-show="dateType==='H'">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                                    <span ng-show="dateType==='H'">{{contractPremium.dueDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                                     <span ng-show="dateType==='G'">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
                                                 </span>
                                                 <span class="mdl-list__item-sub-title">

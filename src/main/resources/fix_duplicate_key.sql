@@ -5,6 +5,7 @@ SELECT setval('bank_transaction_sequence', (SELECT MAX(id) FROM bank_transaction
 SELECT setval('company_sequence', (SELECT MAX(id) FROM company) + 1);
 SELECT setval('contact_sequence', (SELECT MAX(id) FROM contact) + 1);
 SELECT setval('contract_sequence', (SELECT MAX(id) FROM contract) + 1);
+SELECT setval('contract_attach_sequence', (SELECT MAX(id) FROM contract_attach) + 1);
 SELECT setval('contract_payment_sequence', (SELECT MAX(id) FROM contract_payment) + 1);
 SELECT setval('contract_premium_sequence', (SELECT MAX(id) FROM contract_premium) + 1);
 SELECT setval('contract_product_sequence', (SELECT MAX(id) FROM contract_product) + 1);

@@ -193,7 +193,7 @@
 
                             <p class="text-right template-box">
                                 <span>تاريخ المبايعة / </span>
-                                <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{role.writtenDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{role.writtenDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                 <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{role.writtenDate | date: 'yyyy-MM-dd'}}</span>
                                 <span class="label label-info">{{role.writtenDate | date: 'hh:mm a'}}</span>
                             </p>
@@ -341,7 +341,7 @@
                             <tr ng-repeat="contractPremium in role.contractPremiums">
                                 <td>{{$index+1}}</td>
                                 <td>
-                                    <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                    <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPremium.dueDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                     <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
                                 </td>
                                 <td>{{contractPremium.state}}</td>

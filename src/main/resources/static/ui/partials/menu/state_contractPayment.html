@@ -163,7 +163,7 @@
                             <td>{{contractPayment.contract.code}}</td>
                             <td>{{contractPayment.contract.customer.contact.shortName}}</td>
                             <td>
-                                <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPayment.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPayment.date | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                 <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPayment.date | date: 'yyyy-MM-dd'}}</span>
                             </td>
                             <td>{{contractPayment.note}}</td>

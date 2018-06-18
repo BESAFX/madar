@@ -1012,7 +1012,7 @@ app.controller("menuCtrl", [
                 search.push('&');
             });
             if ($scope.pageContract.sorts.length === 0) {
-                search.push('sort=date,desc&');
+                search.push('sort=writtenDate,desc&');
             }
             //Contract Filters
             if (paramContract.codeFrom) {
@@ -1690,6 +1690,7 @@ app.controller("menuCtrl", [
                 search.push('&');
             }
             if (paramBankTransaction.dateTo) {
+                console.info(paramBankTransaction.dateTo);
                 search.push('dateTo=');
                 search.push(paramBankTransaction.dateTo.getTime());
                 search.push('&');

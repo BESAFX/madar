@@ -54,9 +54,9 @@
                 var year = result.getFullYear();
 
                 if (dateformat.slice(0, 4) == "EEEE") {
-                    return weekArr[dayOfWeek] + ' ' + monthsArr[month] + ', ' + day + ' ' + year;
+                    return  year + '-' + month + '-' + day;
                 }
-                return monthsArr[month] + ', ' + day + ' ' + year;
+                return year + '-' + monthsArr[month] + '-' + day;
             } else {
                 return $filter('date')(input, dateformat);
             }

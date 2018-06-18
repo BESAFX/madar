@@ -3,6 +3,7 @@ package com.besafx.app.entity.enums;
 public enum PremiumPeriod {
     Daily("يومي"),
     Weekly("اسبوعي"),
+    Monthly("شهري"),
     Midterm("نصف سنوي"),
     Annual("سنوي");
 

@@ -1,5 +1,7 @@
 package com.besafx.app.entity;
 
+import com.besafx.app.entity.enums.PremiumCalendar;
+import com.besafx.app.entity.enums.PremiumPeriod;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,6 +48,9 @@ public class Contract implements Serializable {
 
     private Double premiumAmount;
 
+    @Transient
+    private Double lastPremiumAmount;
+
     private Double advancedAmount;
 
     @ManyToOne
@@ -79,11 +84,13 @@ public class Contract implements Serializable {
 
     //جدولة الأقساط بالتقويم الميلادي أو الهجري
     @Transient
-    private String premiumCalendar;
+    @Enumerated(EnumType.STRING)
+    private PremiumCalendar premiumCalendar;
 
     //نوع جدولة الأقساط
     @Transient
-    private String premiumPeriod;
+    @Enumerated(EnumType.STRING)
+    private PremiumPeriod premiumPeriod;
 
     //عدد الأقساط
     @Transient

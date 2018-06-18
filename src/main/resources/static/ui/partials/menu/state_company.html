@@ -336,7 +336,7 @@
                                         <td>{{contract.customer.contact.mobile}}</td>
                                         <td>{{contract.seller.contact.shortName}}</td>
                                         <td>
-                                            <span ng-show="dateType==='H'">{{contract.lastPaymentDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                            <span ng-show="dateType==='H'">{{contract.lastPaymentDate | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                             <span ng-show="dateType==='G'">{{contract.lastPaymentDate | date: 'yyyy-MM-dd'}}</span>
                                             <span class="label label-info">{{contract.lastPaymentDate | date: 'hh:mm a'}}</span>
                                         </td>
@@ -462,7 +462,7 @@
                                     <tr ng-repeat="bankTransaction in myBankTransactions | filter:myBankTransactions.searchText">
                                         <td>{{$index+1}}</td>
                                         <td class="fit">
-                                            <span ng-show="dateType==='H'">{{bankTransaction.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                            <span ng-show="dateType==='H'">{{bankTransaction.date | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                             <span ng-show="dateType==='G'">{{bankTransaction.date | date: 'yyyy-MM-dd'}}</span>
                                         </td>
                                         <td>{{bankTransaction.transactionType.name}}</td>
@@ -552,7 +552,7 @@
                                         <td>{{productPurchase.code}}</td>
                                         <td>{{productPurchase.product.name}}</td>
                                         <td class="fit">
-                                            <span ng-show="dateType==='H'">{{productPurchase.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                            <span ng-show="dateType==='H'">{{productPurchase.date | kdate: 'EEEE' : 'ar' : 'ummalqura'}}</span>
                                             <span ng-show="dateType==='G'">{{productPurchase.date | date: 'yyyy-MM-dd'}}</span>
                                             <span class="label label-info">{{productPurchase.date | date: 'hh:mm a'}}</span>
                                         </td>
