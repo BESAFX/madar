@@ -54,10 +54,11 @@ public class ContractPremium implements Serializable {
 
     public Double getPaid() {
         try {
-            return this.contractPayments
-                    .stream()
-                    .mapToDouble(ContractPayment::getAmount)
-                    .sum();
+            double remain = this.contract.getRemain();
+            if(remain <= 0){
+                return this.amount;
+            }
+            return 0.0;
         } catch (Exception ex) {
             return 0.0;
         }

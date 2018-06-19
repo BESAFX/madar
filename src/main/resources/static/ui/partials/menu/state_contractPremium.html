@@ -195,9 +195,9 @@
                                 <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
                             </td>
                             <td>{{contractPremium.state}}</td>
-                            <td>{{contractPremium.amount | currency:' SAR ':2}}</td>
-                            <td>{{contractPremium.paid | currency:' SAR ':2}}</td>
-                            <td>{{contractPremium.remain | currency:' SAR ':2}}</td>
+                            <td>{{contractPremium.amount | currency:'':2}}</td>
+                            <td>{{contractPremium.paid | currency:'':2}}</td>
+                            <td>{{contractPremium.remain | currency:'':2}}</td>
                         </tr>
                         <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
                             ng-if="!contractPremiums || contractPremiums.length ==0">
@@ -209,11 +209,11 @@
                         </tr>
                         <tr ng-if="contractPremiums.length > 0">
                             <td class="info" colspan="7">
-                                <span class="pull-left">المجموع الكلي</span>
+                                <span class="pull-left">المجموع الكلي(جميع القيم بالريال السعودي)</span>
                             </td>
-                            <td class="success" colspan="1">{{contractPremiums | sumByKey:'amount' | currency:' SAR ':2}}</td>
-                            <td class="success" colspan="1">{{contractPremiums | sumByKey:'paid' | currency:' SAR ':2}}</td>
-                            <td class="success" colspan="1">{{contractPremiums | sumByKey:'remain' | currency:' SAR ':2}}</td>
+                            <td class="success" colspan="1">{{contractPremiums | sumByKey:'amount' | currency:'':2}}</td>
+                            <td class="success" colspan="1">{{contractPremiums | sumByKey:'paid' | currency:'':2}}</td>
+                            <td class="success" colspan="1">{{contractPremiums | sumByKey:'remain' | currency:'':2}}</td>
                         </tr>
                         </tbody>
                     </table>

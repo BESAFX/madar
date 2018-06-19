@@ -38,7 +38,7 @@
 
                         <div class="form-group row">
 
-                            <div class="box-warning">
+                            <div class="box-info">
                                 <p>
                                     <span>إجمالي قيمة العقد بعد (الخصم + القيمة المضافة) </span>&nbsp;
                                     {{contract.totalPriceAfterDiscountAndVat | currency:' SAR ':2}}
@@ -49,74 +49,27 @@
 
                         <div class="form-group row">
 
-                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <label for="contractPremium" class="control-label">القسط</label>
-                                <ui-select id="contractPremium"
-                                           ng-model="contractPayment.contractPremium"
-                                           required="required"
-                                           disable-validation-message=""
-                                           theme="bootstrap">
-                                    <ui-select-match placeholder="الحقل مطلوب">
-
-                                        <li class="mdl-list__item mdl-list__item--two-line" style="padding: unset;cursor: pointer; overflow:auto;">
-                                            <span class="mdl-list__item-primary-content">
-                                                <span class="material-icons mdl-list__item-avatar"
-                                                      style="background-color: unset;background-image: url('/ui/img/{{iconSet}}/contractPremium.{{iconSetType}}')"></span>
-                                                <span class="mdl-list__item-sub-title">
-                                                    <span>مقدار القسط / </span>
-                                                    <span>{{$select.selected.amount | currency:' SAR ':2}}</span>
-                                                </span>
-                                                <span class="mdl-list__item-sub-title">
-                                                    <span>تاريخ الاستحقاق / </span>
-                                                    <span ng-show="dateType==='H'">{{$select.selected.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
-                                                    <span ng-show="dateType==='G'">{{$select.selected.dueDate | date: 'yyyy-MM-dd'}}</span>
-                                                </span>
-                                                <span class="mdl-list__item-sub-title">
-                                                    <span>المدفوع / </span>
-                                                    <span>{{$select.selected.paid | currency:' SAR ':2}}</span>
-                                                </span>
-                                                <span class="mdl-list__item-sub-title mdl-color-text--white"
-                                                      ng-class="{'label label-success' : $select.selected.remain === 0, 'label label-danger' : $select.selected.remain > 0, 'label label-warning' : $select.selected.remain < 0}">
-                                                    <span>الباقي / </span>
-                                                    <span>{{$select.selected.remain | currency:' SAR ':2}}</span>
-                                                </span>
-                                            </span>
-                                        </li>
-
-                                    </ui-select-match>
-                                    <ui-select-choices
-                                            repeat="contractPremium in contractPremiums | filter: $select.search | orderBy:'dueDate' track by $index">
-
-                                        <div class="mdl-menu__item--full-bleed-divider"></div>
-                                        <li class="mdl-list__item mdl-list__item--two-line" style="padding: unset;cursor: pointer">
-                                            <span class="mdl-list__item-primary-content">
-                                                <span class="material-icons mdl-list__item-avatar"
-                                                      style="background-color: unset;background-image: url('/ui/img/{{iconSet}}/contractPremium.{{iconSetType}}')"></span>
-                                                <div ng-bind-html="contractPremium.name | highlight: $select.search"></div>
-                                                <span class="mdl-list__item-sub-title">
-                                                    <span>مقدار القسط / </span>
-                                                    {{contractPremium.amount | currency:' SAR ':2}}
-                                                </span>
-                                                <span class="mdl-list__item-sub-title">
-                                                    <span>تاريخ الاستحقاق / </span>
-                                                    <span ng-show="dateType==='H'">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
-                                                    <span ng-show="dateType==='G'">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
-                                                </span>
-                                                <span class="mdl-list__item-sub-title">
-                                                    <span>المدفوع / </span>
-                                                    {{contractPremium.paid | currency:' SAR ':2}}
-                                                </span>
-                                                <span class="mdl-list__item-sub-title mdl-color-text--white"
-                                                      ng-class="{'label label-success' : contractPremium.remain === 0, 'label label-danger' : contractPremium.remain > 0, 'label label-warning' : contractPremium.remain < 0}">
-                                                    <span>الباقي / </span>
-                                                    {{contractPremium.remain | currency:' SAR ':2}}
-                                                </span>
-                                            </span>
-                                        </li>
-
-                                    </ui-select-choices>
-                                </ui-select>
+                            <div class="box-success">
+                                <p>
+                                    <span>المدفوع </span>&nbsp;
+                                    {{contract.paid | currency:' SAR ':2}}
+                                </p>
                             </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="box-warning">
+                                <p>
+                                    <span>المتبقي </span>&nbsp;
+                                    {{contract.remain | currency:' SAR ':2}}
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
 
                             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <label for="date" class="control-label">تاريخ الدفعة</label>
@@ -127,26 +80,32 @@
                                             <span ng-show="calendar==='H'">هجري</span>
                                         </a>
                                     </span>
-                                    <input ng-show="calendar==='H'"
+                                    <div style="position: relative">
+                                    <input style="position: absolute" ng-show="calendar==='H'"
                                            type="text"
-                                           class="form-control is-calendarPicker"
+                                           class="form-control is-calendarPicker animated-div"
                                            ng-model="contractPayment.date"
                                            calendarType="ummalqura"
                                            language="ar"
                                            dateFormat="yyyy/mm/dd"
                                            showOnFocus="true"
                                            pickerClass="myPicker"
+                                           required="required"
+                                           disable-validation-message=""
                                            kdatepicker/>
-                                    <input ng-show="calendar==='G'"
+                                    <input style="position: absolute" ng-show="calendar==='G'"
                                            type="text"
-                                           class="form-control is-calendarPicker"
+                                           class="form-control is-calendarPicker animated-div"
                                            ng-model="contractPayment.date"
                                            calendarType="gregorian"
                                            language="ar-EG"
                                            dateFormat="yyyy/mm/dd"
                                            showOnFocus="true"
                                            pickerClass="myPicker"
+                                           required="required"
+                                           disable-validation-message=""
                                            kdatepicker/>
+                                    </div>
                                 </div>
                             </div>
 
@@ -159,7 +118,6 @@
                                            required="required"
                                            disable-validation-message=""
                                            min="1"
-                                           ng-max="contractPayment.contractPayment.remain"
                                            class="form-control"
                                            placeholder="اجباري"
                                            ng-model="contractPayment.amount">

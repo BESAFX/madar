@@ -1,10 +1,7 @@
 package com.besafx.app.rest;
 
 import com.besafx.app.auditing.PersonAwareUserDetails;
-import com.besafx.app.entity.BankTransaction;
-import com.besafx.app.entity.Contract;
-import com.besafx.app.entity.ContractPayment;
-import com.besafx.app.entity.Person;
+import com.besafx.app.entity.*;
 import com.besafx.app.init.Initializer;
 import com.besafx.app.search.ContractPaymentSearch;
 import com.besafx.app.service.BankTransactionService;
@@ -27,6 +24,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.ListIterator;
 
 @RestController
 @RequestMapping(value = "/api/contractPayment/")
@@ -94,7 +94,7 @@ public class ContractPaymentRest {
             builder.append(" لـ / ");
             builder.append(bankTransaction.getSeller().getContact().getShortName());
             builder.append("، قسط مستحق بتاريخ ");
-            builder.append(DateConverter.getDateInFormat(contractPayment.getContractPremium().getDueDate()));
+            builder.append(DateConverter.getDateInFormat(contractPayment.getDate()));
             builder.append("، للعقد رقم / " + contract.getCode());
             bankTransaction.setNote(builder.toString());
 

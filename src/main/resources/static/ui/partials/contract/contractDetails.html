@@ -371,13 +371,13 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="contractPremium in contract.contractPremiums">
-                                <td>
+                                <td class="fit">
                                     <span ng-show="dateType==='H'">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                                     <span ng-show="dateType==='G'">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
                                 </td>
-                                <td>{{contractPremium.amount | currency:' SAR ':2}}</td>
-                                <td>{{contractPremium.paid | currency:' SAR ':2}}</td>
-                                <td>{{contractPremium.remain | currency:' SAR ':2}}</td>
+                                <td>{{contractPremium.amount | currency:'':2}}</td>
+                                <td>{{contractPremium.paid | currency:'':2}}</td>
+                                <td>{{contractPremium.remain | currency:'':2}}</td>
                                 <td>
                                     <div class="row">
                                         <button uib-tooltip="إضافة قسط"
@@ -458,11 +458,11 @@
                             <tbody>
                             <tr ng-repeat="contractPayment in contract.contractPayments">
                                 <td>{{contractPayment.code}}</td>
-                                <td>
+                                <td class="fit">
                                     <span ng-show="dateType==='H'">{{contractPayment.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                                     <span ng-show="dateType==='G'">{{contractPayment.date | date: 'yyyy-MM-dd'}}</span>
                                 </td>
-                                <td>{{contractPayment.amount | currency:' SAR ':2}}</td>
+                                <td>{{contractPayment.amount | currency:'':2}}</td>
                                 <td>{{contractPayment.note}}</td>
                                 <td>
                                     <div class="row">

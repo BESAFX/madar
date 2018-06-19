@@ -225,7 +225,7 @@ public class Contract implements Serializable {
         try {
             return String.join(", ", this.contractProducts
                     .stream()
-                    .map(contractProduct -> contractProduct.getProductPurchase().getProduct().getName())
+                    .map(contractProduct -> contractProduct.getProductPurchase().getProduct().getName() + "(" + "عدد " + contractProduct.getProductPurchase().getQuantity().intValue() + ")")
                     .toArray(String[]::new));
         } catch (Exception ex) {
             return "";
