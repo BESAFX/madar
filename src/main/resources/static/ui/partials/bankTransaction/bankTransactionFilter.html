@@ -76,26 +76,28 @@
                                             <span ng-show="calendar1==='H'">هجري</span>
                                         </a>
                                     </span>
-                                <input ng-if="calendar1==='H'"
-                                       type="text"
-                                       class="form-control is-calendarPicker"
-                                       ng-model="paramBankTransaction.dateFrom"
-                                       calendarType="ummalqura"
-                                       language="ar"
-                                       dateFormat="yyyy/mm/dd"
-                                       showOnFocus="true"
-                                       pickerClass="myPicker"
-                                       kdatepicker/>
-                                <input ng-if="calendar1==='G'"
-                                       type="text"
-                                       class="form-control is-calendarPicker"
-                                       ng-model="paramBankTransaction.dateFrom"
-                                       calendarType="gregorian"
-                                       language="ar-EG"
-                                       dateFormat="yyyy/mm/dd"
-                                       showOnFocus="true"
-                                       pickerClass="myPicker"
-                                       kdatepicker/>
+                                <div style="position: relative">
+                                    <input style="position: absolute" ng-show="calendar1==='H'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="paramBankTransaction.dateFrom"
+                                           calendarType="ummalqura"
+                                           language="ar"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                    <input style="position: absolute" ng-show="calendar1==='G'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="paramBankTransaction.dateFrom"
+                                           calendarType="gregorian"
+                                           language="ar-EG"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                </div>
                             </div>
                         </div>
 
@@ -108,26 +110,28 @@
                                             <span ng-show="calendar2==='H'">هجري</span>
                                         </a>
                                     </span>
-                                <input ng-show="calendar2==='H'"
-                                       type="text"
-                                       class="form-control is-calendarPicker"
-                                       ng-model="paramBankTransaction.dateTo"
-                                       calendarType="ummalqura"
-                                       language="ar"
-                                       dateFormat="yyyy/mm/dd"
-                                       showOnFocus="true"
-                                       pickerClass="myPicker"
-                                       kdatepicker/>
-                                <input ng-show="calendar2==='G'"
-                                       type="text"
-                                       class="form-control is-calendarPicker"
-                                       ng-model="paramBankTransaction.dateTo"
-                                       calendarType="gregorian"
-                                       language="ar-EG"
-                                       dateFormat="yyyy/mm/dd"
-                                       showOnFocus="true"
-                                       pickerClass="myPicker"
-                                       kdatepicker/>
+                                <div style="position: relative">
+                                    <input style="position: absolute" ng-show="calendar2==='H'"
+                                           type="text"
+                                           class="form-control is-calendarPicker"
+                                           ng-model="paramBankTransaction.dateTo"
+                                           calendarType="ummalqura"
+                                           language="ar"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                    <input style="position: absolute" ng-show="calendar2==='G'"
+                                           type="text"
+                                           class="form-control is-calendarPicker"
+                                           ng-model="paramBankTransaction.dateTo"
+                                           calendarType="gregorian"
+                                           language="ar-EG"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                </div>
                             </div>
                         </div>
 

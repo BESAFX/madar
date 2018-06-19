@@ -506,33 +506,35 @@
 
                             <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
                                 <label for="writtenDate" class="control-label">تاريخ كتابة العقد</label>
-                                <div dir="ltr" class="input-group" id="writtenDate" ng-init="calendar='G'">
+                                <div dir="ltr" class="input-group" id="writtenDate" ng-init="calendar1='G'">
                                     <span class="input-group-addon">
-                                        <a href="" ng-click="calendar==='G'?calendar='H':calendar='G'">
-                                            <span ng-show="calendar==='G'">ميلادي</span>
-                                            <span ng-show="calendar==='H'">هجري</span>
+                                        <a href="" ng-click="calendar1==='G'?calendar1='H':calendar1='G'">
+                                            <span ng-show="calendar1==='G'">ميلادي</span>
+                                            <span ng-show="calendar1==='H'">هجري</span>
                                         </a>
                                     </span>
-                                    <input ng-show="calendar==='H'"
-                                           type="text"
-                                           class="form-control is-calendarPicker"
-                                           ng-model="contract.writtenDate"
-                                           calendarType="ummalqura"
-                                           language="ar"
-                                           dateFormat="yyyy/mm/dd"
-                                           showOnFocus="true"
-                                           pickerClass="myPicker"
-                                           kdatepicker/>
-                                    <input ng-show="calendar==='G'"
-                                           type="text"
-                                           class="form-control is-calendarPicker"
-                                           ng-model="contract.writtenDate"
-                                           calendarType="gregorian"
-                                           language="ar-EG"
-                                           dateFormat="yyyy/mm/dd"
-                                           showOnFocus="true"
-                                           pickerClass="myPicker"
-                                           kdatepicker/>
+                                    <div style="position: relative">
+                                        <input style="position: absolute" ng-show="calendar1==='H'"
+                                               type="text"
+                                               class="form-control is-calendarPicker animated-div"
+                                               ng-model="contract.writtenDate"
+                                               calendarType="ummalqura"
+                                               language="ar"
+                                               dateFormat="yyyy/mm/dd"
+                                               showOnFocus="true"
+                                               pickerClass="myPicker"
+                                               kdatepicker/>
+                                        <input style="position: absolute" ng-show="calendar1==='G'"
+                                               type="text"
+                                               class="form-control is-calendarPicker animated-div"
+                                               ng-model="contract.writtenDate"
+                                               calendarType="gregorian"
+                                               language="ar-EG"
+                                               dateFormat="yyyy/mm/dd"
+                                               showOnFocus="true"
+                                               pickerClass="myPicker"
+                                               kdatepicker/>
+                                    </div>
                                 </div>
                             </div>
 
@@ -575,30 +577,32 @@
                                             <span ng-show="contract.premiumCalendar==='H'">هجري</span>
                                         </a>
                                     </span>
-                                    <input ng-show="contract.premiumCalendar==='H'"
-                                           type="text"
-                                           class="form-control is-calendarPicker"
-                                           ng-model="contract.premiumStartDate"
-                                           calendarType="ummalqura"
-                                           language="ar"
-                                           dateFormat="yyyy/mm/dd"
-                                           showOnFocus="true"
-                                           pickerClass="myPicker"
-                                           ng-required="contract.premiumCalendar==='H'"
-                                           disable-validation-message=""
-                                           kdatepicker/>
-                                    <input ng-show="contract.premiumCalendar==='G'"
-                                           type="text"
-                                           class="form-control is-calendarPicker"
-                                           ng-model="contract.premiumStartDate"
-                                           calendarType="gregorian"
-                                           language="ar-EG"
-                                           dateFormat="yyyy/mm/dd"
-                                           showOnFocus="true"
-                                           pickerClass="myPicker"
-                                           ng-required="contract.premiumCalendar==='G'"
-                                           disable-validation-message=""
-                                           kdatepicker/>
+                                    <div style="position: relative">
+                                        <input style="position: absolute" ng-show="contract.premiumCalendar==='H'"
+                                               type="text"
+                                               class="form-control is-calendarPicker animated-div"
+                                               ng-model="contract.premiumStartDate"
+                                               calendarType="ummalqura"
+                                               language="ar"
+                                               dateFormat="yyyy/mm/dd"
+                                               showOnFocus="true"
+                                               pickerClass="myPicker"
+                                               ng-required="contract.premiumCalendar==='H'"
+                                               disable-validation-message=""
+                                               kdatepicker/>
+                                        <input style="position: absolute" ng-show="contract.premiumCalendar==='G'"
+                                               type="text"
+                                               class="form-control is-calendarPicker animated-div"
+                                               ng-model="contract.premiumStartDate"
+                                               calendarType="gregorian"
+                                               language="ar-EG"
+                                               dateFormat="yyyy/mm/dd"
+                                               showOnFocus="true"
+                                               pickerClass="myPicker"
+                                               ng-required="contract.premiumCalendar==='G'"
+                                               disable-validation-message=""
+                                               kdatepicker/>
+                                    </div>
                                 </div>
                             </div>
 

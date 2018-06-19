@@ -1390,7 +1390,7 @@ app.controller("menuCtrl", [
                 search.push('&');
             }
 
-            search.push('filterCompareType=or');
+            search.push('filterCompareType=and');
 
             ContractPremiumService.filter(search.join("")).then(function (data) {
                 $scope.contractPremiums = data.content;
