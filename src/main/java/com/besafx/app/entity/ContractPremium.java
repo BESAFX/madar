@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
@@ -19,6 +19,8 @@ import java.util.List;
 public class ContractPremium implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    private final static Logger LOG = LoggerFactory.getLogger(ContractPremium.class);
 
     @GenericGenerator(
             name = "contractPremiumSequenceGenerator",
@@ -54,11 +56,30 @@ public class ContractPremium implements Serializable {
 
     public Double getPaid() {
         try {
-            double remain = this.contract.getRemain();
-            if(remain <= 0){
-                return this.amount;
+            double totalPaid = this.contract.getPaid();
+            double currentPaid = 0.0;
+            if (totalPaid == 0) {
+                return 0.0;
             }
-            return 0.0;
+            Iterator<ContractPremium> contractPremiumListIterator = this.contract
+                    .getContractPremiums()
+                    .stream()
+                    .sorted(Comparator.comparing(ContractPremium::getDueDate))
+                    .iterator();
+            while (contractPremiumListIterator.hasNext()) {
+                ContractPremium contractPremium = contractPremiumListIterator.next();
+                if (totalPaid > contractPremium.getAmount()) {
+                    currentPaid = contractPremium.getAmount();
+                }else{
+                    currentPaid = totalPaid;
+                }
+                totalPaid = totalPaid - currentPaid;
+                LOG.info("القسط بتاريخ: " + contractPremium.getDueDate().toString() + "، المدفوع / " + currentPaid);
+                if(contractPremium.getId().equals(this.getId())){
+                    break;
+                }
+            }
+            return currentPaid;
         } catch (Exception ex) {
             return 0.0;
         }
@@ -77,13 +98,13 @@ public class ContractPremium implements Serializable {
             double remain = this.getRemain();
             if (remain == 0) {
                 return "تم السداد";
-            }  else if (remain > 0 && remain < this.amount) {
+            } else if (remain > 0 && remain < this.amount) {
                 return "سداد جزئي";
             } else if (this.dueDate.after(new Date())) {
                 return "غير مستحق";
-            }else if (remain == this.amount) {
+            } else if (remain == this.amount) {
                 return "غير مسدد";
-            }else{
+            } else {
                 return "غير معروف";
             }
         } catch (Exception ex) {
