@@ -194,7 +194,14 @@
                                 <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                                 <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
                             </td>
-                            <td>{{contractPremium.state}}</td>
+                            <td ng-class="{
+                            'danger' : contractPremium.state==='غير مسدد',
+                            'success' : contractPremium.state==='تم السداد',
+                            'warning' : contractPremium.state==='سداد جزئي',
+                            'info' : contractPremium.state==='غير مستحق',
+                            }">
+                                {{contractPremium.state}}
+                            </td>
                             <td>{{contractPremium.amount | currency:'':2}}</td>
                             <td>{{contractPremium.paid | currency:'':2}}</td>
                             <td>{{contractPremium.remain | currency:'':2}}</td>
