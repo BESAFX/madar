@@ -34,6 +34,10 @@ public class DateConverter {
         return new SimpleDateFormat("yyyy-MM-dd").format(date);
     }
 
+    public static String getDateInFormatLTR(Date date) {
+        return new SimpleDateFormat("dd/MM/yyyy").format(date);
+    }
+
     public static String getTimeFromDate(Date date) {
         return new SimpleDateFormat("a mm:hh").format(date);
     }

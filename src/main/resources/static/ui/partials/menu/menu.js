@@ -1197,6 +1197,9 @@ app.controller("menuCtrl", [
                 return contract.contractPremiums.splice(0, 0, data);
             });
         };
+        $scope.printContract = function (contract) {
+            window.open('/report/contract/' + contract.id);
+        };
         $scope.rowMenuContract = [
             {
                 html: '<div class="drop-menu">' +
@@ -1280,6 +1283,18 @@ app.controller("menuCtrl", [
                 },
                 click: function ($itemScope, $event, value) {
                     ModalProvider.openContractDetailsModel($itemScope.contract);
+                }
+            },
+            {
+                html: '<div class="drop-menu">' +
+                '<img src="/ui/img/' + $rootScope.iconSet + '/print.' + $rootScope.iconSetType + '" width="24" height="24">' +
+                '<span>طباعة</span>' +
+                '</div>',
+                enabled: function () {
+                    return true;
+                },
+                click: function ($itemScope, $event, value) {
+                    $scope.printContract($itemScope.contract);
                 }
             }
         ];
