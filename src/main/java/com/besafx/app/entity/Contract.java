@@ -92,6 +92,10 @@ public class Contract implements Serializable {
     @Enumerated(EnumType.STRING)
     private PremiumPeriod premiumPeriod;
 
+    //معامل الجدولة
+    @Transient
+    private Integer premiumPeriodFactor;
+
     //عدد الأقساط
     @Transient
     private Integer premiumCount;

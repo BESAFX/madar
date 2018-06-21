@@ -158,18 +158,6 @@ app.controller('teamCreateUpdateCtrl', ['TeamService', '$scope', '$rootScope', '
             category: 'الإدارة'
         });
         $scope.roles.push({
-            name: 'اضافة قسط للعقود',
-            value: 'ROLE_CONTRACT_PREMIUM_CREATE',
-            selected: false,
-            category: 'الإدارة'
-        });
-        $scope.roles.push({
-            name: 'حذف قسط من العقود',
-            value: 'ROLE_CONTRACT_PREMIUM_DELETE',
-            selected: false,
-            category: 'الإدارة'
-        });
-        $scope.roles.push({
             name: 'تسديد دفعة مالية',
             value: 'ROLE_CONTRACT_PAYMENT_CREATE',
             selected: false,
@@ -178,6 +166,25 @@ app.controller('teamCreateUpdateCtrl', ['TeamService', '$scope', '$rootScope', '
         $scope.roles.push({
             name: 'حذف دفعة مالية',
             value: 'ROLE_CONTRACT_PAYMENT_DELETE',
+            selected: false,
+            category: 'الإدارة'
+        });
+        //////////////////////////ContractPremium///////////////////////////////////
+        $scope.roles.push({
+            name: 'اضافة قسط',
+            value: 'ROLE_CONTRACT_PREMIUM_CREATE',
+            selected: false,
+            category: 'الإدارة'
+        });
+        $scope.roles.push({
+            name: 'تعديل بيانات الأقساط',
+            value: 'ROLE_CONTRACT_PREMIUM_UPDATE',
+            selected: false,
+            category: 'الإدارة'
+        });
+        $scope.roles.push({
+            name: 'حذف الأقساط',
+            value: 'ROLE_CONTRACT_PREMIUM_DELETE',
             selected: false,
             category: 'الإدارة'
         });

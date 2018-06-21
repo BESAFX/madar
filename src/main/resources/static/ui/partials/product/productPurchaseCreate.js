@@ -108,11 +108,11 @@ app.controller('productPurchaseCreateCtrl', ['SellerService', 'ProductService', 
                 var tempProductPurchase = JSON.parse(JSON.stringify(productPurchase));
                 tempProductPurchase.seller = $scope.buffer.seller;
                 tempProductPurchase.note = $scope.buffer.note;
-                ProductPurchaseService.create(tempProductPurchase).then(function (data) {
-                    tempProductPurchases.push(data);
-                });
+                tempProductPurchases.push(tempProductPurchase);
             });
-            $uibModalInstance.close({});
+            ProductPurchaseService.createBatch(tempProductPurchases).then(function (data) {
+                $uibModalInstance.close(data);
+            });
         };
 
         $scope.cancel = function () {

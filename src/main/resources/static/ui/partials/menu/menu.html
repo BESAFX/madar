@@ -207,6 +207,8 @@
                             </span>
                         </li>
 
+                        <li class="mdl-menu__item--full-bleed-divider"></li>
+
                         <li class="mdl-menu__item mdl-list__item"
                             ng-show="contains(me.team.authorities, [
                             'ROLE_CONTRACT_PREMIUM_CREATE',
@@ -220,6 +222,16 @@
                                      width="24"
                                      height="24">
                                <span>سجل الأقساط</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_PREMIUM_CREATE'])"
+                            ng-click="newPremium()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>قسط جديد...</span>
                             </span>
                         </li>
 

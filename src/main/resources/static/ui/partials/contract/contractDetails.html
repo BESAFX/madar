@@ -389,6 +389,15 @@
                                             <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}"
                                                  width="24" height="24">
                                         </button>
+                                        <button uib-tooltip="تعديل"
+                                                tooltip-append-to-body="true"
+                                                type="button"
+                                                ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_PREMIUM_UPDATE'])"
+                                                ng-click="ModalProvider.openPremiumUpdateModel(contractPremium);"
+                                                class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/edit.{{iconSetType}}"
+                                                 width="24" height="24">
+                                        </button>
                                         <button uib-tooltip="حذف"
                                                 tooltip-append-to-body="true"
                                                 type="button"

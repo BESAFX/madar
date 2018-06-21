@@ -45,10 +45,7 @@ app.controller('contractCreateCtrl', ['ContractService', 'CustomerService', 'Sel
 
         $scope.newProductPurchase = function () {
             ModalProvider.openProductPurchaseCreateModel().result.then(function (data) {
-                $scope.productPurchases.splice(0, 0, data);
-                $timeout(function () {
-                    window.componentHandler.upgradeAllRegistered();
-                }, 300);
+                return Array.prototype.push.apply($scope.productPurchases, data);
             });
         };
 

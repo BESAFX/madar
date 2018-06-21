@@ -358,6 +358,35 @@ app.service('ModalProvider', ['$uibModal', '$log', function ($uibModal, $log) {
         });
     };
 
+    this.openPremiumCreateModel = function () {
+        return $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: '/ui/partials/contractPremium/premiumCreate.html',
+            controller: 'premiumCreateCtrl',
+            backdrop: 'static',
+            keyboard: false
+        });
+    };
+
+    this.openPremiumUpdateModel = function (contractPremium) {
+        return $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: '/ui/partials/contractPremium/premiumUpdate.html',
+            controller: 'premiumUpdateCtrl',
+            backdrop: 'static',
+            keyboard: false,
+            resolve: {
+                contractPremium: function () {
+                    return contractPremium;
+                }
+            }
+        });
+    };
+
     this.openContractPremiumSendMessageModel = function (contractPremiums) {
         return $uibModal.open({
             animation: true,

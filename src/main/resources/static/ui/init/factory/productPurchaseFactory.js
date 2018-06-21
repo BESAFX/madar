@@ -31,6 +31,11 @@ app.factory("ProductPurchaseService",
                     return response.data;
                 });
             },
+            createBatch: function (productPurchases) {
+                return $http.post("/api/productPurchase/createBatch", productPurchases).then(function (response) {
+                    return response.data;
+                });
+            },
             remove: function (id) {
                 return $http.delete("/api/productPurchase/delete/" + id);
             },

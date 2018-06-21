@@ -148,6 +148,8 @@ gulp.task('scripts', function () {
         './partials/contractPayment/contractPaymentCreate.js',
         './partials/contractPremium/contractPremiumFilter.js',
         './partials/contractPremium/contractPremiumCreate.js',
+        './partials/contractPremium/premiumCreate.js',
+        './partials/contractPremium/premiumUpdate.js',
         './partials/contractPremium/contractPremiumSendMessage.js',
         './partials/bankTransaction/bankTransactionFilter.js',
         './partials/bankTransaction/depositCreate.js',

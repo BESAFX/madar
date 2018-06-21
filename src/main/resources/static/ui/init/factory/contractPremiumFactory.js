@@ -16,6 +16,11 @@ app.factory("ContractPremiumService",
                     return response.data;
                 });
             },
+            update: function (contractPremium) {
+                return $http.put("/api/contractPremium/update", contractPremium).then(function (response) {
+                    return response.data;
+                });
+            },
             remove: function (id) {
                 return $http.delete("/api/contractPremium/delete/" + id);
             },

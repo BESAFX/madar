@@ -22,11 +22,9 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
@@ -72,6 +70,24 @@ public class ContractPremiumRest {
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contractPremium);
     }
 
+    @PutMapping(value = "update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @PreAuthorize("hasRole('ROLE_CONTRACT_PREMIUM_UPDATE')")
+    @Transactional
+    public String update(@RequestBody ContractPremium contractPremium) {
+        ContractPremium object = contractPremiumService.findOne(contractPremium.getId());
+        if (object != null) {
+            contractPremium = contractPremiumService.save(contractPremium);
+            notificationService.notifyAll(Notification
+                                                  .builder()
+                                                  .message("تم تعديل بيانات القسط بنجاح")
+                                                  .type("success").build());
+            return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contractPremium);
+        } else {
+            return null;
+        }
+    }
+
     @DeleteMapping(value = "delete/{id}")
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_CONTRACT_PREMIUM_DELETE')")
@@ -99,7 +115,7 @@ public class ContractPremiumRest {
     @PreAuthorize("hasRole('ROLE_SMS_SEND')")
     public void sendMessage(@RequestBody String content, @PathVariable List<Long> contractPremiumIds) throws Exception {
         ListIterator<Long> listIterator = contractPremiumIds.listIterator();
-        while (listIterator.hasNext()){
+        while (listIterator.hasNext()) {
             Long id = listIterator.next();
             ContractPremium contractPremium = contractPremiumService.findOne(id);
             String message = content.replaceAll("#amount#", contractPremium.getAmount().toString())

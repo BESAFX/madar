@@ -716,7 +716,8 @@ app.controller("menuCtrl", [
             modalInstance.result.then(function (paramProduct) {
                 $scope.paramProduct = paramProduct;
                 $scope.searchProducts(paramProduct);
-            }, function () {});
+            }, function () {
+            });
         };
         $scope.searchProducts = function (paramProduct) {
             var search = [];
@@ -954,10 +955,7 @@ app.controller("menuCtrl", [
         };
         $scope.newProductPurchase = function () {
             ModalProvider.openProductPurchaseCreateModel().result.then(function (data) {
-                // $scope.productPurchases.splice(0, 0, data);
-                $timeout(function () {
-                    window.componentHandler.upgradeAllRegistered();
-                }, 300);
+                return Array.prototype.push.apply($scope.productPurchases, data);
             });
         };
 
@@ -1058,12 +1056,12 @@ app.controller("menuCtrl", [
             }
             if (paramContract.customerName) {
                 search.push('customerName=');
-                search.push(paramContract.customerName.getTime());
+                search.push(paramContract.customerName);
                 search.push('&');
             }
             if (paramContract.customerMobile) {
                 search.push('customerMobile=');
-                search.push(paramContract.customerMobile.getTime());
+                search.push(paramContract.customerMobile);
                 search.push('&');
             }
             //Seller Filters
@@ -1089,12 +1087,12 @@ app.controller("menuCtrl", [
             }
             if (paramContract.sellerName) {
                 search.push('sellerName=');
-                search.push(paramContract.sellerName.getTime());
+                search.push(paramContract.sellerName);
                 search.push('&');
             }
             if (paramContract.sellerMobile) {
                 search.push('sellerMobile=');
-                search.push(paramContract.sellerMobile.getTime());
+                search.push(paramContract.sellerMobile);
                 search.push('&');
             }
             ContractService.filter(search.join("")).then(function (data) {
@@ -1183,20 +1181,20 @@ app.controller("menuCtrl", [
                 return contract.contractProducts.splice(0, 0, data);
             });
         };
-        $scope.newContractPremium = function (contract) {
-            ModalProvider.openContractPremiumCreateModel(contract).result.then(function (data) {
-                if (!contract.contractPremiums) {
-                    contract.contractPremiums = [];
-                }
-                return contract.contractPremiums.splice(0, 0, data);
-            });
-        };
         $scope.newContractPayment = function (contract) {
             ModalProvider.openContractPaymentCreateModel(contract).result.then(function (data) {
                 if (!contract.contractPayments) {
                     contract.contractPayments = [];
                 }
                 return contract.contractPayments.splice(0, 0, data);
+            });
+        };
+        $scope.newContractPremium = function (contract) {
+            ModalProvider.openContractPremiumCreateModel(contract).result.then(function (data) {
+                if (!contract.contractPremiums) {
+                    contract.contractPremiums = [];
+                }
+                return contract.contractPremiums.splice(0, 0, data);
             });
         };
         $scope.rowMenuContract = [
@@ -1444,6 +1442,24 @@ app.controller("menuCtrl", [
                 }
             }
         };
+        $scope.newPremium = function () {
+            ModalProvider.openPremiumCreateModel().result.then(function (data) {
+                $scope.contractPremiums.splice(0, 0, data);
+                $timeout(function () {
+                    window.componentHandler.upgradeAllRegistered();
+                }, 300);
+            });
+        };
+        $scope.deletePremium = function (premium) {
+            ModalProvider.openConfirmModel("العقود", "delete", "هل تود حذف القسط فعلاً؟").result.then(function (value) {
+                if (value) {
+                    ContractPremiumService.remove(premium.id).then(function () {
+                        var index = $scope.contractPremiums.indexOf(premium);
+                        $scope.contractPremiums.splice(index, 1);
+                    });
+                }
+            });
+        };
         $scope.rowMenuContractPremium = [
             {
                 html: '<div class="drop-menu">' +
@@ -1454,7 +1470,19 @@ app.controller("menuCtrl", [
                     return $rootScope.contains($rootScope.me.team.authorities, ['ROLE_CONTRACT_PREMIUM_CREATE']);
                 },
                 click: function ($itemScope, $event, value) {
-
+                    $scope.newPremium();
+                }
+            },
+            {
+                html: '<div class="drop-menu">' +
+                '<img src="/ui/img/' + $rootScope.iconSet + '/edit.' + $rootScope.iconSetType + '" width="24" height="24">' +
+                '<span>تعديل...</span>' +
+                '</div>',
+                enabled: function () {
+                    return $rootScope.contains($rootScope.me.team.authorities, ['ROLE_CONTRACT_PREMIUM_UPDATE']);
+                },
+                click: function ($itemScope, $event, value) {
+                    ModalProvider.openPremiumUpdateModel($itemScope.contractPremium);
                 }
             },
             {
@@ -1466,7 +1494,7 @@ app.controller("menuCtrl", [
                     return $rootScope.contains($rootScope.me.team.authorities, ['ROLE_CONTRACT_PREMIUM_DELETE']);
                 },
                 click: function ($itemScope, $event, value) {
-
+                    $scope.deletePremium($itemScope.contractPremium);
                 }
             },
             {

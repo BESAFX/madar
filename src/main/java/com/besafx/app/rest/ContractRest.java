@@ -118,6 +118,33 @@ public class ContractRest {
         {
             DateTime startTime = new DateTime(contract.getPremiumStartDate()).withTimeAtStartOfDay();
 
+            LOG.info("سيتم تقديم وقت البداية للاقساط فى حال كان هناك دفعة مقدمة");
+            if(contract.getAdvancedAmount() > 0){
+                switch (contract.getPremiumPeriod()) {
+                    case Daily:
+                        startTime = new DateTime(contract.getPremiumStartDate()).withTimeAtStartOfDay()
+                                                                                .plusDays(contract.getPremiumPeriodFactor());
+                        break;
+                    case Weekly:
+                        startTime = new DateTime(contract.getPremiumStartDate()).withTimeAtStartOfDay()
+                                                                                .plusWeeks(contract.getPremiumPeriodFactor());
+                        break;
+                    case Monthly:
+                        startTime = new DateTime(contract.getPremiumStartDate()).withTimeAtStartOfDay()
+                                                                                .plusMonths(contract.getPremiumPeriodFactor());
+                        break;
+                    case Midterm:
+                        startTime = new DateTime(contract.getPremiumStartDate()).withTimeAtStartOfDay()
+                                                                                .plusMonths(contract.getPremiumPeriodFactor() * 6);
+                        break;
+                    case Annual:
+                        startTime = new DateTime(contract.getPremiumStartDate()).withTimeAtStartOfDay()
+                                                                                .plusYears(contract.getPremiumPeriodFactor());
+                        break;
+                }
+            }
+
+
             LOG.info("إنشاء القسط الاخير إن وجد");
             ContractPremium lastContractPremium = new ContractPremium();
             lastContractPremium.setAmount(contract.getLastPremiumAmount());
@@ -130,52 +157,52 @@ public class ContractRest {
                         contractPremium.setDueDate(startTime
                                 .withChronology(contract.getPremiumCalendar()
                                         .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                .plusDays(i).toDate());
+                                .plusDays(i * contract.getPremiumPeriodFactor()).toDate());
 
                         if ((i == contract.getPremiumCount() - 1) && lastContractPremium.getAmount() > 0) {
                             lastContractPremium.setDueDate(startTime
                                     .withChronology(contract.getPremiumCalendar()
                                             .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                    .plusDays(contract.getPremiumCount()).toDate());
+                                    .plusDays(contract.getPremiumCount() * contract.getPremiumPeriodFactor()).toDate());
                         }
                         break;
                     case Weekly:
                         contractPremium.setDueDate(startTime
                                 .withChronology(contract.getPremiumCalendar()
                                         .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                .plusWeeks(i).toDate());
+                                .plusWeeks(i * contract.getPremiumPeriodFactor()).toDate());
 
                         if ((i == contract.getPremiumCount() - 1) && lastContractPremium.getAmount() > 0) {
                             lastContractPremium.setDueDate(startTime
                                     .withChronology(contract.getPremiumCalendar()
                                             .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                    .plusWeeks(contract.getPremiumCount()).toDate());
+                                    .plusWeeks(contract.getPremiumCount() * contract.getPremiumPeriodFactor()).toDate());
                         }
                         break;
                     case Monthly:
                         contractPremium.setDueDate(startTime
                                 .withChronology(contract.getPremiumCalendar()
                                         .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                .plusMonths(i).withDayOfMonth(1).toDate());
+                                .plusMonths(i * contract.getPremiumPeriodFactor()).withDayOfMonth(1).toDate());
 
                         if ((i == contract.getPremiumCount() - 1) && lastContractPremium.getAmount() > 0) {
                             lastContractPremium.setDueDate(startTime
                                     .withChronology(contract.getPremiumCalendar()
                                             .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                    .plusMonths(contract.getPremiumCount()).withDayOfMonth(1).toDate());
+                                    .plusMonths(contract.getPremiumCount() * contract.getPremiumPeriodFactor()).withDayOfMonth(1).toDate());
                         }
                         break;
                     case Midterm:
                         contractPremium.setDueDate(startTime
                                 .withChronology(contract.getPremiumCalendar()
                                         .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                .plusMonths(i * 6).toDate());
+                                .plusMonths(i * 6 * contract.getPremiumPeriodFactor()).toDate());
 
                         if ((i == contract.getPremiumCount() - 1) && lastContractPremium.getAmount() > 0) {
                             lastContractPremium.setDueDate(startTime
                                     .withChronology(contract.getPremiumCalendar()
                                             .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                    .plusMonths(contract.getPremiumCount() * 6).toDate());
+                                    .plusMonths(contract.getPremiumCount() * 6 * contract.getPremiumPeriodFactor()).toDate());
                         }
 
                         break;
@@ -183,13 +210,13 @@ public class ContractRest {
                         contractPremium.setDueDate(startTime
                                 .withChronology(contract.getPremiumCalendar()
                                         .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                .plusYears(i).toDate());
+                                .plusYears(i * contract.getPremiumPeriodFactor()).toDate());
 
                         if ((i == contract.getPremiumCount() - 1) && lastContractPremium.getAmount() > 0) {
                             lastContractPremium.setDueDate(startTime
                                     .withChronology(contract.getPremiumCalendar()
                                             .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                    .plusYears(contract.getPremiumCount()).toDate());
+                                    .plusYears(contract.getPremiumCount() * contract.getPremiumPeriodFactor()).toDate());
                         }
                         break;
                 }
@@ -202,6 +229,55 @@ public class ContractRest {
                     contract.getContractPremiums().add(contractPremiumService.save(lastContractPremium));
                 }
             }
+        }
+
+        LOG.info("إنشاء الدفعة المالية المقدمة");
+        if(contract.getAdvancedAmount() > 0){
+
+            {
+                LOG.info("إنشاء القسط الخاص بالدفعة المالية المقدمة بتاريخ بداية الأقساط");
+                ContractPremium contractPremium = new ContractPremium();
+                contractPremium.setAmount(contract.getAdvancedAmount());
+                contractPremium.setDueDate(contract.getPremiumStartDate());
+                contractPremium.setContract(contract);
+                contract.getContractPremiums().add(contractPremiumService.save(contractPremium));
+            }
+
+            ContractPayment contractPayment = new ContractPayment();
+            ContractPayment topContractPayment = contractPaymentService.findTopByOrderByCodeDesc();
+            if (topContractPayment == null) {
+                contractPayment.setCode(1);
+            } else {
+                contractPayment.setCode(topContractPayment.getCode() + 1);
+            }
+            contractPayment.setContract(contract);
+            contractPayment.setAmount(contract.getAdvancedAmount());
+            contractPayment.setDate(contract.getWrittenDate());
+
+            LOG.info("عملية سداد للدفعة");
+            BankTransaction bankTransaction = new BankTransaction();
+            bankTransaction.setAmount(contractPayment.getAmount());
+            bankTransaction.setBank(Initializer.bank);
+            bankTransaction.setSeller(contract.getSeller());
+            bankTransaction.setTransactionType(Initializer.transactionTypeDepositPayment);
+            bankTransaction.setDate(contractPayment.getDate());
+            bankTransaction.setPerson(caller);
+            StringBuilder builder = new StringBuilder();
+            builder.append("إيداع مبلغ نقدي بقيمة ");
+            builder.append(bankTransaction.getAmount());
+            builder.append("ريال سعودي، ");
+            builder.append(" لـ / ");
+            builder.append(bankTransaction.getSeller().getContact().getShortName());
+            builder.append("، دفعة مقدمة بتاريخ ");
+            builder.append(DateConverter.getDateInFormat(contractPayment.getDate()));
+            builder.append("، للعقد رقم / " + contract.getCode());
+            bankTransaction.setNote(builder.toString());
+
+            contractPayment.setBankTransaction(bankTransactionService.save(bankTransaction));
+            contractPayment.setPerson(caller);
+            contractPayment.setNote(bankTransaction.getNote());
+            contract.getContractPayments().add(contractPaymentService.save(contractPayment));
+
         }
 
         StringBuilder builder = new StringBuilder();
