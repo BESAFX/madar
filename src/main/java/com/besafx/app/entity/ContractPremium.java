@@ -74,7 +74,6 @@ public class ContractPremium implements Serializable {
                     currentPaid = totalPaid;
                 }
                 totalPaid = totalPaid - currentPaid;
-                LOG.info("القسط بتاريخ: " + contractPremium.getDueDate().toString() + "، المدفوع / " + currentPaid);
                 if(contractPremium.getId().equals(this.getId())){
                     break;
                 }
