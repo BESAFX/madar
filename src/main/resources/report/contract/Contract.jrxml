@@ -26,7 +26,7 @@
 				</box>
 				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank">
 					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="822" uuid="21610afe-ecca-460a-9f93-927dcb83b68f"/>
-					<imageExpression><![CDATA["src/main/resources/report/img/F1.png"]]></imageExpression>
+					<imageExpression><![CDATA["src/main/resources/report/img/F1_LOW.png"]]></imageExpression>
 				</image>
 			</frame>
 		</band>
