@@ -30,12 +30,25 @@ public class ReportContractController {
 
     @RequestMapping(value = "/report/contract/{contractId}", method = RequestMethod.GET, produces = "application/pdf")
     @ResponseBody
-    public void printAccountByBranches(
+    public void printContract(
             @PathVariable(value = "contractId") Long contractId,
             HttpServletResponse response) throws Exception {
         Map<String, Object> map = new HashMap<>();
         map.put("CONTRACT", contractService.findOne(contractId));
         ClassPathResource jrxmlFile = new ClassPathResource("/report/contract/Contract.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlFile.getInputStream());
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map);
+        reportExporter.export(ExportType.PDF, response, jasperPrint);
+    }
+
+    @RequestMapping(value = "/report/receipt/{contractId}", method = RequestMethod.GET, produces = "application/pdf")
+    @ResponseBody
+    public void printReceipt(
+            @PathVariable(value = "contractId") Long contractId,
+            HttpServletResponse response) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("CONTRACT", contractService.findOne(contractId));
+        ClassPathResource jrxmlFile = new ClassPathResource("/report/contract/Receipt.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlFile.getInputStream());
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map);
         reportExporter.export(ExportType.PDF, response, jasperPrint);

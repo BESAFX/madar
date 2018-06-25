@@ -14,9 +14,10 @@
 	<import value="com.besafx.app.util.DateConverter"/>
 	<parameter name="CONTRACT" class="com.besafx.app.entity.Contract"/>
 	<background>
-		<band height="822" splitType="Stretch">
+		<band height="842" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<frame>
-				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="822" uuid="2362171d-4b4e-4fce-8dd3-a845fe0aecd4"/>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="842" uuid="2362171d-4b4e-4fce-8dd3-a845fe0aecd4"/>
 				<box padding="0">
 					<pen lineColor="#754C29"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -25,8 +26,8 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank">
-					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="822" uuid="21610afe-ecca-460a-9f93-927dcb83b68f"/>
-					<imageExpression><![CDATA["src/main/resources/report/img/F1_LOW.png"]]></imageExpression>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="842" uuid="21610afe-ecca-460a-9f93-927dcb83b68f"/>
+					<imageExpression><![CDATA["src/main/resources/report/img/F1_CONTRACT.png"]]></imageExpression>
 				</image>
 			</frame>
 		</band>
@@ -108,11 +109,58 @@
 			</staticText>
 		</band>
 	</pageHeader>
-	<summary>
-		<band height="700">
+	<pageFooter>
+		<band height="102">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<frame>
-				<reportElement x="32" y="0" width="530" height="700" uuid="1ae7eac9-232d-44a1-b6d0-c085b31893c6">
+				<reportElement x="32" y="16" width="530" height="50" uuid="88461e71-d280-4833-bd2c-f6b737c8c456">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="2.25" lineColor="#AB8742"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="530" height="25" forecolor="#754C29" uuid="f44e8de7-d5a5-4d6a-a80b-688bf55362be"/>
+					<box padding="0">
+						<pen lineWidth="0.5" lineColor="#0F8628"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+						<font fontName="stc" size="12" isBold="true" isUnderline="false"/>
+						<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
+					</textElement>
+					<text><![CDATA[المملكة العربية السعودية - عرعر - س.ت: 3450015171 - هاتف: 0146637788 - جوال: 0507058877]]></text>
+				</staticText>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="25" width="530" height="25" forecolor="#754C29" uuid="1045e276-9811-4490-a76e-cae78d47b26e"/>
+					<box padding="0">
+						<pen lineWidth="0.5" lineColor="#0F8628"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+						<font fontName="stc" size="12" isBold="true" isUnderline="false"/>
+						<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
+					</textElement>
+					<text><![CDATA[عنوان واصل - رقم المبنى: 6560 الرمز البريدي: 73311 - الرمز الإضافي: 4237]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="600">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement x="32" y="0" width="530" height="600" uuid="1ae7eac9-232d-44a1-b6d0-c085b31893c6">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box padding="0"/>
@@ -510,8 +558,8 @@
 								</textElement>
 								<text><![CDATA[بمبلغ:]]></text>
 							</staticText>
-							<textField isBlankWhenNull="true">
-								<reportElement stretchType="RelativeToTallestObject" x="346" y="0" width="144" height="18" forecolor="#000000" uuid="cdbfae6b-d410-4928-999b-71dfecc092ef"/>
+							<textField pattern="#,##0.## ريال ;#,##0.##-  ريال " isBlankWhenNull="true">
+								<reportElement stretchType="RelativeToTallestObject" x="318" y="0" width="172" height="18" forecolor="#000000" uuid="cdbfae6b-d410-4928-999b-71dfecc092ef"/>
 								<box padding="0">
 									<pen lineWidth="0.5" lineColor="#0F8628"/>
 									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -525,7 +573,7 @@
 								</textElement>
 								<textFieldExpression><![CDATA[$P{CONTRACT}.getTotalPriceAfterDiscountAndVat()]]></textFieldExpression>
 							</textField>
-							<textField isBlankWhenNull="true">
+							<textField pattern="#,##0.## ريال ;#,##0.##-  ريال " isBlankWhenNull="true">
 								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="130" height="18" forecolor="#000000" uuid="e6251fcd-4ec8-405d-acf6-000fc079295d"/>
 								<box padding="0">
 									<pen lineWidth="0.5" lineColor="#0F8628"/>
@@ -590,7 +638,7 @@
 								</textElement>
 								<textFieldExpression><![CDATA[DateConverter.getHijriStringFromDateRTL($P{CONTRACT}.getPremiumStartDate())]]></textFieldExpression>
 							</textField>
-							<textField isBlankWhenNull="true">
+							<textField pattern="#,##0.## ريال ;#,##0.##-  ريال " isBlankWhenNull="true">
 								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="150" height="18" forecolor="#000000" uuid="a825dc0a-a6d8-43c1-be41-fd3604a674ab"/>
 								<box padding="0">
 									<pen lineWidth="0.5" lineColor="#0F8628"/>
@@ -881,7 +929,7 @@
 								</textElement>
 								<text><![CDATA[كفالة غرامية فى حال الحياة والممات  بمبلغ:]]></text>
 							</staticText>
-							<textField isBlankWhenNull="true">
+							<textField pattern="#,##0.## ريال ;#,##0.##-  ريال " isBlankWhenNull="true">
 								<reportElement stretchType="RelativeToTallestObject" x="210" y="0" width="144" height="18" forecolor="#000000" uuid="4483ffe9-fffe-495a-b001-abe3225483f7"/>
 								<box padding="0">
 									<pen lineWidth="0.5" lineColor="#0F8628"/>
@@ -1156,7 +1204,7 @@
 								</textElement>
 								<text><![CDATA[كفالة غرامية فى حال الحياة والممات  بمبلغ:]]></text>
 							</staticText>
-							<textField isBlankWhenNull="true">
+							<textField pattern="#,##0.## ريال ;#,##0.##-  ريال " isBlankWhenNull="true">
 								<reportElement stretchType="RelativeToTallestObject" x="210" y="0" width="144" height="18" forecolor="#000000" uuid="86d9b22c-3ff3-4d4b-80ea-b92e8ae5368a"/>
 								<box padding="0">
 									<pen lineWidth="0.5" lineColor="#0F8628"/>
@@ -1190,7 +1238,7 @@
 					</frame>
 				</frame>
 				<frame>
-					<reportElement x="15" y="439" width="500" height="80" uuid="69810f02-17e4-46d6-aeb2-004081ceaa51">
+					<reportElement x="15" y="426" width="500" height="80" uuid="69810f02-17e4-46d6-aeb2-004081ceaa51">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<frame>
@@ -1257,7 +1305,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="true" isUnderline="false"/>
+								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[المشتــــــــــــري]]></text>
@@ -1345,7 +1393,7 @@
 					</frame>
 				</frame>
 				<frame>
-					<reportElement x="15" y="540" width="500" height="80" uuid="7f4fadb0-6c74-4035-80d4-d4a77ac026f3">
+					<reportElement x="15" y="513" width="500" height="80" uuid="7f4fadb0-6c74-4035-80d4-d4a77ac026f3">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
 					<frame>
