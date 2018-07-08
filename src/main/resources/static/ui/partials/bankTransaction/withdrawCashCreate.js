@@ -3,6 +3,12 @@ app.controller('withdrawCashCreateCtrl', ['SellerService', 'BankTransactionServi
 
         $scope.buffer = {};
 
+        $scope.findSellerBalance = function () {
+            SellerService.findSellerBalance($rootScope.selectedCompany.seller.id).then(function (value) {
+                return $rootScope.selectedCompany.seller = value;
+            });
+        };
+
         $scope.submit = function () {
             BankTransactionService.createWithdrawCash($scope.buffer.amount, $scope.buffer.note).then(function (data) {
                 $uibModalInstance.close(data);
@@ -14,6 +20,7 @@ app.controller('withdrawCashCreateCtrl', ['SellerService', 'BankTransactionServi
         };
 
         $timeout(function () {
+            $scope.findSellerBalance();
             window.componentHandler.upgradeAllRegistered();
         }, 600);
 

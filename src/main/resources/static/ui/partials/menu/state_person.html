@@ -47,13 +47,15 @@
                                 type="button" ng-click="toggleList=1"
                                 ng-class="{'mdl-color--primary-dark':toggleList===1}">
                             <input type="radio" name="options"/>
-                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/reorder.{{iconSetType}}" width="24" height="24">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/reorder.{{iconSetType}}" width="24"
+                                 height="24">
                         </button>
                         <button class="btn btn-default mdl-button mdl-js-button mdl-js-ripple-effect"
                                 type="button" ng-click="toggleList=2"
                                 ng-class="{'mdl-color--primary-dark':toggleList===2}">
                             <input type="radio" name="options"/>
-                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/module.{{iconSetType}}" width="24" height="24">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/module.{{iconSetType}}" width="24"
+                                 height="24">
                         </button>
                     </div>
                 </div>
@@ -92,71 +94,60 @@
         </div>
         <div class="panel-body panel-body-table">
             <div class="table-responsive">
-                <table st-table="collection1" st-safe-src="persons"
-                       class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
                         <th>
                             <span>#</span>
                         </th>
 
-                        <th st-sort="contact.firstName">
+                        <th>
                             <span>الاسم</span>
                         </th>
 
-                        <th st-sort="email">
+                        <th>
                             <span>البريد الإلكتروني</span>
                         </th>
 
-                        <th st-sort="team.name">
+                        <th>
                             <span>مجموعة الصلاحيات</span>
                         </th>
 
-                        <th st-sort="contact.mobile">
+                        <th>
                             <span>رقم الجوال</span>
                         </th>
 
-                        <th st-sort="lastLoginDate">
+                        <th>
                             <span>تاريخ آخر دخول</span>
                         </th>
 
-                        <th st-sort="ipAddress">
+                        <th>
                             <span>أخر عنوان دخول</span>
-                        </th>
-
-                        <th st-sort="branch.name">
-                            <span>الفرع الرئيسي</span>
                         </th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    <tr
-                            ng-repeat="person in collection1"
-                            context-menu="rowMenuPerson"
-                            st-select-mode="multiple"
-                            ng-click="setSelectedPerson(person)"
-                            ng-right-click="setSelectedPerson(person)">
-                        <td st-select-row-multi="person">{{$index+1}}</td>
-                        <td st-select-row-multi="person">
+                    <tr ng-repeat="person in persons" context-menu="rowMenuPerson">
+                        <td>{{$index+1}}</td>
+                        <td>
                             <span class="label label-success">{{person.enabled ? 'مفعل' : ''}}</span>
                             <span class="label label-danger">{{person.enabled ? '' : 'معطل'}}</span>
-                            {{person.contact.firstName}}
-                            {{person.contact.forthName}}
+                            {{person.contact.shortName}}
                         </td>
-                        <td st-select-row-multi="person">{{person.email}}</td>
-                        <td st-select-row-multi="person">{{person.team.name}}</td>
-                        <td st-select-row-multi="person">{{person.contact.mobile}}</td>
-                        <td st-select-row-multi="person">
-                            <span>{{person.lastLoginDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                        <td>{{person.email}}</td>
+                        <td>{{person.team.name}}</td>
+                        <td>{{person.contact.mobile}}</td>
+                        <td>
+                            <span ng-show="dateType==='H'">{{person.lastLoginDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-show="dateType==='G'">{{person.lastLoginDate | date: 'yyyy-MM-dd'}}</span>
                             <span class="label label-success">{{person.lastLoginDate | date:'h:m a'}}</span>
                         </td>
-                        <td st-select-row-multi="person">{{person.ipAddress}}</td>
-                        <td st-select-row-multi="person">{{person.branch.name}}</td>
+                        <td>{{person.ipAddress}}</td>
                     </tr>
                     <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
-                        ng-show="!collection1 || collection1.length ==0">
-                        <td colspan="8">لا توجد بيانات</td>
+                        ng-show="!persons || persons.length ==0">
+                        <td colspan="7">لا توجد نتائج</td>
                     </tr>
                     </tbody>
                 </table>
@@ -189,7 +180,7 @@
                     <div class="contact-info">
                         <p>
                             <strong>الاسم</strong>
-                            {{person.contact.firstName}} {{person.contact.forthName}}
+                            {{person.contact.shortName}}
                         </p>
                         <hr>
                         <p>

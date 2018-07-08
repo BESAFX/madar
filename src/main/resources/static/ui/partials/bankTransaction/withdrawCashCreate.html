@@ -24,18 +24,6 @@
             </div>
 
             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <label for="balance" class="control-label">الرصيد قبل</label>
-                <div dir="ltr" class="input-group" id="balance">
-                    <span class="input-group-addon">ريال سعودي</span>
-                    <input dir="rtl"
-                           type="number"
-                           readonly
-                           class="form-control"
-                           ng-model="seller.balance">
-                </div>
-            </div>
-
-            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <label for="amount" class="control-label">المبلغ</label>
                 <div dir="ltr" class="input-group" id="amount">
                     <span class="input-group-addon">ريال سعودي</span>
@@ -50,15 +38,25 @@
             </div>
 
             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <label for="remain" class="control-label">الرصيد بعد</label>
-                <div dir="ltr" class="input-group" id="remain">
-                    <span class="input-group-addon">ريال سعودي</span>
-                    <input dir="rtl"
-                           type="number"
-                           readonly
-                           class="form-control"
-                           ng-model="seller.remain">
+
+                <div class="box-warning">
+                    <p>
+                        <span>الرصيد قبل</span>&nbsp;
+                        {{selectedCompany.seller.balance | currency:' SAR ':2}}
+                    </p>
                 </div>
+
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                <div class="box-success">
+                    <p>
+                        <span>الرصيد بعد</span>&nbsp;
+                        {{(selectedCompany.seller.balance - buffer.amount) | currency:' SAR ':2}}
+                    </p>
+                </div>
+
             </div>
 
             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">

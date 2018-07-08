@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
+    public ServletListenerRegistrationBean<HttpSessionEventPublisher> sessionEventPublisherServletListenerRegistrationBean() {
         return new ServletListenerRegistrationBean<>(new HttpSessionEventPublisher() {
             @Override
             public void sessionDestroyed(HttpSessionEvent event) {
@@ -110,6 +110,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .maxAge(3600);
             }
         };
+    }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
     }
 
     @Bean
