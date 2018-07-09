@@ -2104,6 +2104,33 @@ app.controller("menuCtrl", [
             });
         };
 
+        /**************************************************************************************************************
+         *                                                                                                            *
+         * Widget: Late Premiums                                                                                      *
+         *                                                                                                            *
+         **************************************************************************************************************/
+        $scope.findLatePremiums = function () {
+            ContractPremiumService.findLatePremiums().then(function (value) {
+                $scope.latePremiums = value;
+            });
+        };
+        $scope.rowMenuLatePremium = [
+            {
+                html: '<div class="drop-menu">' +
+                '<img src="/ui/img/' + $rootScope.iconSet + '/send.' + $rootScope.iconSetType + '" width="24" height="24">' +
+                '<span>إرسال رسالة...</span>' +
+                '</div>',
+                enabled: function () {
+                    return $rootScope.contains($rootScope.me.team.authorities, ['ROLE_SMS_SEND']);
+                },
+                click: function ($itemScope, $event, value) {
+                    var contractPremiums = [];
+                    contractPremiums.push($itemScope.contractPremium);
+                    ModalProvider.openContractPremiumSendMessageModel(contractPremiums);
+                }
+            }
+        ];
+
         $timeout(function () {
             CompanyService.get().then(function (data) {
                 $rootScope.selectedCompany = data;
@@ -2114,6 +2141,7 @@ app.controller("menuCtrl", [
             AttachTypeService.findAll().then(function (data) {
                 $scope.attachTypes = data;
             });
+            $scope.findLatePremiums();
             window.componentHandler.upgradeAllRegistered();
         }, 800);
 

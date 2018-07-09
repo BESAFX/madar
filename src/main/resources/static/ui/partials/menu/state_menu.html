@@ -424,6 +424,194 @@
 
         </div>
 
+        <div class="form-group row">
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findLatePremiums()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>الأقساط المتأخرة</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+
+                                    <th>
+                                        <span>رقم العقد</span>
+                                    </th>
+
+                                    <th>
+                                        <span>العميل</span>
+                                    </th>
+
+                                    <th>
+                                        <span>تاريخ الاستحقاق</span>
+                                    </th>
+
+                                    <th>
+                                        <span>الباقي</span>
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="contractPremium in latePremiums" context-menu="rowMenuLatePremium">
+                                    <td>
+                                        <a href="" ng-click="ModalProvider.openContractDetailsModel(contractPremium.contract)">
+                                            <span>{{contractPremium.contract.code}}</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span>{{contractPremium.contract.customer.contact.shortName}}</span>
+                                        <br/>
+                                        <span class="label label-info">{{contractPremium.contract.customer.contact.mobile}}</span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="dateType==='H'">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                        <span ng-if="dateType==='G'">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
+                                    </td>
+                                    <td>{{contractPremium.remain | currency:'':2}}</td>
+                                </tr>
+                                <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!latePremiums || latePremiums.length ==0">
+                                    <td colspan="4">
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr ng-if="latePremiums.length > 0">
+                                    <td class="info" colspan="3">
+                                        <span class="pull-left">المجموع الكلي(جميع القيم بالريال السعودي)</span>
+                                    </td>
+                                    <td class="success" colspan="1">{{latePremiums | sumByKey:'remain' | currency:'':2}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findLatePremiums()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>عملاء الشهر</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+
+                                    <th>
+                                        <span>الاسم</span>
+                                    </th>
+
+                                    <th>
+                                        <span>رقم الهوية</span>
+                                    </th>
+
+                                    <th>
+                                        <span>الجوال</span>
+                                    </th>
+
+                                    <th>
+                                        <span>إجمالي العقود</span>
+                                    </th>
+
+                                    <th>
+                                        <span>المدفوع</span>
+                                    </th>
+
+                                    <th>
+                                        <span>المتبقي</span>
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="customer in customers" context-menu="rowMenuCustomer">
+                                    <td>
+                                        <span class="label label-success no-print">{{customer.enabled ? 'مفعل' : ''}}</span>
+                                        <span class="label label-danger no-print">{{customer.enabled ? '' : 'معطل'}}</span>
+                                        {{customer.contact.shortName}}
+                                    </td>
+                                    <td>{{customer.contact.identityNumber}}</td>
+                                    <td>{{customer.contact.mobile}}</td>
+                                    <td>{{customer.contractsTotalPrice | currency:' SAR ':2}}</td>
+                                    <td>{{customer.contractsPaid | currency:' SAR ':2}}</td>
+                                    <td>{{customer.contractsRemain | currency:' SAR ':2}}</td>
+                                </tr>
+                                <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!customers || customers.length ==0">
+                                    <td colspan="10">
+                                        <p ng-if="contains(me.team.authorities, ['ROLE_CUSTOMER_CREATE'])">
+                                            <span>لا يوجد عملاء أو كفلاء حتى الآن، يمكنك التسجيل من خلال هذا الرابط </span>
+                                            <a href="" ng-click="newCustomer()">اضغط هنا</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr ng-if="customers.length > 0">
+                                    <td class="info" colspan="7">
+                                        <span class="pull-left">المجموع الكلي</span>
+                                    </td>
+                                    <td class="success" colspan="1">{{customers | sumByKey:'contractsTotalPrice' | currency:' SAR ':2}}</td>
+                                    <td class="success" colspan="1">{{customers | sumByKey:'contractsPaid' | currency:' SAR ':2}}</td>
+                                    <td class="success" colspan="1">{{customers | sumByKey:'contractsRemain' | currency:' SAR ':2}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 </div>
