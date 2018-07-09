@@ -2131,6 +2131,18 @@ app.controller("menuCtrl", [
             }
         ];
 
+        /**************************************************************************************************************
+         *                                                                                                            *
+         * Widget: Month Customers                                                                                    *
+         *                                                                                                            *
+         **************************************************************************************************************/
+        $scope.findMonthCustomers = function () {
+            CustomerService.findByThisMonth().then(function (value) {
+                $scope.monthCustomers = value;
+            });
+        };
+
+
         $timeout(function () {
             CompanyService.get().then(function (data) {
                 $rootScope.selectedCompany = data;
@@ -2142,6 +2154,7 @@ app.controller("menuCtrl", [
                 $scope.attachTypes = data;
             });
             $scope.findLatePremiums();
+            $scope.findMonthCustomers();
             window.componentHandler.upgradeAllRegistered();
         }, 800);
 

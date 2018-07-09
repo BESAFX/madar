@@ -3,9 +3,9 @@ package com.besafx.app;
 import com.besafx.app.config.DropboxManager;
 import com.besafx.app.config.EmailSender;
 import com.besafx.app.config.SendSMS;
+import com.besafx.app.service.ContractService;
+import com.besafx.app.service.CustomerService;
 import com.besafx.app.util.JSONConverter;
-import org.joda.time.DateTime;
-import org.joda.time.chrono.IslamicChronology;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -27,12 +27,27 @@ public class MainTests {
     @Autowired
     private SendSMS sendSMS;
 
+    @Autowired
+    private ContractService contractService;
+
+    @Autowired
+    private CustomerService customerService;
+
     @Test
     public void contextLoads() throws Exception {
         log.info("Start Initializing From Main...");
         context.getBean(EmailSender.class).init();
         context.getBean(DropboxManager.class).init();
         context.getBean(JSONConverter.class).init();
+
+        contractService.findAll().forEach(contract -> {
+            if(contract.getWrittenDate() != null){
+                contract.getCustomer().setRegisterDate(contract.getWrittenDate());
+            }else{
+                contract.getCustomer().setRegisterDate(contract.getDate());
+            }
+            customerService.save(contract.getCustomer());
+        });
 
 //        Log.info(sendSMS.getCredit());
 

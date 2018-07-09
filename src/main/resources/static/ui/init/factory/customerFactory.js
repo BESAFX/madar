@@ -11,6 +11,11 @@ app.factory("CustomerService",
                     return response.data;
                 });
             },
+            findByThisMonth: function () {
+                return $http.get("/api/customer/findByThisMonth").then(function (response) {
+                    return response.data;
+                });
+            },
             create: function (customer) {
                 return $http.post("/api/customer/create", customer).then(function (response) {
                     return response.data;

@@ -3,22 +3,21 @@ package com.besafx.app.rest;
 import com.besafx.app.config.CustomException;
 import com.besafx.app.config.SendSMS;
 import com.besafx.app.entity.ContractPayment;
-import com.besafx.app.entity.ContractPremium;
 import com.besafx.app.entity.Customer;
 import com.besafx.app.search.CustomerSearch;
 import com.besafx.app.service.*;
-import com.besafx.app.util.DateConverter;
 import com.besafx.app.ws.Notification;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
 import com.github.bohnman.squiggly.util.SquigglyUtils;
-import com.google.common.collect.Lists;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +32,8 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/api/customer/")
 public class CustomerRest {
 
+    private static final String TAG = CustomerRest.class.getSimpleName();
+
     private final static Logger LOG = LoggerFactory.getLogger(CustomerRest.class);
 
     private final String FILTER_TABLE = "" +
@@ -41,7 +42,9 @@ public class CustomerRest {
 
     private final String FILTER_DETAILS = "" +
             "**," +
-            "contracts[**,-customer,seller[id,contact[id,mobile,shortName]],sponsor1[id,contact[id,mobile,shortName]],sponsor2[id,contact[id,mobile,shortName]],-contractProducts,contractPremiums[**,-contract,-contractPayments],-contractPayments,person[id,contact[id,shortName]]]";
+            "contracts[**,-customer,seller[id,contact[id,mobile,shortName]],sponsor1[id,contact[id,mobile,shortName]],sponsor2[id,contact[id," +
+            "mobile,shortName]],-contractProducts,contractPremiums[**,-contract,-contractPayments],-contractPayments,person[id,contact[id," +
+            "shortName]]]";
 
     private final String FILTER_COMBO = "" +
             "id," +
@@ -175,7 +178,7 @@ public class CustomerRest {
     @PreAuthorize("hasRole('ROLE_SMS_SEND')")
     public void sendMessage(@RequestBody String content, @PathVariable List<Long> customerIds) throws Exception {
         ListIterator<Long> listIterator = customerIds.listIterator();
-        while (listIterator.hasNext()){
+        while (listIterator.hasNext()) {
             Long id = listIterator.next();
             Customer customer = customerService.findOne(id);
             String message = content.replaceAll("#remain#", customer.getContractsRemain().toString());
@@ -209,6 +212,22 @@ public class CustomerRest {
     public String findOne(@PathVariable Long id) {
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_DETAILS),
                                        customerService.findOne(id));
+    }
+
+    @GetMapping(value = "findByThisMonth", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String findByThisMonth() {
+        DateTime startMonth = new DateTime().withDayOfMonth(1).withTimeAtStartOfDay();
+        DateTime endMonth = new DateTime().plusMonths(1).withDayOfMonth(1).withTimeAtStartOfDay();
+        LOG.info(TAG, "GETTING CUSTOMERS REGISTERED WITHIN THIS MONTH...");
+        LOG.info(TAG, "Start Month: " + startMonth.toString());
+        LOG.info(TAG, "End Month  : " + endMonth.toString());
+        Specifications specifications = Specifications
+                .where((root, cq, cb) -> cb.greaterThanOrEqualTo(root.get("registerDate"), startMonth.toDate()))
+                .and((root, cq, cb) -> cb.lessThanOrEqualTo(root.get("registerDate"), endMonth.toDate()));
+        Sort sort = new Sort(Sort.Direction.ASC, "registerDate");
+        List<Customer> customers = customerService.findAll(specifications, sort);
+        return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_COMBO), customers);
     }
 
     @GetMapping(value = "filter", produces = MediaType.APPLICATION_JSON_VALUE)
