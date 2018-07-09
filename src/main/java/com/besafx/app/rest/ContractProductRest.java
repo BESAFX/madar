@@ -26,7 +26,7 @@ public class ContractProductRest {
 
     private final String FILTER_TABLE = "" +
             "**," +
-            "productPurchase[id,product[id,name]]," +
+            "productPurchase[id,unitPurchasePrice,product[id,name]]," +
             "-contract";
 
     @Autowired

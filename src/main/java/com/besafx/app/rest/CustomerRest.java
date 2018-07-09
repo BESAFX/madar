@@ -219,9 +219,9 @@ public class CustomerRest {
     public String findByThisMonth() {
         DateTime startMonth = new DateTime().withDayOfMonth(1).withTimeAtStartOfDay();
         DateTime endMonth = new DateTime().plusMonths(1).withDayOfMonth(1).withTimeAtStartOfDay();
-        LOG.info(TAG, "GETTING CUSTOMERS REGISTERED WITHIN THIS MONTH...");
-        LOG.info(TAG, "Start Month: " + startMonth.toString());
-        LOG.info(TAG, "End Month  : " + endMonth.toString());
+        LOG.info("GETTING CUSTOMERS REGISTERED WITHIN THIS MONTH...");
+        LOG.info("Start Month: " + startMonth.toString());
+        LOG.info("End Month  : " + endMonth.toString());
         Specifications specifications = Specifications
                 .where((root, cq, cb) -> cb.greaterThanOrEqualTo(root.get("registerDate"), startMonth.toDate()))
                 .and((root, cq, cb) -> cb.lessThanOrEqualTo(root.get("registerDate"), endMonth.toDate()));

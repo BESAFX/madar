@@ -1,7 +1,10 @@
 package com.besafx.app.rest;
 
 import com.besafx.app.auditing.PersonAwareUserDetails;
-import com.besafx.app.entity.*;
+import com.besafx.app.entity.BankTransaction;
+import com.besafx.app.entity.Contract;
+import com.besafx.app.entity.ContractPayment;
+import com.besafx.app.entity.Person;
 import com.besafx.app.init.Initializer;
 import com.besafx.app.search.ContractPaymentSearch;
 import com.besafx.app.service.BankTransactionService;
@@ -18,15 +21,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.ListIterator;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/contractPayment/")
@@ -147,6 +150,22 @@ public class ContractPaymentRest {
                                                new DateTime(startDate).withTimeAtStartOfDay().toDate(),
                                                new DateTime(endDate).plusDays(1).withTimeAtStartOfDay().toDate()
                                       ));
+    }
+
+    @GetMapping(value = "findByThisMonth", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String findByThisMonth() {
+        DateTime startMonth = new DateTime().withDayOfMonth(1).withTimeAtStartOfDay();
+        DateTime endMonth = new DateTime().plusMonths(1).withDayOfMonth(1).withTimeAtStartOfDay();
+        LOG.info("GETTING PAYMENTS PAID WITHIN THIS MONTH...");
+        LOG.info("Start Month: " + startMonth.toString());
+        LOG.info("End Month  : " + endMonth.toString());
+        Specifications specifications = Specifications
+                .where((root, cq, cb) -> cb.greaterThanOrEqualTo(root.get("date"), startMonth.toDate()))
+                .and((root, cq, cb) -> cb.lessThanOrEqualTo(root.get("date"), endMonth.toDate()));
+        Sort sort = new Sort(Sort.Direction.ASC, "date");
+        List<ContractPayment> contractPayments = contractPaymentService.findAll(specifications, sort);
+        return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_DETAILS), contractPayments);
     }
 
     @GetMapping(value = "filter", produces = MediaType.APPLICATION_JSON_VALUE)

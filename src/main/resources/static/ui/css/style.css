@@ -1038,3 +1038,8 @@ p {
 .has-success .input-group-addon a{
     color: #3c763d!important;
 }
+
+.panel-body-scroll{
+    max-height: 400px !important;
+    overflow-y: auto!important;
+}

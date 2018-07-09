@@ -268,6 +268,10 @@
                                 </th>
 
                                 <th>
+                                    <span>سعر الشراء للوحدة</span>
+                                </th>
+
+                                <th>
                                     <span>سعر البيع للوحدة</span>
                                 </th>
 
@@ -289,6 +293,7 @@
                             <tr ng-repeat="contractProduct in contract.contractProducts">
                                 <td>{{contractProduct.productPurchase.product.name}}</td>
                                 <td>{{contractProduct.quantity}}</td>
+                                <td>{{contractProduct.productPurchase.unitPurchasePrice | currency:' SAR ':2}}</td>
                                 <td>{{contractProduct.unitSellPrice | currency:' SAR ':2}}</td>
                                 <td>{{contractProduct.unitVat | currency:' SAR ':2}}</td>
                                 <td>{{contractProduct.totalPriceAfterVat | currency:' SAR ':2}}</td>
@@ -317,7 +322,7 @@
                             </tr>
                             <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
                                 ng-show="!contract.contractProducts || contract.contractProducts.length ==0">
-                                <td colspan="6">
+                                <td colspan="7">
                                     <span>لا توجد سلع حتى الآن لهذا العقد </span>
                                 </td>
                             </tr>
@@ -325,6 +330,7 @@
                                 <td colspan="2" class="text-left warning">
                                     <span class="pull-left">المجموع</span>
                                 </td>
+                                <td colspan="1">{{contract.contractProducts | sumByKey:'productPurchase.unitPurchasePrice' | currency:' SAR ':2}}</td>
                                 <td colspan="1">{{contract.contractProducts | sumByKey:'unitSellPrice' | currency:' SAR ':2}}</td>
                                 <td colspan="1">{{contract.contractProducts | sumByKey:'unitVat' | currency:' SAR ':2}}</td>
                                 <td colspan="1">{{contract.contractProducts | sumByKey:'totalPriceAfterVat' | currency:' SAR ':2}}</td>

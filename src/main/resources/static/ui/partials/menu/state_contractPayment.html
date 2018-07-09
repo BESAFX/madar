@@ -160,7 +160,11 @@
                         <tbody>
                         <tr ng-repeat="contractPayment in contractPayments | filter:contractPayments.searchText">
                             <td>{{$index+1}}</td>
-                            <td>{{contractPayment.contract.code}}</td>
+                            <td>
+                                <a href="" ng-click="ModalProvider.openContractDetailsModel(contractPayment.contract)">
+                                    <span>{{contractPayment.contract.code}}</span>
+                                </a>
+                            </td>
                             <td>{{contractPayment.contract.customer.contact.shortName}}</td>
                             <td>
                                 <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPayment.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>

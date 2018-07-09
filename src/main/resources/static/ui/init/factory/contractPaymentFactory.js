@@ -25,6 +25,11 @@ app.factory("ContractPaymentService",
                     return response.data;
                 });
             },
+            findByThisMonth: function () {
+                return $http.get("/api/contractPayment/findByThisMonth").then(function (response) {
+                    return response.data;
+                });
+            },
             filter: function (search) {
                 return $http.get("/api/contractPayment/filter?" + search).then(function (response) {
                     return response.data;

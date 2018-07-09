@@ -1655,7 +1655,7 @@ app.controller("menuCtrl", [
                 search.push('&');
             }
 
-            search.push('filterCompareType=or');
+            search.push('filterCompareType=and');
 
             ContractPaymentService.filter(search.join("")).then(function (data) {
                 $scope.contractPayments = data.content;
@@ -2142,6 +2142,27 @@ app.controller("menuCtrl", [
             });
         };
 
+        /**************************************************************************************************************
+         *                                                                                                            *
+         * Widget: Month Contracts                                                                                    *
+         *                                                                                                            *
+         **************************************************************************************************************/
+        $scope.findMonthContracts = function () {
+            ContractService.findByThisMonth().then(function (value) {
+                $scope.monthContracts = value;
+            });
+        };
+
+        /**************************************************************************************************************
+         *                                                                                                            *
+         * Widget: Month Payments                                                                                     *
+         *                                                                                                            *
+         **************************************************************************************************************/
+        $scope.findMonthContractPayments = function () {
+            ContractPaymentService.findByThisMonth().then(function (value) {
+                $scope.monthContractPayments = value;
+            });
+        };
 
         $timeout(function () {
             CompanyService.get().then(function (data) {
@@ -2155,6 +2176,8 @@ app.controller("menuCtrl", [
             });
             $scope.findLatePremiums();
             $scope.findMonthCustomers();
+            $scope.findMonthContracts();
+            $scope.findMonthContractPayments();
             window.componentHandler.upgradeAllRegistered();
         }, 800);
 
