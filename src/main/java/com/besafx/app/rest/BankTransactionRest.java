@@ -2,7 +2,6 @@ package com.besafx.app.rest;
 
 import com.besafx.app.auditing.PersonAwareUserDetails;
 import com.besafx.app.config.CustomException;
-import com.besafx.app.entity.Bank;
 import com.besafx.app.entity.BankTransaction;
 import com.besafx.app.entity.Person;
 import com.besafx.app.entity.Seller;
@@ -20,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.http.MediaType;
@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -263,6 +262,23 @@ public class BankTransactionRest {
         } else {
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), new ArrayList<>());
         }
+    }
+
+    @GetMapping(value = "findWithdrawCashThisMonth", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String findWithdrawCashThisMonth() {
+        DateTime startMonth = new DateTime().withDayOfMonth(1).withTimeAtStartOfDay();
+        DateTime endMonth = new DateTime().plusMonths(1).withDayOfMonth(1).withTimeAtStartOfDay();
+        LOG.info("GETTING CASH THAT SPENT IN THIS MONTH...");
+        LOG.info("Start Month: " + startMonth.toString());
+        LOG.info("End Month  : " + endMonth.toString());
+        Specifications specifications = Specifications
+                .where((root, cq, cb) -> cb.greaterThanOrEqualTo(root.get("date"), startMonth.toDate()))
+                .and((root, cq, cb) -> cb.lessThanOrEqualTo(root.get("date"), endMonth.toDate()))
+                .and((root, cq, cb) -> cb.equal(root.get("transactionType"), Initializer.transactionTypeWithdrawCash));
+        Sort sort = new Sort(Sort.Direction.ASC, "date");
+        List<BankTransaction> bankTransactions = bankTransactionService.findAll(specifications, sort);
+        return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), bankTransactions);
     }
 
     @GetMapping(value = "filter", produces = MediaType.APPLICATION_JSON_VALUE)

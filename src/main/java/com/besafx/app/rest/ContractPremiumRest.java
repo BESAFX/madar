@@ -162,7 +162,28 @@ public class ContractPremiumRest {
         Sort sort = new Sort(Sort.Direction.ASC, "dueDate");
         List<ContractPremium> contractPremiums = contractPremiumService.findAll(specifications, sort);
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE),
-                                       contractPremiums.stream().filter(contractPremium -> contractPremium.getState().equalsIgnoreCase("غير مسدد")).collect(Collectors.toList()));
+                                       contractPremiums
+                                               .stream()
+                                               .filter(contractPremium -> contractPremium.getState().equalsIgnoreCase("غير مسدد")).collect(Collectors.toList()));
+    }
+
+    @GetMapping(value = "findRequiredThisMonth", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String findRequiredThisMonth() {
+        DateTime startMonth = new DateTime().withDayOfMonth(1).withTimeAtStartOfDay();
+        DateTime endMonth = new DateTime().plusMonths(1).withDayOfMonth(1).withTimeAtStartOfDay();
+        LOG.info("GETTING REQUIRED PREMIUMS THAT MUST BE PAID WITHIN THIS MONTH...");
+        LOG.info("Start Month: " + startMonth.toString());
+        LOG.info("End Month  : " + endMonth.toString());
+        Specifications specifications = Specifications
+                .where((root, cq, cb) -> cb.greaterThanOrEqualTo(root.get("dueDate"), startMonth.toDate()))
+                .and((root, cq, cb) -> cb.lessThanOrEqualTo(root.get("dueDate"), endMonth.toDate()));
+        Sort sort = new Sort(Sort.Direction.ASC, "dueDate");
+        List<ContractPremium> contractPremiums = contractPremiumService.findAll(specifications, sort);
+        return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE),
+                                       contractPremiums.stream()
+                                                       .filter(contractPremium -> contractPremium.getRemain() > 0)
+                                                       .collect(Collectors.toList()));
     }
 
     @GetMapping(value = "filter", produces = MediaType.APPLICATION_JSON_VALUE)

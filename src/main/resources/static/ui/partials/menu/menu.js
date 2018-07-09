@@ -2133,6 +2133,17 @@ app.controller("menuCtrl", [
 
         /**************************************************************************************************************
          *                                                                                                            *
+         * Widget: Required Premiums This Month                                                                       *
+         *                                                                                                            *
+         **************************************************************************************************************/
+        $scope.findRequiredPremiumsThisMonth = function () {
+            ContractPremiumService.findRequiredThisMonth().then(function (value) {
+                $scope.requiredPremiumsThisMonth = value;
+            });
+        };
+
+        /**************************************************************************************************************
+         *                                                                                                            *
          * Widget: Month Customers                                                                                    *
          *                                                                                                            *
          **************************************************************************************************************/
@@ -2164,6 +2175,17 @@ app.controller("menuCtrl", [
             });
         };
 
+        /**************************************************************************************************************
+         *                                                                                                            *
+         * Widget: Month Withdraw Cash                                                                                *
+         *                                                                                                            *
+         **************************************************************************************************************/
+        $scope.findWithdrawCashThisMonth = function () {
+            BankTransactionService.findWithdrawCashThisMonth().then(function (value) {
+                $scope.monthWithdrawCash = value;
+            });
+        };
+
         $timeout(function () {
             CompanyService.get().then(function (data) {
                 $rootScope.selectedCompany = data;
@@ -2175,9 +2197,11 @@ app.controller("menuCtrl", [
                 $scope.attachTypes = data;
             });
             $scope.findLatePremiums();
+            $scope.findRequiredPremiumsThisMonth();
             $scope.findMonthCustomers();
             $scope.findMonthContracts();
             $scope.findMonthContractPayments();
+            $scope.findWithdrawCashThisMonth();
             window.componentHandler.upgradeAllRegistered();
         }, 800);
 

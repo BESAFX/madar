@@ -40,6 +40,11 @@ app.factory("BankTransactionService",
                     return response.data;
                 });
             },
+            findWithdrawCashThisMonth: function () {
+                return $http.get("/api/bankTransaction/findWithdrawCashThisMonth").then(function (response) {
+                    return response.data;
+                });
+            },
             filter: function (search) {
                 return $http.get("/api/bankTransaction/filter?" + search).then(function (response) {
                     return response.data;

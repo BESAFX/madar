@@ -16,6 +16,11 @@ app.factory("ContractPremiumService",
                     return response.data;
                 });
             },
+            findRequiredThisMonth: function () {
+                return $http.get("/api/contractPremium/findRequiredThisMonth").then(function (response) {
+                    return response.data;
+                });
+            },
             create: function (contractPremium) {
                 return $http.post("/api/contractPremium/create", contractPremium).then(function (response) {
                     return response.data;

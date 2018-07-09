@@ -296,7 +296,7 @@
                                         <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPayment.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                                         <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPayment.date | date: 'yyyy-MM-dd'}}</span>
                                     </td>
-                                    <td>{{contractPayment.amount | currency:' SAR ':2}}</td>
+                                    <td>{{contractPayment.amount | currency:'':2}}</td>
                                 </tr>
                                 <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
                                     ng-if="!monthContractPayments || monthContractPayments.length ==0">
@@ -306,11 +306,88 @@
                                         </p>
                                     </td>
                                 </tr>
-                                <tr ng-if="monthContractPayments.length > 0">
-                                    <td class="info" colspan="3">
-                                        <span class="pull-left">المجموع الكلي(جميع القيم بالريال السعودي)</span>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group row" ng-if="monthContractPayments.length > 0">
+                        <div class="box-warning">
+                            <p>
+                                <span>المجموع الكلي(جميع القيم بالريال السعودي):</span>&nbsp;
+                                <span>{{monthContractPayments | sumByKey:'amount' | currency:'':2}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findWithdrawCashThisMonth()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>المصاريف الشهرية</h3>
+                        <span>جميع المصروفات التى تم سحبها خلال هذا الشهر الميلادي</span>
+                    </div>
+                </div>
+                <div class="panel-body panel-body-scroll">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+
+                                    <th>
+                                        <span>البيان</span>
+                                    </th>
+
+                                    <th>
+                                        <span>التاريخ</span>
+                                    </th>
+
+                                    <th>
+                                        <span>المبلغ</span>
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="bankTransaction in monthWithdrawCash">
+                                    <td>{{bankTransaction.note}}</td>
+                                    <td class="fit">
+                                        <span ng-if="dateType==='H'">{{bankTransaction.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                        <span ng-if="dateType==='G'">{{bankTransaction.date | date: 'yyyy-MM-dd'}}</span>
                                     </td>
-                                    <td colspan="1">{{monthContractPayments | sumByKey:'amount' | currency:' SAR ':2}}</td>
+                                    <td>{{bankTransaction.amount | currency:'':2}}</td>
+                                </tr>
+                                <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!monthWithdrawCash || monthWithdrawCash.length ==0">
+                                    <td colspan="4">
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -318,6 +395,16 @@
 
                     </div>
 
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group row" ng-if="monthWithdrawCash.length > 0">
+                        <div class="box-warning">
+                            <p>
+                                <span>المجموع الكلي(جميع القيم بالريال السعودي):</span>&nbsp;
+                                <span>{{monthWithdrawCash | sumByKey:'amount' | currency:' SAR ':2}}</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -605,11 +692,101 @@
                                         </p>
                                     </td>
                                 </tr>
-                                <tr ng-if="latePremiums.length > 0">
-                                    <td class="info" colspan="3">
-                                        <span class="pull-left">المجموع الكلي(جميع القيم بالريال السعودي)</span>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group row" ng-if="latePremiums.length > 0">
+                        <div class="box-warning">
+                            <p>
+                                <span>المجموع الكلي(جميع القيم بالريال السعودي):</span>&nbsp;
+                                <span>{{latePremiums | sumByKey:'remain' | currency:'':2}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findRequiredPremiumsThisMonth()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>أقساط الشهر المستحقة</h3>
+                        <span>جميع الأقساط الواجب سدادها خلال هذا الشهر الميلادي</span>
+                    </div>
+                </div>
+                <div class="panel-body panel-body-scroll">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+
+                                    <th>
+                                        <span>رقم العقد</span>
+                                    </th>
+
+                                    <th>
+                                        <span>العميل</span>
+                                    </th>
+
+                                    <th>
+                                        <span>تاريخ الاستحقاق</span>
+                                    </th>
+
+                                    <th>
+                                        <span>الباقي</span>
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="contractPremium in requiredPremiumsThisMonth" context-menu="rowMenuLatePremium">
+                                    <td>
+                                        <a href="" ng-click="ModalProvider.openContractDetailsModel(contractPremium.contract)">
+                                            <span>{{contractPremium.contract.code}}</span>
+                                        </a>
                                     </td>
-                                    <td class="success" colspan="1">{{latePremiums | sumByKey:'remain' | currency:'':2}}</td>
+                                    <td>
+                                        <span>{{contractPremium.contract.customer.contact.shortName}}</span>
+                                        <br/>
+                                        <span class="label label-info">{{contractPremium.contract.customer.contact.mobile}}</span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="dateType==='H'">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                        <span ng-if="dateType==='G'">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
+                                    </td>
+                                    <td>{{contractPremium.remain | currency:'':2}}</td>
+                                </tr>
+                                <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!requiredPremiumsThisMonth || requiredPremiumsThisMonth.length ==0">
+                                    <td colspan="4">
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -617,6 +794,16 @@
 
                     </div>
 
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group row" ng-if="requiredPremiumsThisMonth.length > 0">
+                        <div class="box-warning">
+                            <p>
+                                <span>المجموع الكلي(جميع القيم بالريال السعودي):</span>&nbsp;
+                                <span>{{requiredPremiumsThisMonth | sumByKey:'remain' | currency:'':2}}</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
