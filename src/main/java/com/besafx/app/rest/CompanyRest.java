@@ -4,6 +4,7 @@ import com.besafx.app.entity.Company;
 import com.besafx.app.init.Initializer;
 import com.besafx.app.service.CompanyService;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -52,7 +53,7 @@ public class CompanyRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم تعديل بيانات الشركة بنجاح")
-                                                  .type("warning")
+                                                  .type(NotificationDegree.warning)
                                                   .build());
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), company);
         } else {

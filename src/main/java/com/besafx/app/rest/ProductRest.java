@@ -7,6 +7,7 @@ import com.besafx.app.entity.Product;
 import com.besafx.app.search.ProductSearch;
 import com.besafx.app.service.ProductService;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -75,7 +76,7 @@ public class ProductRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message("تم انشاء التصنيف / السلعة بنجاح")
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), product);
     }
 
@@ -97,7 +98,7 @@ public class ProductRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم تعديل بيانات التصنيف / السلعة بنجاح")
-                                                  .type("success").build());
+                                                  .type(NotificationDegree.success).build());
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), product);
         } else {
             return null;
@@ -115,7 +116,7 @@ public class ProductRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم حذف التصنيف / السلعة بنجاح")
-                                                  .type("error").build());
+                                                  .type(NotificationDegree.error).build());
         }
     }
 

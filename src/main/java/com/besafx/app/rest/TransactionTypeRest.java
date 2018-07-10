@@ -3,6 +3,7 @@ package com.besafx.app.rest;
 import com.besafx.app.entity.TransactionType;
 import com.besafx.app.service.TransactionTypeService;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -51,7 +52,7 @@ public class TransactionTypeRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message("تم انشاء بند مصروفات بنجاح")
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), transactionType);
     }
 
@@ -67,7 +68,7 @@ public class TransactionTypeRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم تعديل بيانات البند بنجاح")
-                                                  .type("success").build());
+                                                  .type(NotificationDegree.success).build());
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), transactionType);
         } else {
             return null;
@@ -85,7 +86,7 @@ public class TransactionTypeRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم حذف البند بنجاح")
-                                                  .type("error").build());
+                                                  .type(NotificationDegree.error).build());
         }
     }
 

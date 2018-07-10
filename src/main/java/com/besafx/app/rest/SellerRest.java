@@ -9,6 +9,7 @@ import com.besafx.app.init.Initializer;
 import com.besafx.app.search.SellerSearch;
 import com.besafx.app.service.*;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -108,7 +109,7 @@ public class SellerRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message("تم انشاء حساب مستثمر جديد بنجاح")
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
         LOG.info("إنشاء الرصيد الافتتاحي وعمل عملية إيداع بالمبلغ");
         if (openCash > 0) {
             BankTransaction bankTransaction = new BankTransaction();
@@ -130,7 +131,7 @@ public class SellerRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message(builder.toString())
-                                                  .type("success").build());
+                                                  .type(NotificationDegree.success).build());
         }
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), seller);
     }
@@ -150,7 +151,7 @@ public class SellerRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم تعديل بيانات المستثمر بنجاح")
-                                                  .type("success").build());
+                                                  .type(NotificationDegree.success).build());
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), seller);
         } else {
             return null;
@@ -220,7 +221,7 @@ public class SellerRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم حذف المستثمر وكل ما يتعلق به من عقود وحسابات بنجاح")
-                                                  .type("error").build());
+                                                  .type(NotificationDegree.error).build());
         }
     }
 

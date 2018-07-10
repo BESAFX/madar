@@ -9,6 +9,7 @@ import com.besafx.app.service.ContractPaymentService;
 import com.besafx.app.service.ContractPremiumService;
 import com.besafx.app.util.DateConverter;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -68,7 +69,7 @@ public class ContractPremiumRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message("تم اضافة قسط للعقد بنجاح")
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contractPremium);
     }
 
@@ -83,7 +84,7 @@ public class ContractPremiumRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم تعديل بيانات القسط بنجاح")
-                                                  .type("success").build());
+                                                  .type(NotificationDegree.success).build());
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contractPremium);
         } else {
             return null;
@@ -108,7 +109,7 @@ public class ContractPremiumRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم حذف القسط من العقد وكل الدفعات المرتبطة بهذا القسط بنجاح")
-                                                  .type("error").build());
+                                                  .type(NotificationDegree.error).build());
         }
     }
 
@@ -137,7 +138,7 @@ public class ContractPremiumRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message(builder.toString())
-                                                  .type("information").build());
+                                                  .type(NotificationDegree.information).build());
         }
     }
 

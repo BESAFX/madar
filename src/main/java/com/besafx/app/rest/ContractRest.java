@@ -1,5 +1,6 @@
 package com.besafx.app.rest;
 
+import com.besafx.app.auditing.EntityHistoryListener;
 import com.besafx.app.auditing.PersonAwareUserDetails;
 import com.besafx.app.config.CustomException;
 import com.besafx.app.entity.*;
@@ -9,6 +10,7 @@ import com.besafx.app.search.ContractSearch;
 import com.besafx.app.service.*;
 import com.besafx.app.util.DateConverter;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -99,6 +101,9 @@ public class ContractRest {
     @Autowired
     private NotificationService notificationService;
 
+    @Autowired
+    private EntityHistoryListener entityHistoryListener;
+
     @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_CONTRACT_CREATE')")
@@ -124,7 +129,7 @@ public class ContractRest {
             DateTime startTime = new DateTime(contract.getPremiumStartDate()).withTimeAtStartOfDay();
 
             LOG.info("سيتم تقديم وقت البداية للاقساط فى حال كان هناك دفعة مقدمة");
-            if(contract.getAdvancedAmount() > 0){
+            if (contract.getAdvancedAmount() > 0) {
                 switch (contract.getPremiumPeriod()) {
                     case Daily:
                         startTime = new DateTime(contract.getPremiumStartDate()).withTimeAtStartOfDay()
@@ -160,68 +165,83 @@ public class ContractRest {
                 switch (contract.getPremiumPeriod()) {
                     case Daily:
                         contractPremium.setDueDate(startTime
-                                .withChronology(contract.getPremiumCalendar()
-                                        .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                .plusDays(i * contract.getPremiumPeriodFactor()).toDate());
+                                                           .withChronology(contract.getPremiumCalendar()
+                                                                                   .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() :
+                                                                                   IslamicChronology.getInstance())
+                                                           .plusDays(i * contract.getPremiumPeriodFactor()).toDate());
 
                         if ((i == contract.getPremiumCount() - 1) && lastContractPremium.getAmount() > 0) {
                             lastContractPremium.setDueDate(startTime
-                                    .withChronology(contract.getPremiumCalendar()
-                                            .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                    .plusDays(contract.getPremiumCount() * contract.getPremiumPeriodFactor()).toDate());
+                                                                   .withChronology(contract.getPremiumCalendar()
+                                                                                           .equals(PremiumCalendar.G) ? GregorianChronology
+                                                                           .getInstance() : IslamicChronology.getInstance())
+                                                                   .plusDays(contract.getPremiumCount() * contract.getPremiumPeriodFactor()).toDate
+                                            ());
                         }
                         break;
                     case Weekly:
                         contractPremium.setDueDate(startTime
-                                .withChronology(contract.getPremiumCalendar()
-                                        .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                .plusWeeks(i * contract.getPremiumPeriodFactor()).toDate());
+                                                           .withChronology(contract.getPremiumCalendar()
+                                                                                   .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() :
+                                                                                   IslamicChronology.getInstance())
+                                                           .plusWeeks(i * contract.getPremiumPeriodFactor()).toDate());
 
                         if ((i == contract.getPremiumCount() - 1) && lastContractPremium.getAmount() > 0) {
                             lastContractPremium.setDueDate(startTime
-                                    .withChronology(contract.getPremiumCalendar()
-                                            .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                    .plusWeeks(contract.getPremiumCount() * contract.getPremiumPeriodFactor()).toDate());
+                                                                   .withChronology(contract.getPremiumCalendar()
+                                                                                           .equals(PremiumCalendar.G) ? GregorianChronology
+                                                                           .getInstance() : IslamicChronology.getInstance())
+                                                                   .plusWeeks(contract.getPremiumCount() * contract.getPremiumPeriodFactor())
+                                                                   .toDate());
                         }
                         break;
                     case Monthly:
                         contractPremium.setDueDate(startTime
-                                .withChronology(contract.getPremiumCalendar()
-                                        .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                .plusMonths(i * contract.getPremiumPeriodFactor()).withDayOfMonth(1).toDate());
+                                                           .withChronology(contract.getPremiumCalendar()
+                                                                                   .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() :
+                                                                                   IslamicChronology.getInstance())
+                                                           .plusMonths(i * contract.getPremiumPeriodFactor()).withDayOfMonth(1).toDate());
 
                         if ((i == contract.getPremiumCount() - 1) && lastContractPremium.getAmount() > 0) {
                             lastContractPremium.setDueDate(startTime
-                                    .withChronology(contract.getPremiumCalendar()
-                                            .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                    .plusMonths(contract.getPremiumCount() * contract.getPremiumPeriodFactor()).withDayOfMonth(1).toDate());
+                                                                   .withChronology(contract.getPremiumCalendar()
+                                                                                           .equals(PremiumCalendar.G) ? GregorianChronology
+                                                                           .getInstance() : IslamicChronology.getInstance())
+                                                                   .plusMonths(contract.getPremiumCount() * contract.getPremiumPeriodFactor())
+                                                                   .withDayOfMonth(1).toDate());
                         }
                         break;
                     case Midterm:
                         contractPremium.setDueDate(startTime
-                                .withChronology(contract.getPremiumCalendar()
-                                        .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                .plusMonths(i * 6 * contract.getPremiumPeriodFactor()).toDate());
+                                                           .withChronology(contract.getPremiumCalendar()
+                                                                                   .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() :
+                                                                                   IslamicChronology.getInstance())
+                                                           .plusMonths(i * 6 * contract.getPremiumPeriodFactor()).toDate());
 
                         if ((i == contract.getPremiumCount() - 1) && lastContractPremium.getAmount() > 0) {
                             lastContractPremium.setDueDate(startTime
-                                    .withChronology(contract.getPremiumCalendar()
-                                            .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                    .plusMonths(contract.getPremiumCount() * 6 * contract.getPremiumPeriodFactor()).toDate());
+                                                                   .withChronology(contract.getPremiumCalendar()
+                                                                                           .equals(PremiumCalendar.G) ? GregorianChronology
+                                                                           .getInstance() : IslamicChronology.getInstance())
+                                                                   .plusMonths(contract.getPremiumCount() * 6 * contract.getPremiumPeriodFactor())
+                                                                   .toDate());
                         }
 
                         break;
                     case Annual:
                         contractPremium.setDueDate(startTime
-                                .withChronology(contract.getPremiumCalendar()
-                                        .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                .plusYears(i * contract.getPremiumPeriodFactor()).toDate());
+                                                           .withChronology(contract.getPremiumCalendar()
+                                                                                   .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() :
+                                                                                   IslamicChronology.getInstance())
+                                                           .plusYears(i * contract.getPremiumPeriodFactor()).toDate());
 
                         if ((i == contract.getPremiumCount() - 1) && lastContractPremium.getAmount() > 0) {
                             lastContractPremium.setDueDate(startTime
-                                    .withChronology(contract.getPremiumCalendar()
-                                            .equals(PremiumCalendar.G) ? GregorianChronology.getInstance() : IslamicChronology.getInstance())
-                                    .plusYears(contract.getPremiumCount() * contract.getPremiumPeriodFactor()).toDate());
+                                                                   .withChronology(contract.getPremiumCalendar()
+                                                                                           .equals(PremiumCalendar.G) ? GregorianChronology
+                                                                           .getInstance() : IslamicChronology.getInstance())
+                                                                   .plusYears(contract.getPremiumCount() * contract.getPremiumPeriodFactor())
+                                                                   .toDate());
                         }
                         break;
                 }
@@ -237,7 +257,7 @@ public class ContractRest {
         }
 
         LOG.info("إنشاء الدفعة المالية المقدمة");
-        if(contract.getAdvancedAmount() > 0){
+        if (contract.getAdvancedAmount() > 0) {
 
             {
                 LOG.info("إنشاء القسط الخاص بالدفعة المالية المقدمة بتاريخ بداية الأقساط");
@@ -286,14 +306,20 @@ public class ContractRest {
         }
 
         StringBuilder builder = new StringBuilder();
-        builder.append("تم إنشاء العقد بنجاح بمجموع أسعار = ");
+        builder.append("إنشاء عقد جديد بمجموع أسعار = ");
         builder.append(contract.getTotalPrice());
         builder.append("، وأصناف عدد " + contract.getContractProducts().size() + " صنف");
         builder.append("، تسدد على " + contract.getContractPremiums().size() + " قسط");
         notificationService.notifyAll(Notification
-                .builder()
-                .message(builder.toString())
-                .type("success").build());
+                                              .builder()
+                                              .title("العمليات على العقود")
+                                              .message(builder.toString())
+                                              .type(NotificationDegree.success)
+                                              .icon("add")
+                                              .build());
+
+        entityHistoryListener.perform(builder.toString());
+
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contract);
     }
 
@@ -443,14 +469,20 @@ public class ContractRest {
         }
 
         StringBuilder builder = new StringBuilder();
-        builder.append("تم إنشاء العقد بنجاح بمجموع أسعار = ");
+        builder.append("إنشاء عقد جديد بمجموع أسعار = ");
         builder.append(contract.getTotalPrice());
         builder.append("، وأصناف عدد " + contract.getContractProducts().size() + " صنف");
         builder.append("، تسدد على " + contract.getContractPremiums().size() + " قسط");
         notificationService.notifyAll(Notification
-                .builder()
-                .message(builder.toString())
-                .type("success").build());
+                                              .builder()
+                                              .title("العمليات على العقود")
+                                              .message(builder.toString())
+                                              .type(NotificationDegree.success)
+                                              .icon("add")
+                                              .build());
+
+        entityHistoryListener.perform(builder.toString());
+
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contract);
     }
 
@@ -465,10 +497,23 @@ public class ContractRest {
         Contract object = contractService.findOne(contract.getId());
         if (object != null) {
             contract = contractService.save(contract);
+
+            Person caller = ((PersonAwareUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPerson();
+            StringBuilder builder = new StringBuilder();
+            builder.append("تعديل العقد رقم ");
+            builder.append("( " + contract.getCode() + " )");
+            builder.append("، بواسطة ");
+            builder.append(caller.getContact().getShortName());
             notificationService.notifyAll(Notification
-                    .builder()
-                    .message("تم تعديل بيانات العقد الأساسية بنجاح")
-                    .type("success").build());
+                                                  .builder()
+                                                  .title("العمليات على العقود")
+                                                  .message(builder.toString())
+                                                  .type(NotificationDegree.warning)
+                                                  .icon("edit")
+                                                  .build());
+
+            entityHistoryListener.perform(builder.toString());
+
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contract);
         } else {
             return null;
@@ -491,18 +536,29 @@ public class ContractRest {
                             .stream()
                             .map(ContractPayment::getBankTransaction)
                             .collect(Collectors.toList())
-            );
+                                         );
             LOG.info("حذف كل دفعات العقد");
             contractPaymentService.delete(contract.getContractPayments());
             LOG.info("حذف كل أقساط العقد");
             contractPremiumService.delete(contract.getContractPremiums());
             LOG.info("حذف العقد");
             contractService.delete(id);
-            notificationService.notifyAll(
-                    Notification
-                            .builder()
-                            .message("تم حذف العقد وكل ما يتعلق به من حسابات بنجاح")
-                            .type("error").build());
+
+            Person caller = ((PersonAwareUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPerson();
+            StringBuilder builder = new StringBuilder();
+            builder.append("حذف العقد رقم ");
+            builder.append("( " + contract.getCode() + " )");
+            builder.append("، بواسطة ");
+            builder.append(caller.getContact().getShortName());
+            notificationService.notifyAll(Notification
+                                                  .builder()
+                                                  .title("العمليات على العقود")
+                                                  .message(builder.toString())
+                                                  .type(NotificationDegree.error)
+                                                  .icon("trash")
+                                                  .build());
+
+            entityHistoryListener.perform(builder.toString());
         }
     }
 
@@ -510,7 +566,7 @@ public class ContractRest {
     @ResponseBody
     public String findOne(@PathVariable Long id) {
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_DETAILS),
-                contractService.findOne(id));
+                                       contractService.findOne(id));
     }
 
     @GetMapping(value = "findByThisMonth", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -534,14 +590,14 @@ public class ContractRest {
     public String findMyContracts() {
         Person caller = ((PersonAwareUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPerson();
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_DETAILS),
-                contractService.findBySeller(caller.getCompany().getSeller()));
+                                       contractService.findBySeller(caller.getCompany().getSeller()));
     }
 
     @GetMapping(value = "findBySeller/{sellerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String findBySeller(@PathVariable(value = "sellerId") Long sellerId) {
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_DETAILS),
-                contractService.findBySeller(sellerService.findOne(sellerId)));
+                                       contractService.findBySeller(sellerService.findOne(sellerId)));
     }
 
     @GetMapping(value = "filter", produces = MediaType.APPLICATION_JSON_VALUE)

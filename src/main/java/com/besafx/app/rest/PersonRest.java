@@ -1,5 +1,6 @@
 package com.besafx.app.rest;
 
+import com.besafx.app.auditing.EntityHistoryListener;
 import com.besafx.app.auditing.PersonAwareUserDetails;
 import com.besafx.app.config.CustomException;
 import com.besafx.app.entity.Person;
@@ -9,6 +10,7 @@ import com.besafx.app.service.PersonService;
 import com.besafx.app.util.JSONConverter;
 import com.besafx.app.util.Options;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -56,6 +58,9 @@ public class PersonRest {
     @Autowired
     private NotificationService notificationService;
 
+    @Autowired
+    private EntityHistoryListener entityHistoryListener;
+
     @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_PERSON_CREATE')")
@@ -80,7 +85,7 @@ public class PersonRest {
                                                    .iconSetType("png")
                                                    .style("mdl-style-1")));
         person = personService.save(person);
-        notificationService.notifyAll(Notification.builder().message("تم إنشاء حساب شخصي بنجاح").type("success").build());
+        notificationService.notifyAll(Notification.builder().message("تم إنشاء حساب شخصي بنجاح").type(NotificationDegree.success).build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), person);
     }
 
@@ -98,11 +103,23 @@ public class PersonRest {
                 person.setContact(contactService.save(person.getContact()));
             }
             person = personService.save(person);
+
+            Person caller = ((PersonAwareUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPerson();
+            StringBuilder builder = new StringBuilder();
+            builder.append("تعديل حساب المستخدم ");
+            builder.append("( " + person.getContact().getShortName() + " )");
+            builder.append("، بواسطة ");
+            builder.append(caller.getContact().getShortName());
             notificationService.notifyAll(Notification
                                                   .builder()
-                                                  .message("تم تعديل بيانات الحساب الشخصي بنجاح")
-                                                  .type("success")
+                                                  .title("العمليات على حسابات المستخدمين")
+                                                  .message(builder.toString())
+                                                  .type(NotificationDegree.warning)
+                                                  .icon("fa-edit")
                                                   .build());
+
+            entityHistoryListener.perform(builder.toString());
+
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), person);
         } else {
             return null;
@@ -122,11 +139,23 @@ public class PersonRest {
             if (person.getContact() != null) {
                 person.setContact(contactService.save(person.getContact()));
             }
+
+            Person caller = ((PersonAwareUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPerson();
+            StringBuilder builder = new StringBuilder();
+            builder.append("تعديل الملف الشخصي للمستخدم ");
+            builder.append("( " + person.getContact().getShortName() + " )");
+            builder.append("، بواسطة ");
+            builder.append(caller.getContact().getShortName());
             notificationService.notifyAll(Notification
                                                   .builder()
-                                                  .message("تم تعديل بيانات الحساب الشخصي بنجاح")
-                                                  .type("success")
+                                                  .title("العمليات على حسابات المستخدمين")
+                                                  .message(builder.toString())
+                                                  .type(NotificationDegree.warning)
+                                                  .icon("fa-edit")
                                                   .build());
+
+            entityHistoryListener.perform(builder.toString());
+
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), person);
         } else {
             return null;
@@ -145,7 +174,7 @@ public class PersonRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم تفعيل المستخدم بنجاح")
-                                                  .type("success")
+                                                  .type(NotificationDegree.success)
                                                   .build());
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), person);
         } else {
@@ -165,7 +194,7 @@ public class PersonRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم تعطيل المستخدم بنجاح")
-                                                  .type("error")
+                                                  .type(NotificationDegree.error)
                                                   .build());
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), person);
         } else {

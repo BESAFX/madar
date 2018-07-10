@@ -1,5 +1,4 @@
 package com.besafx.app.ws;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -22,7 +21,7 @@ public class Notification {
 
     private Date date;
 
-    private String type;
+    private NotificationDegree type;
 
     private String icon;
 

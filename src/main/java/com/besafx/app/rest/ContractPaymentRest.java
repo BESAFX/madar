@@ -12,6 +12,7 @@ import com.besafx.app.service.ContractPaymentService;
 import com.besafx.app.service.ContractService;
 import com.besafx.app.util.DateConverter;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -107,7 +108,7 @@ public class ContractPaymentRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message(builder.toString())
-                                                  .type("success").build());
+                                                  .type(NotificationDegree.success).build());
         }
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contractPayment);
     }
@@ -124,7 +125,7 @@ public class ContractPaymentRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم حذف الدفعة وكل ما يتعلق بها من حسابات بنجاح")
-                                                  .type("error").build());
+                                                  .type(NotificationDegree.error).build());
         }
     }
 

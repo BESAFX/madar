@@ -4,6 +4,7 @@ import com.besafx.app.config.CustomException;
 import com.besafx.app.entity.Team;
 import com.besafx.app.service.TeamService;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -49,7 +50,7 @@ public class TeamRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message("تم انشاء مجموعة صلاحيات جديدة بنجاح")
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), team);
     }
 
@@ -67,7 +68,7 @@ public class TeamRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم تعديل بيانات المجموعة بنجاح")
-                                                  .type("success").build());
+                                                  .type(NotificationDegree.success).build());
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), team);
         } else {
             return null;
@@ -88,7 +89,7 @@ public class TeamRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم حذف مجموعة الصلاحيات بنجاح")
-                                                  .type("error").build());
+                                                  .type(NotificationDegree.error).build());
         }
     }
 

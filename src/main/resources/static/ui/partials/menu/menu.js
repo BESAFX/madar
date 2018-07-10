@@ -12,6 +12,7 @@ app.controller("menuCtrl", [
     'AttachTypeService',
     'PersonService',
     'SmsService',
+    'HistoryService',
     'TeamService',
     'ModalProvider',
     '$scope',
@@ -32,6 +33,7 @@ app.controller("menuCtrl", [
               AttachTypeService,
               PersonService,
               SmsService,
+              HistoryService,
               TeamService,
               ModalProvider,
               $scope,
@@ -2186,6 +2188,17 @@ app.controller("menuCtrl", [
             });
         };
 
+        /**************************************************************************************************************
+         *                                                                                                            *
+         * Widget: Daily History                                                                                      *
+         *                                                                                                            *
+         **************************************************************************************************************/
+        $scope.findDailyHistory = function () {
+            HistoryService.findDaily().then(function (value) {
+                $scope.dailyHistories = value;
+            });
+        };
+
         $timeout(function () {
             CompanyService.get().then(function (data) {
                 $rootScope.selectedCompany = data;
@@ -2202,6 +2215,7 @@ app.controller("menuCtrl", [
             $scope.findMonthContracts();
             $scope.findMonthContractPayments();
             $scope.findWithdrawCashThisMonth();
+            $scope.findDailyHistory();
             window.componentHandler.upgradeAllRegistered();
         }, 800);
 

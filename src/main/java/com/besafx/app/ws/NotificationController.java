@@ -21,7 +21,7 @@ public class NotificationController {
             @RequestParam(value = "code") String code,
             @RequestParam(value = "title") String title,
             @RequestParam(value = "message") String message,
-            @RequestParam(value = "type") String type,
+            @RequestParam(value = "type") NotificationDegree type,
             @RequestParam(value = "receiver") String receiver) {
         notificationService.notifyOne(Notification.builder().code(code).title(title).message(message).date(new Date()).type(type).build(), receiver);
     }
@@ -32,7 +32,7 @@ public class NotificationController {
             @RequestParam(value = "code") String code,
             @RequestParam(value = "title") String title,
             @RequestParam(value = "message") String message,
-            @RequestParam(value = "type") String type) {
+            @RequestParam(value = "type") NotificationDegree type) {
         notificationService.notifyAll(Notification.builder().code(code).title(title).message(message).date(new Date()).type(type).build());
     }
 
@@ -42,7 +42,7 @@ public class NotificationController {
             @RequestParam(value = "code") String code,
             @RequestParam(value = "title") String title,
             @RequestParam(value = "message") String message,
-            @RequestParam(value = "type") String type) {
+            @RequestParam(value = "type") NotificationDegree type) {
         notificationService.notifyAllExceptMe(Notification.builder().code(code).title(title).message(message).date(new Date()).type(type).build());
     }
 }

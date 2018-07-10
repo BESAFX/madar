@@ -9,6 +9,7 @@ import com.besafx.app.service.ContractAttachService;
 import com.besafx.app.service.ContractService;
 import com.besafx.app.service.PersonService;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -97,7 +98,7 @@ public class ContractAttachRest {
 
                 notificationService.notifyOne(Notification.builder()
                                                           .message("تم رفع الملف بنجاح")
-                                                          .type("success")
+                                                          .type(NotificationDegree.success)
                                                           .build(), principal.getName());
             }
         }
@@ -123,12 +124,12 @@ public class ContractAttachRest {
                 attachService.delete(contractAttach.getAttach());
                 notificationService.notifyOne(Notification.builder()
                                                           .message("تم حذف الملف بنجاح")
-                                                          .type("error").build(), principal.getName());
+                                                          .type(NotificationDegree.error).build(), principal.getName());
                 return true;
             } else {
                 notificationService.notifyOne(Notification.builder()
                                                           .message("لا يمكن حذف الملف حيث يبدو غير موجود")
-                                                          .type("error").build(), principal.getName());
+                                                          .type(NotificationDegree.error).build(), principal.getName());
                 return false;
             }
         } else {
@@ -146,7 +147,7 @@ public class ContractAttachRest {
             attachService.delete(contractAttach.getAttach());
             notificationService.notifyOne(Notification.builder()
                                                       .message("تم حذف الملف بنجاح")
-                                                      .type("success").build(), principal.getName());
+                                                      .type(NotificationDegree.success).build(), principal.getName());
         }
     }
 

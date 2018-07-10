@@ -10,6 +10,7 @@ import com.besafx.app.search.BankTransactionSearch;
 import com.besafx.app.service.BankTransactionService;
 import com.besafx.app.service.SellerService;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -80,7 +81,7 @@ public class BankTransactionRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message(builder.toString())
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), bankTransaction);
     }
 
@@ -107,7 +108,7 @@ public class BankTransactionRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message(builder.toString())
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), bankTransaction);
     }
 
@@ -153,7 +154,7 @@ public class BankTransactionRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message(builder.toString())
-                                                  .type("success").build());
+                                                  .type(NotificationDegree.success).build());
         }
 
         {
@@ -178,7 +179,7 @@ public class BankTransactionRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message(builder.toString())
-                                                  .type("success").build());
+                                                  .type(NotificationDegree.success).build());
         }
 
     }
@@ -213,7 +214,7 @@ public class BankTransactionRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message(builder.toString())
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), bankTransaction);
     }
 

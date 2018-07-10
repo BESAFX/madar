@@ -3,6 +3,7 @@ package com.besafx.app.rest;
 import com.besafx.app.entity.ContractProduct;
 import com.besafx.app.service.ContractProductService;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -44,7 +45,7 @@ public class ContractProductRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message("تم اضافة سلعة للعقد بنجاح")
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contractProduct);
     }
 
@@ -57,7 +58,7 @@ public class ContractProductRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message("تم اضافة عدد من السلع للعقد بنجاح")
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), contractProducts);
     }
 
@@ -72,7 +73,7 @@ public class ContractProductRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم حذف سلع من العقد بنجاح")
-                                                  .type("error").build());
+                                                  .type(NotificationDegree.error).build());
         }
     }
 

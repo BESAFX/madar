@@ -7,6 +7,7 @@ import com.besafx.app.entity.Customer;
 import com.besafx.app.search.CustomerSearch;
 import com.besafx.app.service.*;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
@@ -98,7 +99,7 @@ public class CustomerRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message("تم انشاء حساب عميل جديد بنجاح")
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), customer);
     }
 
@@ -117,7 +118,7 @@ public class CustomerRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم تعديل بيانات العميل بنجاح")
-                                                  .type("success").build());
+                                                  .type(NotificationDegree.success).build());
             return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), customer);
         } else {
             return null;
@@ -169,7 +170,7 @@ public class CustomerRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم حذف العميل وكل ما يتعلق به من عقود وحسابات بنجاح")
-                                                  .type("error").build());
+                                                  .type(NotificationDegree.error).build());
         }
     }
 
@@ -196,7 +197,8 @@ public class CustomerRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message(builder.toString())
-                                                  .type("information").build());
+                                                  .type(NotificationDegree.information)
+                                                  .build());
         }
     }
 

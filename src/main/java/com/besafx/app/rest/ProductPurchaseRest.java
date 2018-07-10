@@ -1,19 +1,19 @@
 package com.besafx.app.rest;
 
 import com.besafx.app.auditing.PersonAwareUserDetails;
-import com.besafx.app.entity.*;
+import com.besafx.app.entity.BankTransaction;
+import com.besafx.app.entity.Person;
+import com.besafx.app.entity.ProductPurchase;
 import com.besafx.app.init.Initializer;
 import com.besafx.app.search.ProductPurchaseSearch;
 import com.besafx.app.service.BankTransactionService;
 import com.besafx.app.service.ProductPurchaseService;
 import com.besafx.app.ws.Notification;
+import com.besafx.app.ws.NotificationDegree;
 import com.besafx.app.ws.NotificationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
 import com.github.bohnman.squiggly.util.SquigglyUtils;
-import com.google.common.collect.Lists;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -104,7 +103,7 @@ public class ProductPurchaseRest {
         notificationService.notifyAll(Notification
                                               .builder()
                                               .message(builder.toString())
-                                              .type("success").build());
+                                              .type(NotificationDegree.success).build());
 
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE), productPurchase);
     }
@@ -131,7 +130,7 @@ public class ProductPurchaseRest {
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message("تم حذف المخزون وكل ما يتعلق به من حسابات بنجاح")
-                                                  .type("error").build());
+                                                  .type(NotificationDegree.error).build());
         }
     }
 
