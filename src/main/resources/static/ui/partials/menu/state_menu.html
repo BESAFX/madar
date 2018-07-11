@@ -957,8 +957,8 @@
                         </li>
                     </ul>
                     <div class="panel-title-box pull-right">
-                        <h3>العمليات اليومية</h3>
-                        <span>جميع الحركات على البرنامج التي تمت خلال اليوم</span>
+                        <h3>العمليات الأخيرة</h3>
+                        <span>جميع الحركات على البرنامج التي تمت خلال آخر 24 ساعة</span>
                     </div>
                 </div>
                 <div class="panel-body panel-body-scroll">
@@ -969,6 +969,64 @@
                             <table class="table table-bordered table-hover">
                                 <tbody>
                                 <tr ng-repeat="history in dailyHistories">
+                                    <td>
+                                        <div class="form-group row">
+                                            <span>{{history.note}}</span>
+                                        </div>
+                                        <div class="for-group row">
+                                            <span class="label label-success pull-right">{{history.modifiedDate | date: 'hh:mm a'}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!dailyHistories || dailyHistories.length ==0">
+                                    <td>
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findDailyHistory()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>العملاء الأكثر نشاطاً</h3>
+                        <span>أكثر عملاء لهم عقود داخل النظام</span>
+                    </div>
+                </div>
+                <div class="panel-body panel-body-scroll">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr ng-repeat="customer in mostActiveCustomers">
                                     <td>
                                         <div class="form-group row">
                                             <span>{{history.note}}</span>
