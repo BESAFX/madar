@@ -1,0 +1,888 @@
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+    <header class="mdl-layout__header">
+
+        <div class="mdl-layout__header-row">
+
+            <div class="mdl-layout-icon">
+                <a class="mdl-button mdl-js-button mdl-button--icon" ng-click="openStateMenu()">
+                    <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/{{toggleState}}.{{iconSetType}}" width="24"
+                         height="24">
+                </a>
+            </div>
+
+            <span class="mdl-layout__title">{{pageTitle}}</span>
+
+            <div class="btn-toolbar mdl-layout--large-screen-only">
+                <div class="btn-group" data-toggle="buttons">
+
+                    <button id="toggle-admin-menu-lower"
+                            class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white"
+                            ng-show="contains(me.team.authorities, [
+                            'ROLE_COMPANY_UPDATE',
+                            'ROLE_CUSTOMER_CREATE',
+                            'ROLE_CUSTOMER_UPDATE',
+                            'ROLE_CUSTOMER_DELETE',
+                            'ROLE_CUSTOMER_NOTE_CREATE',
+                            'ROLE_SELLER_CREATE',
+                            'ROLE_SELLER_UPDATE',
+                            'ROLE_SELLER_DELETE',
+                            'ROLE_PRODUCT_CREATE',
+                            'ROLE_PRODUCT_UPDATE',
+                            'ROLE_PRODUCT_DELETE',
+                            'ROLE_PERSON_CREATE',
+                            'ROLE_PERSON_UPDATE',
+                            'ROLE_PERSON_DELETE',
+                            'ROLE_TEAM_CREATE',
+                            'ROLE_TEAM_UPDATE',
+                            'ROLE_TEAM_DELETE'
+                            ])">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/admin.{{iconSetType}}" width="24" height="24">
+                        <span>الإدارة</span>
+                    </button>
+                    <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right"
+                        style="max-height: 400px"
+                        for="toggle-admin-menu-lower">
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-show="contains(me.team.authorities, ['ROLE_COMPANY_UPDATE'])"
+                            ng-click="openStateCompany()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/company.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>بيانات المؤسسة</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-show="contains(me.team.authorities, [
+                            'ROLE_CUSTOMER_CREATE',
+                            'ROLE_CUSTOMER_UPDATE',
+                            'ROLE_CUSTOMER_DELETE',
+                            'ROLE_CUSTOMER_NOTE_CREATE'
+                            ])"
+                            ng-click="openStateCustomer()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/customer.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>سجل العملاء / الكفلاء</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_CUSTOMER_CREATE'])"
+                            ng-click="newCustomer()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>عميل / كفيل جديد...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-show="contains(me.team.authorities, [
+                            'ROLE_SELLER_CREATE',
+                            'ROLE_SELLER_UPDATE',
+                            'ROLE_SELLER_DELETE'
+                            ])"
+                            ng-click="openStateSeller()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/seller.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>سجل المستثمرين</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_SELLER_CREATE'])"
+                            ng-click="newSeller()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>مستثمر جديد...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-show="contains(me.team.authorities, [
+                            'ROLE_PRODUCT_CREATE',
+                            'ROLE_PRODUCT_UPDATE',
+                            'ROLE_PRODUCT_DELETE'
+                            ])"
+                            ng-click="openStateProduct()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/product.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                               <span>السلع</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-show="contains(me.team.authorities, [
+                            'ROLE_PRODUCT_CREATE',
+                            'ROLE_PRODUCT_UPDATE',
+                            'ROLE_PRODUCT_DELETE',
+                            'ROLE_PRODUCT_PURCHASE_CREATE'
+                            ])"
+                            ng-click="openStateProductPurchase()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/productPurchase.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                               <span>المخزون</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_CREATE'])"
+                            ng-click="newParent()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/product.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>تصنيف رئيسي جديد...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_CREATE'])"
+                            ng-click="newProduct()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/product.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>تصنيف فرعي جديد...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_PURCHASE_CREATE'])"
+                            ng-click="newProductPurchase()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>شراء سلعة جديدة...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-show="contains(me.team.authorities, [
+                            'ROLE_CONTRACT_CREATE',
+                            'ROLE_CONTRACT_DELETE',
+                            'ROLE_PRODUCT_PURCHASE_CREATE'
+                            ])"
+                            ng-click="openStateContract()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/contract.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>العقود</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_CREATE'])"
+                            ng-click="newContract()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>عقد جديد...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_CREATE'])"
+                            ng-click="newOldContract()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>عقد قديم...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-show="contains(me.team.authorities, [
+                            'ROLE_CONTRACT_PREMIUM_CREATE',
+                            'ROLE_CONTRACT_PREMIUM_UPDATE',
+                            'ROLE_CONTRACT_PREMIUM_DELETE',
+                            ])"
+                            ng-click="openStateContractPremium()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/contractPremium.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                               <span>سجل الأقساط</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_PREMIUM_CREATE'])"
+                            ng-click="newPremium()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>قسط جديد...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-show="contains(me.team.authorities, [
+                            'ROLE_COMPANY_UPDATE',
+                            ])"
+                            ng-click="openStateBankTransaction()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/bankTransaction.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                               <span>سجل المعاملات المالية</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_DEPOSIT_CREATE'])"
+                            ng-click="ModalProvider.openDepositCreateModel()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/deposit.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>عملية إيداع...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_WITHDRAW_CREATE'])"
+                            ng-click="ModalProvider.openWithdrawCreateModel()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/withdraw.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>عملية سحب...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_TRANSFER_CREATE'])"
+                            ng-click="ModalProvider.openTransferCreateModel()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/send.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>عملية تحويل...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_TRANSFER_CREATE'])"
+                            ng-click="ModalProvider.openWithdrawCashCreateModel()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/cash_outgoings.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>عملية تسجيل مصروفات...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-show="contains(me.team.authorities, [
+                            'ROLE_PERSON_CREATE',
+                            'ROLE_PERSON_UPDATE',
+                            'ROLE_PERSON_DELETE'
+                            ])"
+                            ng-click="openStatePerson()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/person.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>سجل المستخدمين</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_PERSON_CREATE'])"
+                            ng-click="newPerson()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>مستخدم جديد...</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-show="contains(me.team.authorities, [
+                            'ROLE_TEAM_CREATE',
+                            'ROLE_TEAM_UPDATE',
+                            'ROLE_TEAM_DELETE'
+                            ])"
+                            ng-click="openStateTeam()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/team.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>سجل الصلاحيات</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-if="contains(me.team.authorities, ['ROLE_TEAM_CREATE'])"
+                            ng-click="newTeam()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>صلاحيات جديدة...</span>
+                            </span>
+                        </li>
+
+                    </ul>
+
+                    <button id="toggle-options-menu-lower-right"
+                            class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/setting.{{iconSetType}}" width="24" height="24">
+                        <span>خيارات</span>
+                    </button>
+                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                        style="max-height: 400px"
+                        for="toggle-options-menu-lower-right">
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-click="goFullscreen()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/full-screen.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>تفعيل ملء الشاشة</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-click="switchDateType();">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/contractPremium.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                                <span>تبديل نوع التقويم</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                        <li class="mdl-menu__item"
+                            ng-click="setStyle();">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>تطبيق المظهر الافتراضي</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <i class="material-icons mdl-list__item-icon" style="color: #313534">format_color_fill</i>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item"
+                            ng-click="setStyle('mdl-style-1');">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>تطبيق المظهر #1</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <i class="material-icons mdl-list__item-icon" style="color: rgb(121, 85, 72)">format_color_fill</i>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item"
+                            ng-click="setStyle('mdl-style-2');">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>تطبيق المظهر #2</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <i class="material-icons mdl-list__item-icon" style="color: rgb(76, 175, 80)">format_color_fill</i>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item"
+                            ng-click="setStyle('mdl-style-3');">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>تطبيق المظهر #3</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <i class="material-icons mdl-list__item-icon" style="color: rgb(158, 158, 158)">format_color_fill</i>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item"
+                            ng-click="setStyle('mdl-style-4');">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>تطبيق المظهر #4</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <i class="material-icons mdl-list__item-icon" style="color: rgb(63, 81, 181)">format_color_fill</i>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item"
+                            ng-click="setStyle('mdl-style-5');">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>تطبيق المظهر #5</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <i class="material-icons mdl-list__item-icon" style="color: rgb(139, 195, 74)">format_color_fill</i>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item"
+                            ng-click="setStyle('mdl-style-6');">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>تطبيق المظهر #6</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <i class="material-icons mdl-list__item-icon" style="color: rgb(205, 220, 57)">format_color_fill</i>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item"
+                            ng-click="setStyle('mdl-style-7');">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>تطبيق المظهر #7</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                               <i class="material-icons mdl-list__item-icon" style="color: rgb(156, 39, 176)">format_color_fill</i>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item"
+                            ng-click="setStyle('mdl-style-8');">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>تطبيق المظهر #8</span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                <i class="material-icons mdl-list__item-icon" style="color: rgb(244, 67, 54)">format_color_fill</i>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-click="setIconSet('icon-set-1', 'png');">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>حزمة ايقونات #1</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-click="setIconSet('icon-set-2', 'png');">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>حزمة ايقونات #2</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-click="setIconSet('icon-set-3', 'svg');">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/paint.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>حزمة ايقونات #3</span>
+                            </span>
+                        </li>
+
+                    </ul>
+
+                    <button id="toggle-help-menu-lower-right"
+                            class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/help.{{iconSetType}}" width="24" height="24">
+                        <span>مساعدة</span>
+                    </button>
+                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                        style="max-height: 400px"
+                        for="toggle-help-menu-lower-right">
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-click="openStateHelp()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/help.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>المساعدة</span>
+                            </span>
+                        </li>
+
+                        <li class="mdl-menu__item mdl-list__item"
+                            ng-click="openStateAbout();">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/about.{{iconSetType}}" width="24"
+                                     height="24">
+                                <span>عن البرنامج</span>
+                            </span>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="mdl-layout-spacer"></div>
+
+            <button class="mdl-button mdl-js-button mdl-button--icon mdl-icon-margin" ng-click="toggleDrawer()">
+                <i class="material-icons">storage</i>
+            </button>
+
+            <button id="menu-lower-left" class="mdl-button mdl-js-button mdl-button--icon mdl-icon-margin">
+                <i class="material-icons">more_vert</i>
+            </button>
+            <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-left mdl-js-ripple-effect mdl-shadow--2dp" for="menu-lower-left">
+
+                <li class="mdl-list__item mdl-list__item--two-line mdl-color--primary-dark mdl-color-text--white">
+                    <span class="mdl-list__item-primary-content">
+                        <span class="material-icons mdl-list__item-avatar"
+                              style="background-image: url('/ui/img/{{iconSet}}/person.{{iconSetType}}')"></span>
+                        <span>{{me.contact.shortName}}</span>
+                        <br/>
+                        <br/>
+                        <span>{{me.contact.qualification}}</span>
+                    </span>
+                </li>
+
+                <div class=" mdl-menu__item--full-bleed-divider"></div>
+
+                <li class="mdl-menu__item mdl-list__item" ng-click="openStateHelp();">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">help</i>
+                        <span>المساعدة</span>
+                    </span>
+                </li>
+
+                <li class="mdl-menu__item mdl-list__item" ng-click="openStateAbout();">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">info</i>
+                        <span>عن البرنامج</span>
+                    </span>
+                </li>
+
+                <li class="mdl-menu__item mdl-list__item" ng-click="openStateProfile();">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">account_box</i>
+                        <span>الملف الشخصي</span>
+                    </span>
+                </li>
+
+                <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                <li class="mdl-menu__item mdl-list__item" ng-click="logout()">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">exit_to_app</i>
+                        <span>تسجيل الخروج</span>
+                    </span>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </header>
+
+    <div class="mdl-layout__drawer">
+
+        <nav class="mdl-navigation">
+
+            <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
+               href=""
+               ng-show="contains(me.team.authorities, ['ROLE_COMPANY_UPDATE'])"
+               ng-click="openStateCompany();toggleDrawer();"
+               ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='company'}">
+                <span class="mdl-list__item-primary-content">
+                    <img class="material-icons mdl-list__item-icon"
+                         ng-src="/ui/img/{{iconSet}}/company.{{iconSetType}}"
+                         width="24"
+                         height="24">
+                    <span>بيانات المؤسسة</span>
+                </span>
+            </a>
+
+            <div class="mdl-menu__item--full-bleed-divider"></div>
+
+            <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
+               href=""
+               ng-show="contains(me.team.authorities, [
+                            'ROLE_CUSTOMER_CREATE',
+                            'ROLE_CUSTOMER_UPDATE',
+                            'ROLE_CUSTOMER_DELETE',
+                            'ROLE_CUSTOMER_NOTE_CREATE'
+                            ])"
+               ng-click="openStateCustomer();toggleDrawer();"
+               ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='customer'}">
+                <span class="mdl-list__item-primary-content">
+                    <img class="material-icons mdl-list__item-icon"
+                         ng-src="/ui/img/{{iconSet}}/customer.{{iconSetType}}"
+                         width="24"
+                         height="24">
+                    <span>سجل العملاء / الكفلاء</span>
+                </span>
+            </a>
+
+            <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
+               href=""
+               ng-show="contains(me.team.authorities, [
+                            'ROLE_SELLER_CREATE',
+                            'ROLE_SELLER_UPDATE',
+                            'ROLE_SELLER_DELETE'
+                            ])"
+               ng-click="openStateSeller();toggleDrawer();"
+               ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='seller'}">
+                <span class="mdl-list__item-primary-content">
+                    <img class="material-icons mdl-list__item-icon"
+                         ng-src="/ui/img/{{iconSet}}/seller.{{iconSetType}}"
+                         width="24"
+                         height="24">
+                    <span>سجل المستثمرين</span>
+                </span>
+            </a>
+
+            <div class="mdl-menu__item--full-bleed-divider"></div>
+
+            <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
+               href=""
+               ng-show="contains(me.team.authorities, [
+                            'ROLE_PRODUCT_CREATE',
+                            'ROLE_PRODUCT_UPDATE',
+                            'ROLE_PRODUCT_DELETE'
+                            ])"
+               ng-click="openStateProduct();toggleDrawer();"
+               ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='product'}">
+                <span class="mdl-list__item-primary-content">
+                    <img class="material-icons mdl-list__item-icon"
+                         ng-src="/ui/img/{{iconSet}}/product.{{iconSetType}}"
+                         width="24"
+                         height="24">
+                    <span>السلع</span>
+                </span>
+            </a>
+
+            <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
+               href=""
+               ng-show="contains(me.team.authorities, [
+                            'ROLE_PRODUCT_CREATE',
+                            'ROLE_PRODUCT_UPDATE',
+                            'ROLE_PRODUCT_DELETE',
+                            'ROLE_PRODUCT_PURCHASE_CREATE'
+                            ])"
+               ng-click="openStateProductPurchase();toggleDrawer();"
+               ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='productPurchase'}">
+                <span class="mdl-list__item-primary-content">
+                    <img class="material-icons mdl-list__item-icon"
+                         ng-src="/ui/img/{{iconSet}}/productPurchase.{{iconSetType}}"
+                         width="24"
+                         height="24">
+                    <span>المخزون</span>
+                </span>
+            </a>
+
+            <div class="mdl-menu__item--full-bleed-divider"></div>
+
+            <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
+               href=""
+               ng-show="contains(me.team.authorities, [
+                            'ROLE_CONTRACT_CREATE',
+                            'ROLE_CONTRACT_DELETE',
+                            'ROLE_PRODUCT_PURCHASE_CREATE'
+                            ])"
+               ng-click="openStateContract();toggleDrawer();"
+               ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='contract'}">
+                <span class="mdl-list__item-primary-content">
+                    <img class="material-icons mdl-list__item-icon"
+                         ng-src="/ui/img/{{iconSet}}/contract.{{iconSetType}}"
+                         width="24"
+                         height="24">
+                    <span>العقود</span>
+                </span>
+            </a>
+
+            <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
+               href=""
+               ng-show="contains(me.team.authorities, [
+                            'ROLE_COMPANY_UPDATE',
+                            ])"
+               ng-click="openStateBankTransaction();toggleDrawer();"
+               ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='bankTransaction'}">
+                <span class="mdl-list__item-primary-content">
+                    <img class="material-icons mdl-list__item-icon"
+                         ng-src="/ui/img/{{iconSet}}/bankTransaction.{{iconSetType}}"
+                         width="24"
+                         height="24">
+                    <span>سجل المعاملات المالية</span>
+                </span>
+            </a>
+
+            <div class="mdl-menu__item--full-bleed-divider"></div>
+
+            <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
+               href=""
+               ng-show="contains(me.team.authorities, [
+                            'ROLE_PERSON_CREATE',
+                            'ROLE_PERSON_UPDATE',
+                            'ROLE_PERSON_DELETE'
+                            ])"
+               ng-click="openStatePerson();toggleDrawer();"
+               ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='person'}">
+                <span class="mdl-list__item-primary-content">
+                    <img class="material-icons mdl-list__item-icon"
+                         ng-src="/ui/img/{{iconSet}}/person.{{iconSetType}}"
+                         width="24"
+                         height="24">
+                    <span>سجل المستخدمين</span>
+                </span>
+            </a>
+
+            <a class="mdl-navigation__link mdl-menu__item mdl-list__item"
+               href=""
+               ng-show="contains(me.team.authorities, [
+                            'ROLE_TEAM_CREATE',
+                            'ROLE_TEAM_UPDATE',
+                            'ROLE_TEAM_DELETE'
+                            ])"
+               ng-click="openStateTeam();toggleDrawer();"
+               ng-class="{'mdl-navigation__link-active mdl-color--primary': toggleState==='team'}">
+                <span class="mdl-list__item-primary-content">
+                    <img class="material-icons mdl-list__item-icon"
+                         ng-src="/ui/img/{{iconSet}}/team.{{iconSetType}}"
+                         width="24"
+                         height="24">
+                    <span>سجل الصلاحيات</span>
+                </span>
+            </a>
+
+        </nav>
+
+    </div>
+
+    <main class="mdl-layout__content">
+
+        <div ng-if="toggleState==='menu'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_menu.html'"></div>
+
+        </div>
+
+        <div ng-if="toggleState==='company'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_company.html'"></div>
+
+        </div>
+
+        <div ng-if="toggleState==='customer'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_customer.html'"></div>
+
+        </div>
+
+        <div ng-if="toggleState==='seller'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_seller.html'"></div>
+
+        </div>
+
+        <div ng-if="toggleState==='product'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_product.html'"></div>
+
+        </div>
+
+        <div ng-if="toggleState==='productPurchase'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_productPurchase.html'"></div>
+
+        </div>
+
+        <div ng-if="toggleState==='contract'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_contract.html'"></div>
+
+        </div>
+
+        <div ng-if="toggleState==='contractPremium'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_contractPremium.html'"></div>
+
+        </div>
+
+        <div ng-if="toggleState==='contractPayment'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_contractPayment.html'"></div>
+
+        </div>
+
+        <div ng-if="toggleState==='bankTransaction'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_bankTransaction.html'"></div>
+
+        </div>
+
+        <div ng-show="toggleState==='team'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_team.html'"></div>
+
+        </div>
+
+        <div ng-show="toggleState==='person'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_person.html'"></div>
+
+        </div>
+
+        <div ng-show="toggleState==='profile'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_profile.html'"></div>
+
+        </div>
+
+        <div ng-show="toggleState==='help'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_help.html'"></div>
+
+        </div>
+
+        <div ng-show="toggleState==='about'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_about.html'"></div>
+
+        </div>
+
+        <div ng-show="toggleState==='report'" class="row" style="margin-top: 10px">
+
+            <div ng-include="'ui/partials/menu/state_report.html'"></div>
+
+        </div>
+
+    </main>
+
+    <footer class="mdl-mini-footer mdl-color--primary mdl-color-text--white">
+        <div class="row" style="margin: auto">
+            <span dir="rtl">مؤسسة المدار للتقسيط | Madar Institution</span>
+        </div>
+    </footer>
+
+</div>

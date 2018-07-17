@@ -1,0 +1,1060 @@
+<div class="form-group row">
+
+    <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+        <div class="form-group row">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title-box pull-right">
+                        <h3>الشاشات الرئيسية</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-group row">
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-click="openStateCompany()"
+                             ng-if="contains(me.team.authorities, ['ROLE_COMPANY_UPDATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/company.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>المؤسسة</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-show="contains(me.team.authorities, [
+            'ROLE_CUSTOMER_CREATE',
+            'ROLE_CUSTOMER_UPDATE',
+            'ROLE_CUSTOMER_DELETE',
+            'ROLE_CUSTOMER_NOTE_CREATE'
+            ])"
+                             ng-click="openStateCustomer()">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/customer.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>العملاء/الكفلاء</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-show="contains(me.team.authorities, [
+            'ROLE_SELLER_CREATE',
+            'ROLE_SELLER_UPDATE',
+            'ROLE_SELLER_DELETE',
+            ])"
+                             ng-click="openStateSeller()">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/seller.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>المستثمرين</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-show="contains(me.team.authorities, [
+                            'ROLE_PRODUCT_CREATE',
+                            'ROLE_PRODUCT_UPDATE',
+                            'ROLE_PRODUCT_DELETE',
+                            ])"
+                             ng-click="openStateProduct()">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/product.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>السلع</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-show="contains(me.team.authorities, [
+                            'ROLE_PRODUCT_CREATE',
+                            'ROLE_PRODUCT_UPDATE',
+                            'ROLE_PRODUCT_DELETE',
+                            ])"
+                             ng-click="openStateProductPurchase()">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/productPurchase.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>المخزون</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-show="contains(me.team.authorities, [
+            'ROLE_CONTRACT_CREATE',
+            'ROLE_CONTRACT_DELETE',
+            ])"
+                             ng-click="openStateContract()">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/contract.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>العقود</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-show="contains(me.team.authorities, [
+            'ROLE_CONTRACT_PREMIUM_CREATE',
+            'ROLE_CONTRACT_PREMIUM_UPDATE',
+            'ROLE_CONTRACT_PREMIUM_DELETE',
+            ])"
+                             ng-click="openStateContractPremium()">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/contractPremium.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>الأقساط</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-show="contains(me.team.authorities, [
+            'ROLE_CONTRACT_PAYMENT_CREATE',
+            'ROLE_CONTRACT_PAYMENT_UPDATE',
+            'ROLE_CONTRACT_PAYMENT_DELETE',
+            ])"
+                             ng-click="openStateContractPayment()">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/contractPayment.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>الدفعات</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-click="openStateBankTransaction()"
+                             ng-if="contains(me.team.authorities, ['ROLE_COMPANY_UPDATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/bankTransaction.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>المعاملات المالية</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-click="openStatePerson()"
+                             ng-if="contains(me.team.authorities, [
+             'ROLE_PERSON_CREATE',
+             'ROLE_PERSON_UPDATE',
+             'ROLE_PERSON_DELETE'
+             ])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/person.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>المستخدمين</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-click="openStateTeam()"
+                             ng-if="contains(me.team.authorities, [
+             'ROLE_TEAM_CREATE',
+             'ROLE_TEAM_UPDATE',
+             'ROLE_TEAM_DELETE'
+             ])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/team.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>الصلاحيات</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-click="openStateReport()">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/report.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>التقارير</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-click="openStateProfile()">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/profile.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>الملف الشخصي</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 parent text-center"
+                             ng-click="openStateAbout()">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/about.{{iconSetType}}')">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>عن البرنامج</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findMonthContractPayments()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>تحصيل الشهر</h3>
+                        <span>الايرادات حسب الشهر الميلادي لكل العقود</span>
+                    </div>
+                </div>
+                <div class="panel-body panel-body-scroll">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <span>#</span>
+                                    </th>
+
+                                    <th>
+                                        <span>رقم العقد</span>
+                                    </th>
+
+                                    <th>
+                                        <span>تاريخ السداد</span>
+                                    </th>
+
+                                    <th>
+                                        <span>المبلغ</span>
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="contractPayment in monthContractPayments">
+                                    <td>{{$index+1}}</td>
+                                    <td>
+                                        <a href="" ng-click="ModalProvider.openContractDetailsModel(contractPayment.contract)">
+                                            <span>{{contractPayment.contract.code}}</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPayment.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                        <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPayment.date | date: 'yyyy-MM-dd'}}</span>
+                                    </td>
+                                    <td>{{contractPayment.amount | currency:'':2}}</td>
+                                </tr>
+                                <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!monthContractPayments || monthContractPayments.length ==0">
+                                    <td colspan="4">
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group row" ng-if="monthContractPayments.length > 0">
+                        <div class="box-warning">
+                            <p>
+                                <span>المجموع الكلي(جميع القيم بالريال السعودي):</span>&nbsp;
+                                <span>{{monthContractPayments | sumByKey:'amount' | currency:'':2}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findWithdrawCashThisMonth()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>المصاريف الشهرية</h3>
+                        <span>جميع المصروفات التى تم سحبها خلال هذا الشهر الميلادي</span>
+                    </div>
+                </div>
+                <div class="panel-body panel-body-scroll">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+
+                                    <th>
+                                        <span>البيان</span>
+                                    </th>
+
+                                    <th>
+                                        <span>التاريخ</span>
+                                    </th>
+
+                                    <th>
+                                        <span>المبلغ</span>
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="bankTransaction in monthWithdrawCash">
+                                    <td>{{bankTransaction.note}}</td>
+                                    <td class="fit">
+                                        <span ng-if="dateType==='H'">{{bankTransaction.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                        <span ng-if="dateType==='G'">{{bankTransaction.date | date: 'yyyy-MM-dd'}}</span>
+                                    </td>
+                                    <td>{{bankTransaction.amount | currency:'':2}}</td>
+                                </tr>
+                                <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!monthWithdrawCash || monthWithdrawCash.length ==0">
+                                    <td colspan="4">
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group row" ng-if="monthWithdrawCash.length > 0">
+                        <div class="box-warning">
+                            <p>
+                                <span>المجموع الكلي(جميع القيم بالريال السعودي):</span>&nbsp;
+                                <span>{{monthWithdrawCash | sumByKey:'amount' | currency:' SAR ':2}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+        <div class="form-group row">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title-box pull-right">
+                        <h3>اجراءات سريعة</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-group row">
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="newCustomer()"
+                             ng-if="contains(me.team.authorities, ['ROLE_CUSTOMER_CREATE'])">
+                            <div class="card-image mdl-card"
+                                 style="background-image: url('/ui/img/{{iconSet}}/add.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>عميل جديد</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="newSeller()"
+                             ng-if="contains(me.team.authorities, ['ROLE_SELLER_CREATE'])">
+                            <div class="card-image mdl-card"
+                                 style="background-image: url('/ui/img/{{iconSet}}/add.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>مستثمر جديد</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="newParent()"
+                             ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/add.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>تصنيف رئيسي جديد</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="newProduct()"
+                             ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/add.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>تصنيف فرعي جديد</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="newProductPurchase()"
+                             ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_PURCHASE_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/add.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>شراء سلع</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="newContract()"
+                             ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/add.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>عقد جديد</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="newOldContract()"
+                             ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/add.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>عقد قديم</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="newPremium()"
+                             ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_PREMIUM_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/add.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>قسط جديد</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="ModalProvider.openDepositCreateModel()"
+                             ng-if="contains(me.team.authorities, ['ROLE_DEPOSIT_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/deposit.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>إيداع</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="ModalProvider.openWithdrawCreateModel()"
+                             ng-if="contains(me.team.authorities, ['ROLE_WITHDRAW_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/withdraw.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>سحب</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="ModalProvider.openTransferCreateModel()"
+                             ng-if="contains(me.team.authorities, ['ROLE_TRANSFER_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/send.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>تحويل</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="ModalProvider.openWithdrawCashCreateModel()"
+                             ng-if="contains(me.team.authorities, ['ROLE_TRANSFER_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/cash_outgoings.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>مصاريف</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="newPerson()"
+                             ng-if="contains(me.team.authorities, ['ROLE_PERSON_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/add.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>مستخدم جديد</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="newTeam()"
+                             ng-if="contains(me.team.authorities, ['ROLE_TEAM_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/add.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>صلاحيات جديدة</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findLatePremiums()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>الأقساط المتأخرة</h3>
+                        <span>جميع الأقساط المتأخر سدادها عن تاريخ الاستحقاق</span>
+                    </div>
+                </div>
+                <div class="panel-body panel-body-scroll">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+
+                                    <th>
+                                        <span>رقم العقد</span>
+                                    </th>
+
+                                    <th>
+                                        <span>العميل</span>
+                                    </th>
+
+                                    <th>
+                                        <span>تاريخ الاستحقاق</span>
+                                    </th>
+
+                                    <th>
+                                        <span>الباقي</span>
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="contractPremium in latePremiums" context-menu="rowMenuLatePremium">
+                                    <td>
+                                        <a href="" ng-click="ModalProvider.openContractDetailsModel(contractPremium.contract)">
+                                            <span>{{contractPremium.contract.code}}</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span>{{contractPremium.contract.customer.contact.shortName}}</span>
+                                        <br/>
+                                        <span class="label label-info">{{contractPremium.contract.customer.contact.mobile}}</span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="dateType==='H'">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                        <span ng-if="dateType==='G'">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
+                                    </td>
+                                    <td>{{contractPremium.remain | currency:'':2}}</td>
+                                </tr>
+                                <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!latePremiums || latePremiums.length ==0">
+                                    <td colspan="4">
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group row" ng-if="latePremiums.length > 0">
+                        <div class="box-warning">
+                            <p>
+                                <span>المجموع الكلي(جميع القيم بالريال السعودي):</span>&nbsp;
+                                <span>{{latePremiums | sumByKey:'remain' | currency:'':2}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findRequiredPremiumsThisMonth()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>أقساط الشهر المستحقة</h3>
+                        <span>جميع الأقساط الواجب سدادها خلال هذا الشهر الميلادي</span>
+                    </div>
+                </div>
+                <div class="panel-body panel-body-scroll">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+
+                                    <th>
+                                        <span>رقم العقد</span>
+                                    </th>
+
+                                    <th>
+                                        <span>العميل</span>
+                                    </th>
+
+                                    <th>
+                                        <span>تاريخ الاستحقاق</span>
+                                    </th>
+
+                                    <th>
+                                        <span>الباقي</span>
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="contractPremium in requiredPremiumsThisMonth" context-menu="rowMenuLatePremium">
+                                    <td>
+                                        <a href="" ng-click="ModalProvider.openContractDetailsModel(contractPremium.contract)">
+                                            <span>{{contractPremium.contract.code}}</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span>{{contractPremium.contract.customer.contact.shortName}}</span>
+                                        <br/>
+                                        <span class="label label-info">{{contractPremium.contract.customer.contact.mobile}}</span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="dateType==='H'">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                        <span ng-if="dateType==='G'">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
+                                    </td>
+                                    <td>{{contractPremium.remain | currency:'':2}}</td>
+                                </tr>
+                                <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!requiredPremiumsThisMonth || requiredPremiumsThisMonth.length ==0">
+                                    <td colspan="4">
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <div class="form-group row" ng-if="requiredPremiumsThisMonth.length > 0">
+                        <div class="box-warning">
+                            <p>
+                                <span>المجموع الكلي(جميع القيم بالريال السعودي):</span>&nbsp;
+                                <span>{{requiredPremiumsThisMonth | sumByKey:'remain' | currency:'':2}}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findMonthCustomers()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>عملاء الشهر</h3>
+                        <span>جميع العملاء المسجلين خلال هذا الشهر الميلادي</span>
+                    </div>
+                </div>
+                <div class="panel-body panel-body-scroll">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr ng-repeat="customer in monthCustomers" context-menu="rowMenuCustomer">
+                                    <td>
+                                        <span>{{customer.contact.shortName}}</span>
+                                        <br/>
+                                        <span class="label label-warning">{{customer.contact.mobile}}</span>
+                                    </td>
+                                </tr>
+                                <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!monthCustomers || monthCustomers.length ==0">
+                                    <td>
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findMonthContracts()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>عقود الشهر</h3>
+                        <span>جميع العقود المسجلة خلال هذا الشهر الميلادي</span>
+                    </div>
+                </div>
+                <div class="panel-body panel-body-scroll">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr ng-repeat="contract in monthContracts"
+                                    ng-dblclick="ModalProvider.openContractDetailsModel(contract)"
+                                    context-menu="rowMenuContract">
+                                    <td>
+
+                                        <li class="mdl-list__item mdl-list__item--two-line" style="padding: unset;cursor: pointer">
+                                            <span class="mdl-list__item-primary-content">
+                                                <span class="material-icons mdl-list__item-avatar"
+                                                      style="background-color: unset;background-image: url('/ui/img/{{iconSet}}/contract.{{iconSetType}}')"></span>
+                                                <div ng-bind-html="contract.name | highlight: $select.search"></div>
+                                                <span class="mdl-list__item-sub-title">
+                                                    <span>رقم العقد / </span>
+                                                    {{contract.code}}
+                                                </span>
+                                                <span class="mdl-list__item-sub-title">
+                                                    <span>العميل / </span>
+                                                    {{contract.customer.contact.shortName}}
+                                                </span>
+                                                <span class="mdl-list__item-sub-title">
+                                                    <span>جوال العميل / </span>
+                                                    {{contract.customer.contact.mobile}}
+                                                </span>
+                                            </span>
+                                        </li>
+
+                                    </td>
+                                </tr>
+                                <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!monthContracts || monthContracts.length ==0">
+                                    <td>
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findDailyHistory()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>العمليات الأخيرة</h3>
+                        <span>جميع الحركات على البرنامج التي تمت خلال آخر 24 ساعة</span>
+                    </div>
+                </div>
+                <div class="panel-body panel-body-scroll">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr ng-repeat="history in dailyHistories">
+                                    <td>
+                                        <div class="form-group row">
+                                            <span>{{history.note}}</span>
+                                        </div>
+                                        <div class="for-group row">
+                                            <span class="label label-success pull-right">{{history.modifiedDate | date: 'hh:mm a'}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!dailyHistories || dailyHistories.length ==0">
+                                    <td>
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                        <li>
+                            <a href=""
+                               ng-click="findDailyHistory()"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="تحديث">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-title-box pull-right">
+                        <h3>العملاء الأكثر نشاطاً</h3>
+                        <span>أكثر عملاء لهم عقود داخل النظام</span>
+                    </div>
+                </div>
+                <div class="panel-body panel-body-scroll">
+
+                    <div class="form-group row">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <tbody>
+                                <tr ng-repeat="customer in mostActiveCustomers">
+                                    <td>
+                                        <div class="form-group row">
+                                            <span>{{history.note}}</span>
+                                        </div>
+                                        <div class="for-group row">
+                                            <span class="label label-success pull-right">{{history.modifiedDate | date: 'hh:mm a'}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                                    ng-if="!dailyHistories || dailyHistories.length ==0">
+                                    <td>
+                                        <p>
+                                            <span>لا نتائج</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

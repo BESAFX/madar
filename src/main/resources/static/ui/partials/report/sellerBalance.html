@@ -1,0 +1,126 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-body">
+
+        <div class="row">
+            <ul dir="rtl" class="breadcrumb">
+                <li>
+                    <a href="" ng-click="openStateMenu()">
+                        <span>الرئيسية</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-click="openStateReport()">
+                        <span>التقارير</span>
+                    </a>
+                </li>
+                <li>
+                    <span>أرصدة المستثمرين</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <button type="button"
+                    ng-click="fetchAllSellerBalance()"
+                    class="pull-right mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
+                        <span class="mdl-list__item-primary-content">
+                            <img class="material-icons mdl-list__item-icon"
+                                 ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}"
+                                 width="24"
+                                 height="24">
+                            <span>عرض</span>
+                        </span>
+            </button>
+
+            <button type="button"
+                    ng-click="printToCart('printSellerBalanceTable', 'أرصدة المستثمرين')"
+                    class="pull-right mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
+                        <span class="mdl-list__item-primary-content">
+                            <img class="material-icons mdl-list__item-icon"
+                                 ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}"
+                                 width="24"
+                                 height="24">
+                            <span>طباعة</span>
+                        </span>
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="panel panel-body">
+
+        <div class="form-group row" id="printSellerBalanceTable">
+
+            <div class="form-group row">
+
+                <h4 class="text-center">أرصدة المستثمرين لجميع الحسابات</h4>
+
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>
+                            <span>#</span>
+                        </th>
+
+                        <th>
+                            <span>المستثمر</span>
+                        </th>
+
+                        <th>
+                            <span>السجل المدني</span>
+                        </th>
+
+                        <th>
+                            <span>رقم الجوال</span>
+                        </th>
+
+                        <th>
+                            <span>تاريخ آخر عقد</span>
+                        </th>
+
+                        <th>
+                            <span>وارد(مدين)</span>
+                        </th>
+
+                        <th>
+                            <span>منصرف(دائن)</span>
+                        </th>
+
+                        <th>
+                            <span>مجموع الرصيد</span>
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="sellerBalance in sellersBalance">
+                        <td>{{$index+1}}</td>
+                        <td>{{sellerBalance.contact.shortName}}</td>
+                        <td>{{sellerBalance.contact.identityNumber}}</td>
+                        <td>{{sellerBalance.contact.mobile}}</td>
+                        <td>
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{sellerBalance.lastContractDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{sellerBalance.lastContractDate | date: 'yyyy-MM-dd'}}</span>
+                        </td>
+                        <td>{{sellerBalance.totalDeposits | currency:' SAR ':2}}</td>
+                        <td>{{sellerBalance.totalWithdraws | currency:' SAR ':2}}</td>
+                        <td>{{sellerBalance.balance | currency:' SAR ':2}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

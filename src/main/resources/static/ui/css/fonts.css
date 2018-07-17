@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Changa';
+    font-style: normal;
+    font-weight: 500;
+    src: url(font/Changa-ExtraBold.ttf) format('woff');
+    unicode-range: U+0-10FFFF;
+}
+
+@font-face {
+    font-family: 'Changa';
+    font-style: normal;
+    font-weight: 800;
+    src: url(font/Changa-Regular.ttf) format('woff');
+    unicode-range: U+0-10FFFF;
+}
+
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 400;
+    src: url(font/Cairo-Regular.ttf) format('woff');
+    unicode-range: U+0-10FFFF;
+}
+
+@font-face {
+    font-family: 'Cairo Black';
+    font-style: normal;
+    font-weight: 900;
+    src: url(font/Cairo-Black.ttf) format('woff');
+    unicode-range: U+0-10FFFF;
+}
+
+@font-face {
+    font-family: 'Traditional Arabic';
+    font-style: normal;
+    font-weight: 900;
+    src: url(font/trado.ttf) format('woff');
+    unicode-range: U+0-10FFFF;
+}
+

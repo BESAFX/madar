@@ -1,0 +1,239 @@
+<form dir="rtl" name="form" ng-submit="submit()" novalidate="novalidate" focus-group="" focus-stack=""
+      focus-group-head="loop" focus-group-tail="loop">
+
+    <div class="modal-header mdl-color--primary mdl-navigation__link-active">
+        <a class="pull-left" href="" ng-click="cancel()">
+            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+        </a>
+        <h3 class="panel-title mdl-list__item pull-right mdl-color-text--white">
+            <span class="mdl-list__item-primary-content">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/product.{{iconSetType}}" width="24" height="24">
+                <strong>اضافة سلع جديدة للعقد رقم</strong>&nbsp;
+                <span class="label label-info">{{contract.code}}</span>
+            </span>
+        </h3>
+    </div>
+
+    <div class="modal-body modal-body-free" id="modal-body">
+
+        <div class="row">
+
+            <div class="form-group row" ng-show="form.$invalid && form.$submitted">
+                <div class="alert alert-danger" role="alert">
+                    <strong>فضلاً اكمل الحقول المطلوبة</strong>
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+
+                    <div class="mdl-tabs__tab-bar">
+
+                        <a href="#panel-1-contract" class="mdl-tabs__tab col-xs-4 col-sm-4 col-md-4 col-lg-4 is-active">
+                            <span>المعلومات الأساسية</span>
+                        </a>
+
+                    </div>
+
+                    <div class="mdl-tabs__panel is-active" id="panel-1-contract">
+
+                        <div class="form-group row">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+
+                                        <th>
+                                            <span>السلعة</span>
+                                        </th>
+
+                                        <th>
+                                            <span>المتوفر</span>
+                                        </th>
+
+                                        <th>
+                                            <span>الكمية المطلوبة</span>
+                                        </th>
+
+                                        <th>
+                                            <span>سعر الشراء</span>
+                                        </th>
+
+                                        <th>
+                                            <span>سعر بيع الوحدة</span>
+                                        </th>
+
+                                        <th>
+                                            <span>القيمة المضافة للوحدة</span>
+                                        </th>
+
+                                        <th>
+                                            <span>إجمالي البيع قبل القيمة المضافة</span>
+                                        </th>
+
+                                        <th>
+                                            <span>إجمالي البيع بعد القيمة المضافة</span>
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="productPurchase in contract.seller.productPurchases">
+                                        <td>{{productPurchase.product.name}}</td>
+                                        <td class="fit"
+                                            ng-class="{'success': productPurchase.remain > 0, 'danger': productPurchase.remain <=0}">
+                                            <span>{{productPurchase.remain}}</span>
+                                        </td>
+                                        <td>
+                                            <input dir="rtl"
+                                                   type="number"
+                                                   min="0"
+                                                   ng-max="productPurchase.remain"
+                                                   required="required"
+                                                   disable-validation-message=""
+                                                   class="form-control"
+                                                   ng-change="findProfitPercentage()"
+                                                   ng-model="productPurchase.requiredQuantity">
+                                        </td>
+                                        <td>{{productPurchase.unitPurchasePrice}}</td>
+                                        <td>
+                                            <input dir="rtl"
+                                                   type="number"
+                                                   min="0"
+                                                   required="required"
+                                                   disable-validation-message=""
+                                                   class="form-control"
+                                                   ng-change="findProfitPercentage()"
+                                                   ng-model="productPurchase.unitSellPrice">
+                                        </td>
+                                        <td>
+                                            <input dir="rtl"
+                                                   type="text"
+                                                   readonly
+                                                   class="form-control"
+                                                   value="{{productPurchase.unitVat = (productPurchase.unitSellPrice * selectedCompany.vatFactor) | currency:'':2}}">
+                                        </td>
+                                        <td>
+                                            <input dir="rtl"
+                                                   type="text"
+                                                   readonly
+                                                   class="form-control"
+                                                   value="{{(productPurchase.requiredQuantity * productPurchase.unitSellPrice) | currency:'':2}}">
+                                        </td>
+                                        <td>
+                                            <input dir="rtl"
+                                                   type="text"
+                                                   readonly
+                                                   class="form-control"
+                                                   value="{{(productPurchase.requiredQuantity * productPurchase.unitSellPrice) + (productPurchase.unitVat * productPurchase.requiredQuantity) | currency:'':2}}">
+                                        </td>
+                                    </tr>
+                                    <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                                        ng-show="!contract.seller.productPurchases || contract.seller.productPurchases.length ==0">
+                                        <td colspan="8">
+                                            <p ng-if="!contract.seller.id">
+                                                <span>فضلاً اختر المستثمر أولاً لعرض كافة السلعة الموجودة بحسابه</span>
+                                            </p>
+                                            <p ng-if="contract.seller.id">
+                                                <span>لا توجد سلع حتى الآن في حساب المستثمر / </span>
+                                                <span>{{contract.seller.contact.shortName}}</span>
+                                                <span ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_PURCHASE_CREATE'])"> - لإضافة سلع جديدة قم بالضغط <a
+                                                        href="" ng-click="ModalProvider.openProductPurchaseCreateModel()">هنا</a></span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="contract.seller.id && contract.seller.productPurchases.length > 0">
+                                        <td colspan="6" class="text-left info">
+                                            <span>رأس المال</span>
+                                        </td>
+                                        <td colspan="2">
+                                            <input dir="rtl"
+                                                   type="text"
+                                                   disabled
+                                                   class="form-control"
+                                                   value="{{capitalCash | currency:'':2}}">
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="contract.seller.id && contract.seller.productPurchases.length > 0">
+                                        <td colspan="6" class="text-left success">
+                                            <span>نسبة الربح</span>
+                                        </td>
+                                        <td colspan="2">
+                                            <input dir="rtl"
+                                                   type="text"
+                                                   disabled
+                                                   class="form-control"
+                                                   ng-class="{'success': profitPercentage >=0 , 'danger': profitPercentage < 0}"
+                                                   value="{{profitPercentage | currency:'':2}}">
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="contract.seller.id && contract.seller.productPurchases.length > 0">
+                                        <td colspan="6" class="text-left warning">
+                                            <span>إجمالي الأصناف قبل (القيمة المضافة)</span>
+                                        </td>
+                                        <td colspan="2">
+                                            <input dir="rtl"
+                                                   type="text"
+                                                   disabled
+                                                   class="form-control"
+                                                   value="{{totalPrice | currency:'':2}}">
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="contract.seller.id && contract.seller.productPurchases.length > 0">
+                                        <td colspan="6" class="text-left warning">
+                                            <span>إجمالي الأصناف بعد (القيمة المضافة)</span>
+                                        </td>
+                                        <td colspan="2">
+                                            <input dir="rtl"
+                                                   type="text"
+                                                   disabled
+                                                   class="form-control"
+                                                   value="{{totalPriceAfterVat | currency:'':2}}">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <button uib-tooltip="اضافة"
+                    tooltip-append-to-body="true"
+                    type="submit"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="مسح الحقول"
+                    tooltip-append-to-body="true"
+                    type="reset"
+                    ng-click="form.$setPristine()"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/delete.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="خروج"
+                    tooltip-append-to-body="true"
+                    type="button"
+                    ng-click="cancel()"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+            </button>
+        </div>
+
+    </div>
+
+</form>

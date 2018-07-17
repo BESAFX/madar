@@ -1,0 +1,209 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-body">
+
+        <div class="row">
+            <ul dir="rtl" class="breadcrumb">
+                <li>
+                    <a href="" ng-click="openStateMenu()">
+                        <span>الرئيسية</span>
+                    </a>
+                </li>
+                <li>
+                    <span>سجل الصلاحيات</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 pull-right">
+                <button id="team-menu-lower-right" style="width: 100%;"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                    <span>العمليات</span>
+                </button>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    for="team-menu-lower-right">
+                    <li class="mdl-menu__item mdl-list__item mdl-menu__item--full-bleed-divider"
+                        ng-click="fetchTeamTableData()">
+                    <span class="mdl-list__item-primary-content">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}" width="24" height="24">
+                        <span>عرض البيانات</span>
+                    </span>
+                    </li>
+                    <li class="mdl-menu__item mdl-list__item" ng-click="newTeam();"
+                        ng-if="contains(me.team.authorities, ['ROLE_TEAM_CREATE'])">
+                    <span class="mdl-list__item-primary-content">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+                        <span>جديد...</span>
+                    </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="pull-left" ng-init="toggleList=1">
+                <div class="btn-toolbar">
+                    <div class="btn-group" data-toggle="buttons">
+                        <button class="btn btn-default mdl-button mdl-js-button mdl-js-ripple-effect"
+                                type="button" ng-click="toggleList=1"
+                                ng-class="{'mdl-color--primary-dark':toggleList===1}">
+                            <input type="radio" name="options"/>
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/reorder.{{iconSetType}}" width="24" height="24">
+                        </button>
+                        <button class="btn btn-default mdl-button mdl-js-button mdl-js-ripple-effect"
+                                type="button" ng-click="toggleList=2"
+                                ng-class="{'mdl-color--primary-dark':toggleList===2}">
+                            <input type="radio" name="options"/>
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/module.{{iconSetType}}" width="24" height="24">
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="toggleList===1">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <ul class="panel-controls pull-left"
+                style="margin-top: 2px;">
+                <li>
+                    <a href=""
+                       ng-click="fetchTeamTableData()"
+                       tooltip-append-to-body="true"
+                       uib-tooltip="تحديث البيانات">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}" width="24" height="24">
+                    </a>
+                    <a href=""
+                       ng-if="contains(me.team.authorities, ['ROLE_TEAM_CREATE'])"
+                       ng-click="newTeam()"
+                       tooltip-append-to-body="true"
+                       uib-tooltip="صلاحيات جديدة">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+                    </a>
+                </li>
+            </ul>
+            <div class="panel-title-box pull-right">
+                <h3>قائمة صلاحيات المستخدمين</h3>
+            </div>
+        </div>
+        <div class="panel-body panel-body-table">
+            <div class="table-responsive">
+                <table st-table="collection1" st-safe-src="teams"
+                       class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center">
+                            <span>#</span>
+                        </th>
+
+                        <th class="text-right">
+                            <span> رقم المجموعة</span>
+                        </th>
+
+                        <th class="text-right">
+                            <span> اسم المجموعة</span>
+                        </th>
+
+                        <th class="text-right">
+                            <span>عدد المستخدمين</span>
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-right"
+                        ng-repeat="team in collection1"
+                        context-menu="rowMenuTeam"
+                        st-select-mode="multiple">
+                        <td st-select-row-multi="team">{{$index+1}}</td>
+                        <td st-select-row-multi="team">{{team.code}}</td>
+                        <td st-select-row-multi="team">{{team.name}}</td>
+                        <td st-select-row-multi="team">{{team.persons.length}}</td>
+                    </tr>
+                    <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                        ng-show="!collection1 || collection1.length ==0">
+                        <td colspan="5">لا توجد نتائج</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="toggleList===2">
+    <div st-table="collection2" st-safe-src="teams">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="team in collection2">
+            <!-- CONTACT ITEM -->
+            <div class="panel panel-default">
+                <div class="panel-body profile">
+                    <div class="profile-image">
+                        <img width="100" height="100"
+                             ng-src="/ui/img/{{iconSet}}/team.{{iconSetType}}"
+                             alt="{{team.name}}"/>
+                    </div>
+                    <div class="profile-data">
+                        <div class="profile-data-name">{{team.name}}</div>
+                    </div>
+                    <div class="profile-controls">
+                        <!--<a href="" class="profile-control-left"><span class="fa fa-info-circle"></span></a>-->
+                        <!--<a href="" class="profile-control-right"><span class="fa fa-phone"></span></a>-->
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="contact-info">
+                        <p>
+                            <strong>رقم المجموعة</strong>
+                            {{team.code}}
+                        </p>
+                        <hr>
+                        <p>
+                            <strong>اسم المجموعة</strong>
+                            {{team.name}}
+                        </p>
+                        <hr>
+                        <p>
+                            <strong>عدد المستخدمون</strong>
+                            {{team.persons.length}}
+                        </p>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <button uib-tooltip="مجموعة جديدة"
+                                tooltip-append-to-body="true"
+                                type="button"
+                                ng-if="contains(me.team.authorities, ['ROLE_TEAM_CREATE'])"
+                                ng-click="newTeam();"
+                                class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+                        </button>
+                        <button uib-tooltip="تعديل"
+                                tooltip-append-to-body="true"
+                                type="button"
+                                ng-if="contains(me.team.authorities, ['ROLE_TEAM_UPDATE'])"
+                                ng-click="ModalProvider.openTeamUpdateModel(team)"
+                                class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/edit.{{iconSetType}}" width="24" height="24">
+                        </button>
+                        <button uib-tooltip="حذف"
+                                tooltip-append-to-body="true"
+                                type="button"
+                                ng-if="contains(me.team.authorities, ['ROLE_TEAM_DELETE'])"
+                                ng-click="deleteTeam(team)"
+                                class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/delete.{{iconSetType}}" width="24"
+                                 height="24">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- END CONTACT ITEM -->
+        </div>
+    </div>
+</div>

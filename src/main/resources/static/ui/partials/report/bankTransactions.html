@@ -1,0 +1,117 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-body">
+
+        <div class="row">
+            <ul dir="rtl" class="breadcrumb">
+                <li>
+                    <a href="" ng-click="openStateMenu()">
+                        <span>الرئيسية</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-click="openStateReport()">
+                        <span>التقارير</span>
+                    </a>
+                </li>
+                <li>
+                    <span>حركة العمليات اليومية</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <button type="button"
+                    ng-click="openBankTransactionsFilter()"
+                    class="pull-right mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
+                        <span class="mdl-list__item-primary-content">
+                            <img class="material-icons mdl-list__item-icon"
+                                 ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}"
+                                 width="24"
+                                 height="24">
+                            <span>عرض</span>
+                        </span>
+            </button>
+
+            <button type="button"
+                    ng-click="printToCart('printBankTransactionsTable', 'حركة العمليات اليومية')"
+                    class="pull-right mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
+                        <span class="mdl-list__item-primary-content">
+                            <img class="material-icons mdl-list__item-icon"
+                                 ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}"
+                                 width="24"
+                                 height="24">
+                            <span>طباعة</span>
+                        </span>
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="panel panel-body">
+
+        <div class="form-group row" id="printBankTransactionsTable">
+
+            <div class="form-group row">
+
+                <h4 class="text-center">حركة العمليات اليومية</h4>
+
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>
+                            <span>#</span>
+                        </th>
+
+                        <th>
+                            <span>التاريخ</span>
+                        </th>
+
+                        <th>
+                            <span>نوعها</span>
+                        </th>
+
+                        <th>
+                            <span>المبلغ</span>
+                        </th>
+
+                        <th>
+                            <span>البيان</span>
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="bankTransaction in bankTransactions">
+                        <td>{{$index+1}}</td>
+                        <td>
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{bankTransaction.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{bankTransaction.date | date: 'yyyy-MM-dd'}}</span>
+                        </td>
+                        <td>{{bankTransaction.transactionType.name}}</td>
+                        <td>{{bankTransaction.amount | currency:' SAR ':2}}</td>
+                        <td>{{bankTransaction.note}}</td>
+                    </tr>
+                    <tr ng-if="bankTransactions.length > 0">
+                        <td class="info" colspan="3">
+                            <span class="pull-left">المجموع الكلي</span>
+                        </td>
+                        <td class="success" colspan="2">{{bankTransactions | sumByKey:'amount' | currency:' SAR ':2}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

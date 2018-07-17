@@ -1,0 +1,184 @@
+<div dir="rtl" class="row" style="margin-top: 10px">
+
+    <form dir="rtl" name="form" ng-submit="submitProfile()" novalidate="novalidate" focus-group="" focus-stack=""
+          focus-group-head="loop" focus-group-tail="loop">
+
+        <div class="col-xs-12 col-sm-12 col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                             ng-show="form.$invalid && form.$submitted">
+                            <div class="alert alert-danger" role="alert">
+                                <strong>فضلاً اكمل الحقول المطلوبة</strong>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">البيانات الاساسية</div>
+                                <div class="panel-body">
+
+                                    <div class="row">
+
+                                        <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                            <label for="nickname" class="control-label">اللقب</label>
+                                            <input id="nickname"
+                                                   type="text"
+                                                   focus-autofocus="1"
+                                                   required="required"
+                                                   disable-validation-message=""
+                                                   class="form-control"
+                                                   ng-model="me.contact.nickname">
+                                        </div>
+
+                                        <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                            <label for="name" class="control-label">الأسم</label>
+                                            <input id="name"
+                                                   type="text"
+                                                   focus-autofocus="1"
+                                                   required="required"
+                                                   disable-validation-message=""
+                                                   class="form-control"
+                                                   ng-model="me.contact.name">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                            <label for="nationality" class="control-label">الجنسية </label>
+                                            <input id="nationality"
+                                                   type="text"
+                                                   class="form-control"
+                                                   required="required"
+                                                   disable-validation-message=""
+                                                   ng-model="me.contact.nationality">
+                                        </div>
+
+                                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                            <label for="identityNumber" class="control-label">رقم الهوية / رخصة
+                                                الإقامة </label>
+                                            <input id="identityNumber"
+                                                   type="text"
+                                                   class="form-control"
+                                                   ng-model="me.contact.identityNumber">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                            <label for="mobile" class="control-label">الجوال </label>
+                                            <input id="mobile"
+                                                   type="text"
+                                                   required="required"
+                                                   disable-validation-message=""
+                                                   class="form-control"
+                                                   ng-model="me.contact.mobile">
+                                        </div>
+
+                                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                            <label for="address" class="control-label">العنوان الحالي </label>
+                                            <input id="address"
+                                                   type="text"
+                                                   class="form-control"
+                                                   ng-model="me.contact.address">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <label for="qualification" class="control-label">الدور الوظيفي</label>
+                                        <input id="qualification"
+                                               type="text"
+                                               required="required"
+                                               disable-validation-message=""
+                                               class="form-control"
+                                               ng-model="me.contact.qualification">
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                            <label for="email" class="control-label">البريد الإلكتروني</label>
+                                            <input id="email"
+                                                   dir="ltr"
+                                                   type="text"
+                                                   required="required"
+                                                   disable-validation-message=""
+                                                   class="form-control text-left"
+                                                   ng-model="me.email">
+                                        </div>
+
+                                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                            <label for="password" class="control-label">الرقم السري</label>
+                                            <input id="password"
+                                                   dir="ltr"
+                                                   type="password"
+                                                   required="required"
+                                                   disable-validation-message=""
+                                                   class="form-control text-left"
+                                                   ng-model="me.password">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <ul class="panel-controls pull-left" style="margin-top: 2px;">
+                                        <li>
+                                            <a href=""
+                                               ng-click="browseProfilePhoto()"
+                                               tooltip-append-to-body="true"
+                                               uib-tooltip="تحميل">
+                                                <span class="fa fa-paperclip"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="panel-title-box pull-right">
+                                        <h3>الصورة الشخصية</h3>
+                                        <span>حساب المستخدم</span>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <input id="uploader-profile" style="display: none" type="file" accept="image/*"
+                                           onchange="angular.element(this).scope().uploadProfilePhoto(this.files)"/>
+                                    <img ng-src="{{me.contact.photo}}" style="width: 100%; height: 100%"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer">
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                        <button uib-tooltip="حفظ"
+                                tooltip-append-to-body="true"
+                                type="submit"
+                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect pull-left">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-icon">save</i>
+                                    <span>حفظ البيانات</span>
+                                </span>
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+</div>

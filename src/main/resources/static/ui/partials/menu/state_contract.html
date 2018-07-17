@@ -1,0 +1,384 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-body">
+
+        <div class="row">
+            <ul dir="rtl" class="breadcrumb">
+                <li>
+                    <a href="" ng-click="openStateMenu()">
+                        <span>الرئيسية</span>
+                    </a>
+                </li>
+                <li>
+                    <span>سجل العقود</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 pull-right">
+                <button id="contract-menu-lower-right" style="width: 100%;"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                    <span>العمليات</span>
+                </button>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    for="contract-menu-lower-right">
+
+                    <li class="mdl-menu__item mdl-list__item"
+                        ng-click="openContractsFilter()">
+                        <span class="mdl-list__item-primary-content">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}" width="24" height="24">
+                            <span>البحث المتقدم</span>
+                        </span>
+                    </li>
+
+                    <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                    <li class="mdl-menu__item mdl-list__item" ng-click="newContract()"
+                        ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_CREATE'])">
+                        <span class="mdl-list__item-primary-content">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+                            <span>عقد جديد...</span>
+                        </span>
+                    </li>
+
+                    <li class="mdl-menu__item mdl-list__item" ng-click="newOldContract()"
+                        ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_CREATE'])">
+                        <span class="mdl-list__item-primary-content">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+                            <span>عقد قديم...</span>
+                        </span>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="pull-left" ng-init="toggleList=1">
+                <div class="btn-toolbar">
+                    <div class="btn-group" data-toggle="buttons">
+                        <button class="btn btn-default mdl-button mdl-js-button mdl-js-ripple-effect"
+                                type="button" ng-click="toggleList=1"
+                                ng-class="{'mdl-color--primary-dark':toggleList===1}">
+                            <input type="radio" name="options"/>
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/reorder.{{iconSetType}}" width="24"
+                                 height="24">
+                        </button>
+                        <button class="btn btn-default mdl-button mdl-js-button mdl-js-ripple-effect"
+                                type="button" ng-click="toggleList=2"
+                                ng-class="{'mdl-color--primary-dark':toggleList===2}">
+                            <input type="radio" name="options"/>
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/module.{{iconSetType}}" width="24"
+                                 height="24">
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_CREATE'])">
+    <div class="panel panel-body box-info">
+        <p>
+            <span>مرحباً بك عزيزي العميل ، يمكنك إنشاء عقد جديد من خلال هذا الرابط </span>
+            <a href="" ng-click="newContract()">اضغط هنا</a>
+            <span>، كما يمكنك اضافة العقود القديمة من خلال هذا الرابط</span>
+            <a href="" ng-click="newOldContract()">اضغط هنا</a>
+        </p>
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <ul class="panel-controls pull-left"
+                style="margin-top: 2px;">
+                <li>
+                    <a href=""
+                       ng-click="openContractsFilter()"
+                       tooltip-append-to-body="true"
+                       uib-tooltip="بحث">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}" width="24" height="24">
+                    </a>
+                    <a href=""
+                       ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_CREATE'])"
+                       ng-click="newContract()"
+                       tooltip-append-to-body="true"
+                       uib-tooltip="عقد جديد">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+                    </a>
+                </li>
+            </ul>
+            <div class="panel-title-box pull-right">
+                <h3>نتائج البحث</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            <div class="form-group row" ng-if="pageContract.totalElements > 0 && (toggleList===1 || toggleList===2)">
+
+                <div class="pull-right btn-toolbar">
+
+                    <div class="btn-group" data-toggle="buttons">
+
+                        <button uib-tooltip="السابق"
+                                tooltip-append-to-body="true"
+                                ng-disabled="pageContract.first"
+                                type="button"
+                                ng-click="selectPrevContractsPage()"
+                                class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-1 col-sm-1 col-md-1 col-lg-1 pull-right">
+                            <i class="material-icons md-36">keyboard_arrow_right</i>
+                        </button>
+
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 pull-left">
+                            <input dir="rtl"
+                                   type="text"
+                                   readonly
+                                   class="form-control"
+                                   style="text-align: center!important;"
+                                   ng-model="pageContract.currentPageString">
+                        </div>
+
+                        <button uib-tooltip="التالي"
+                                tooltip-append-to-body="true"
+                                ng-disabled="pageContract.last"
+                                type="button"
+                                ng-click="selectNextContractsPage()"
+                                class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-1 col-sm-1 col-md-1 col-lg-1 pull-right">
+                            <i class="material-icons md-36">keyboard_arrow_left</i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="pull-left">
+
+                    <input type="text"
+                           class="form-control"
+                           placeholder="بحث سريع(فى بيانات الصفحة الواحدة)"
+                           ng-change="refreshGUI()"
+                           ng-model="contracts.searchText">
+
+                </div>
+
+            </div>
+
+            <div class="row" ng-show="toggleList===1">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th class="fit no-print">
+                                <label id="checkAllContracts" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
+                                       for="checkbox-0">
+                                    <input type="checkbox" id="checkbox-0" class="mdl-checkbox__input"
+                                           ng-model="contracts.checkAll" ng-change="checkAllContracts()">
+                                </label>
+                            </th>
+
+                            <th>
+                                <span>رقم العقد</span>
+                            </th>
+
+                            <th>
+                                <span>العميل</span>
+                            </th>
+
+                            <th>
+                                <span>الكفيل الأول</span>
+                            </th>
+
+                            <th>
+                                <span>الكفيل الثاني</span>
+                            </th>
+
+                            <th>
+                                <span>تاريخ الإنشاء</span>
+                            </th>
+
+                            <th>
+                                <span>آخر عملية دفع</span>
+                            </th>
+
+                            <th>
+                                <span>القيمة المضافة</span>
+                            </th>
+
+                            <th>
+                                <span>الخصم</span>
+                            </th>
+
+                            <th>
+                                <span>الأجمالي</span>
+                            </th>
+
+                            <th>
+                                <span>المدفوع</span>
+                            </th>
+
+                            <th>
+                                <span>المتبقي</span>
+                            </th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="contract in contracts | filter:contracts.searchText"
+                            ng-class="{'mdl-color--primary-dark' : contract.isSelected, 'mdl-color-text--white' : contract.isSelected}"
+                            ng-dblclick="ModalProvider.openContractDetailsModel(contract)"
+                            context-menu="rowMenuContract">
+                            <td class="fit no-print">
+                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect check"
+                                       for="checkbox-contract-{{contract.id}}">
+                                    <input type="checkbox"
+                                           id="checkbox-contract-{{contract.id}}"
+                                           class="mdl-checkbox__input"
+                                           ng-model="contract.isSelected" ng-click="checkContract()">
+                                </label>
+                            </td>
+                            <td class="fit">{{contract.code}}</td>
+                            <td>
+                                <span>{{contract.customer.contact.shortName}}</span>
+                                <br>
+                                <span class="label label-success">{{contract.customer.contact.mobile}}</span>
+                            </td>
+                            <td ng-class="{'danger': !contract.sponsor1}">
+                                <span ng-if="!contract.sponsor1">---</span>
+                                <span>{{contract.sponsor1.contact.shortName}}</span>
+                                <br>
+                                <span class="label label-success">{{contract.sponsor1.contact.mobile}}</span>
+                            </td>
+                            <td ng-class="{'danger': !contract.sponsor2}">
+                                <span ng-if="!contract.sponsor2">---</span>
+                                <span>{{contract.sponsor2.contact.shortName}}</span>
+                                <br>
+                                <span class="label label-success">{{contract.sponsor2.contact.mobile}}</span>
+                            </td>
+                            <td class="fit">
+                                <span ng-show="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.writtenDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                <span ng-show="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contract.writtenDate | date: 'yyyy-MM-dd'}}</span>
+                                <br>
+                                <span class="label label-info no-print">{{contract.writtenDate | date: 'hh:mm a'}}</span>
+                            </td>
+                            <td class="fit" ng-class="{'danger': !contract.lastPaymentDate}">
+                                <span ng-if="!contract.lastPaymentDate">---</span>
+                                <span ng-show="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contract.lastPaymentDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                <span ng-show="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contract.lastPaymentDate | date: 'yyyy-MM-dd'}}</span>
+                                <br>
+                                <span class="label label-info no-print">{{contract.lastPaymentDate | date: 'hh:mm a'}}</span>
+                            </td>
+                            <td class="fit">{{contract.totalVat | currency:'':2}}</td>
+                            <td class="fit">{{contract.discount | currency:'':2}}</td>
+                            <td class="fit">{{contract.totalPriceAfterDiscountAndVat | currency:'':2}}</td>
+                            <td class="fit">{{contract.paid | currency:'':2}}</td>
+                            <td class="fit">{{contract.remain | currency:'':2}}</td>
+                        </tr>
+                        <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
+                            ng-if="!contracts || contracts.length ==0">
+                            <td colspan="12">
+                                <p ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_CREATE'])">
+                                    <span>لا توجد عقود حتى الآن، يمكنك التسجيل من خلال هذا الرابط </span>
+                                    <a href="" ng-click="newContract()">اضغط هنا</a>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr ng-if="contracts.length > 0">
+                            <td class="info" colspan="7">
+                                <span class="pull-left">المجموع الكلي(جميع القيم بالريال السعودي)</span>
+                            </td>
+                            <td class="success" colspan="1">{{contracts | sumByKey:'totalVat' | currency:'':2}}</td>
+                            <td class="success" colspan="1">{{contracts | sumByKey:'discount' | currency:'':2}}</td>
+                            <td class="success" colspan="1">{{contracts | sumByKey:'totalPriceAfterDiscountAndVat' | currency:'':2}}</td>
+                            <td class="success" colspan="1">{{contracts | sumByKey:'paid' | currency:'':2}}</td>
+                            <td class="success" colspan="1">{{contracts | sumByKey:'remain' | currency:'':2}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="row" ng-show="toggleList===2">
+
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="contract in contracts">
+                    <!-- CONTACT ITEM -->
+                    <div class="panel panel-default">
+                        <div class="panel-body profile mdl-color--primary-dark">
+                            <div class="profile-image">
+                                <img width="100" height="100"
+                                     ng-src="/ui/img/{{iconSet}}/contract.{{iconSetType}}"
+                                     alt="{{contract.code}}"/>
+                            </div>
+                            <div class="profile-data">
+                                <div class="profile-data-name">{{contract.customer.contact.shortName}}</div>
+                            </div>
+                            <div class="profile-controls">
+                                <!--<a href="" class="profile-control-left"><span class="fa fa-info-circle"></span></a>-->
+                                <!--<a href="" class="profile-control-right"><span class="fa fa-phone"></span></a>-->
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="contact-info">
+                                <p>
+                                    <strong>العميل</strong>
+                                    {{contract.customer.contact.shortName}}
+                                </p>
+                                <hr>
+                                <p>
+                                    <strong>جوال العميل</strong>
+                                    {{contract.customer.contact.mobile}}
+                                </p>
+                                <hr>
+                                <p>
+                                    <strong>المستثمر</strong>
+                                    {{contract.seller.contact.shortName}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <button uib-tooltip="عقد جديد"
+                                        tooltip-append-to-body="true"
+                                        type="button"
+                                        ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_CREATE'])"
+                                        ng-click="newContract();"
+                                        class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                         height="24">
+                                </button>
+                                <button uib-tooltip="تعديل"
+                                        tooltip-append-to-body="true"
+                                        type="button"
+                                        ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_UPDATE'])"
+                                        ng-click="ModalProvider.openContractUpdateModel(contract)"
+                                        class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/edit.{{iconSetType}}" width="24"
+                                         height="24">
+                                </button>
+                                <button uib-tooltip="حذف"
+                                        tooltip-append-to-body="true"
+                                        type="button"
+                                        ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_DELETE'])"
+                                        ng-click="deleteContract(contract)"
+                                        class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/delete.{{iconSetType}}" width="24"
+                                         height="24">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END CONTACT ITEM -->
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,177 @@
+<form dir="rtl" name="form" ng-submit="submit()" novalidate="novalidate" focus-group="" focus-stack=""
+      focus-group-head="loop" focus-group-tail="loop">
+
+    <div class="modal-header mdl-color--primary mdl-navigation__link-active">
+        <a class="pull-left" href="" ng-click="cancel()">
+            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+        </a>
+        <h3 class="panel-title mdl-list__item pull-right mdl-color-text--white">
+            <span class="mdl-list__item-primary-content">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/bankTransaction.{{iconSetType}}" width="24" height="24">
+                <strong>اضافة مالية للعقد رقم</strong>&nbsp;
+                <span class="label label-info">{{contract.code}}</span>
+            </span>
+        </h3>
+    </div>
+
+    <div class="modal-body modal-body-free" id="modal-body">
+
+        <div class="row">
+
+            <div class="form-group row" ng-show="form.$invalid && form.$submitted">
+                <div class="alert alert-danger" role="alert">
+                    <strong>فضلاً اكمل الحقول المطلوبة</strong>
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+
+                    <div class="mdl-tabs__tab-bar">
+                        <a href="#panel-1-payment" class="mdl-tabs__tab col-xs-6 col-sm-6 col-md-6 col-lg-6 is-active">
+                            <span>المعلومات الأساسية</span>
+                        </a>
+                    </div>
+
+                    <div class="mdl-tabs__panel is-active" id="panel-1-payment">
+
+                        <div class="form-group row">
+
+                            <div class="box-info">
+                                <p>
+                                    <span>إجمالي قيمة العقد بعد (الخصم + القيمة المضافة) </span>&nbsp;
+                                    {{contract.totalPriceAfterDiscountAndVat | currency:' SAR ':2}}
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="box-success">
+                                <p>
+                                    <span>المدفوع </span>&nbsp;
+                                    {{contract.paid | currency:' SAR ':2}}
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="box-warning">
+                                <p>
+                                    <span>المتبقي </span>&nbsp;
+                                    {{contract.remain | currency:' SAR ':2}}
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="date" class="control-label">تاريخ الدفعة</label>
+                                <div dir="ltr" class="input-group" id="date" ng-init="calendar='G'">
+                                    <span class="input-group-addon">
+                                        <a href="" ng-click="calendar==='G'?calendar='H':calendar='G'">
+                                            <span ng-show="calendar==='G'">ميلادي</span>
+                                            <span ng-show="calendar==='H'">هجري</span>
+                                        </a>
+                                    </span>
+                                    <div style="position: relative">
+                                    <input style="position: absolute" ng-show="calendar==='H'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="contractPayment.date"
+                                           calendarType="ummalqura"
+                                           language="ar"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           required="required"
+                                           disable-validation-message=""
+                                           kdatepicker/>
+                                    <input style="position: absolute" ng-show="calendar==='G'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="contractPayment.date"
+                                           calendarType="gregorian"
+                                           language="ar-EG"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           required="required"
+                                           disable-validation-message=""
+                                           kdatepicker/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="amount" class="control-label">مقدار الدفعة</label>
+                                <div dir="ltr" class="input-group" id="amount">
+                                    <span class="input-group-addon">ريال سعودي</span>
+                                    <input dir="rtl"
+                                           type="number"
+                                           required="required"
+                                           disable-validation-message=""
+                                           min="1"
+                                           class="form-control"
+                                           placeholder="اجباري"
+                                           ng-model="contractPayment.amount">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="note" class="control-label">ملاحظات</label>
+                                <textarea id="note"
+                                          type="text"
+                                          msd-elastic="\n"
+                                          class="form-control"
+                                          placeholder="اختياري"
+                                          ng-model="contractPayment.note">
+                                </textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <button uib-tooltip="سداد"
+                    tooltip-append-to-body="true"
+                    type="submit"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="مسح الحقول"
+                    tooltip-append-to-body="true"
+                    type="reset"
+                    ng-click="form.$setPristine()"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/delete.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="خروج"
+                    tooltip-append-to-body="true"
+                    type="button"
+                    ng-click="cancel()"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+            </button>
+        </div>
+
+    </div>
+
+</form>

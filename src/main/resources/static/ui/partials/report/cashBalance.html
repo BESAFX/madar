@@ -1,0 +1,103 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-body">
+
+        <div class="row">
+            <ul dir="rtl" class="breadcrumb">
+                <li>
+                    <a href="" ng-click="openStateMenu()">
+                        <span>الرئيسية</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-click="openStateReport()">
+                        <span>التقارير</span>
+                    </a>
+                </li>
+                <li>
+                    <span>السيولة النقدية</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <button type="button"
+                    ng-click="fetchAllBanks()"
+                    class="pull-right mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
+                        <span class="mdl-list__item-primary-content">
+                            <img class="material-icons mdl-list__item-icon"
+                                 ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}"
+                                 width="24"
+                                 height="24">
+                            <span>عرض</span>
+                        </span>
+            </button>
+
+            <button type="button"
+                    ng-click="printToCart('printCashBalanceTable', '')"
+                    class="pull-right mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
+                        <span class="mdl-list__item-primary-content">
+                            <img class="material-icons mdl-list__item-icon"
+                                 ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}"
+                                 width="24"
+                                 height="24">
+                            <span>طباعة</span>
+                        </span>
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="panel panel-body">
+
+        <div class="form-group row" id="printCashBalanceTable">
+
+            <div class="form-group row">
+
+                <h4 class="text-center">السيولة المتوفرة</h4>
+
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>
+                            <span>الحساب</span>
+                        </th>
+
+                        <th>
+                            <span>وارد(مدين)</span>
+                        </th>
+
+                        <th>
+                            <span>منصرف(دائن)</span>
+                        </th>
+
+                        <th>
+                            <span>مجموع الرصيد</span>
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="bank in banks">
+                        <td>{{bank.name}}</td>
+                        <td>{{bank.totalDeposits | currency:' SAR ':2}}</td>
+                        <td>{{bank.totalWithdraws | currency:' SAR ':2}}</td>
+                        <td>{{bank.balance | currency:' SAR ':2}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

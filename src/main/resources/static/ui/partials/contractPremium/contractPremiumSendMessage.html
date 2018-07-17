@@ -1,0 +1,139 @@
+<form dir="rtl" ng-submit="submit()" novalidate="novalidate" focus-group="" focus-stack="" focus-group-head="loop"
+      focus-group-tail="loop">
+
+    <div class="modal-header mdl-color--primary mdl-navigation__link-active">
+        <a class="pull-left" href="" ng-click="cancel()">
+            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+        </a>
+        <h3 class="panel-title mdl-list__item pull-right mdl-color-text--white">
+            <span class="mdl-list__item-primary-content">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/contractPremium.{{iconSetType}}" width="24" height="24">
+                <strong>إرسال رسائل الأقساط</strong>
+            </span>
+        </h3>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+
+                            <th>
+                                <span>#</span>
+                            </th>
+
+                            <th>
+                                <span>رقم العقد</span>
+                            </th>
+
+                            <th>
+                                <span>العميل</span>
+                            </th>
+
+                            <th>
+                                <span>جوال العميل</span>
+                            </th>
+
+                            <th>
+                                <span>تاريخ الاستحقاق</span>
+                            </th>
+
+                            <th>
+                                <span>الحالة</span>
+                            </th>
+
+                            <th>
+                                <span>المبلغ</span>
+                            </th>
+
+                            <th>
+                                <span>المسدد</span>
+                            </th>
+
+                            <th>
+                                <span>الباقي</span>
+                            </th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="contractPremium in contractPremiums">
+                            <td>{{$index+1}}</td>
+                            <td>{{contractPremium.contract.code}}</td>
+                            <td>{{contractPremium.contract.customer.contact.shortName}}</td>
+                            <td>{{contractPremium.contract.customer.contact.mobile}}</td>
+                            <td>
+                                <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
+                            </td>
+                            <td>{{contractPremium.state}}</td>
+                            <td>{{contractPremium.amount | currency:' SAR ':2}}</td>
+                            <td>{{contractPremium.paid | currency:' SAR ':2}}</td>
+                            <td>{{contractPremium.remain | currency:' SAR ':2}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-init="findSmsCredit()">
+
+                <h3 class="box-info">
+                    <span>الرصيد = </span>
+                    {{sms.credit}}
+                    <span>[{{sms.description}}]</span>
+                </h3>
+
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <label for="content" class="control-label">الرسالة</label>
+                <textarea id="content"
+                          type="text"
+                          msd-elastic="\n"
+                          class="form-control text-right"
+                          placeholder="اذكر باختصار الرسالة"
+                          ng-model="buffer.message">
+                </textarea>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <button uib-tooltip="ارسال"
+                    tooltip-append-to-body="true"
+                    ng-disabled="sms.credit === 0"
+                    type="submit"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="مسح الحقول"
+                    tooltip-append-to-body="true"
+                    type="reset"
+                    ng-click="form.$setPristine()"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/delete.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="خروج"
+                    tooltip-append-to-body="true"
+                    type="button"
+                    ng-click="cancel()"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+            </button>
+        </div>
+
+    </div>
+
+</form>

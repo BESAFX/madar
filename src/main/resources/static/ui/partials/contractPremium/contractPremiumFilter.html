@@ -1,0 +1,265 @@
+<form dir="rtl" name="form" ng-submit="submit()" novalidate="novalidate" focus-group="" focus-stack=""
+      focus-group-head="loop" focus-group-tail="loop">
+
+    <div class="modal-header mdl-color--primary mdl-navigation__link-active">
+        <a class="pull-left" href="" ng-click="cancel()">
+            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+        </a>
+        <h3 class="panel-title mdl-color-text--white mdl-list__item pull-right">
+            <span class="mdl-list__item-primary-content">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}" width="24" height="24">
+                <strong>البحث المتقدم فى الأقساط</strong>
+            </span>
+        </h3>
+    </div>
+
+    <div class="modal-body modal-body-free" id="modal-body">
+
+        <div class="form-group row">
+
+            <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+
+                <div class="mdl-tabs__tab-bar">
+                    <a href="#panel-1-contract-filter" class="mdl-tabs__tab col-xs-6 col-sm-6 col-md-6 col-lg-6 is-active">
+                        <span>البيانات الأساسية</span>
+                    </a>
+                    <a href="#panel-2-contract-filter" class="mdl-tabs__tab col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <span>خيارات</span>
+                    </a>
+                </div>
+
+                <div class="mdl-tabs__panel is-active" id="panel-1-contract-filter">
+
+                    <div class="form-group row">
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="dueDateFrom" class="control-label">تاريخ الاستحقاق من</label>
+                            <div dir="ltr" class="input-group" id="dueDateFrom" ng-init="calendar1='G'">
+                                    <span class="input-group-addon">
+                                        <a href="" ng-click="calendar1==='G'?calendar1='H':calendar1='G'">
+                                            <span ng-show="calendar1==='G'">ميلادي</span>
+                                            <span ng-show="calendar1==='H'">هجري</span>
+                                        </a>
+                                    </span>
+                                <div style="position: relative">
+                                    <input style="position: absolute" ng-show="calendar1==='H'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="paramContractPremium.dueDateFrom"
+                                           calendarType="ummalqura"
+                                           language="ar"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                    <input style="position: absolute" ng-show="calendar1==='G'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="paramContractPremium.dueDateFrom"
+                                           calendarType="gregorian"
+                                           language="ar-EG"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="dueDateTo" class="control-label">تاريخ الاستحقاق إلى</label>
+                            <div dir="ltr" class="input-group" id="dueDateTo" ng-init="calendar2='G'">
+                                    <span class="input-group-addon">
+                                        <a href="" ng-click="calendar2==='G'?calendar2='H':calendar2='G'">
+                                            <span ng-show="calendar2==='G'">ميلادي</span>
+                                            <span ng-show="calendar2==='H'">هجري</span>
+                                        </a>
+                                    </span>
+                                <div style="position: relative">
+                                    <input style="position: absolute" ng-show="calendar2==='H'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="paramContractPremium.dueDateTo"
+                                           calendarType="ummalqura"
+                                           language="ar"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                    <input style="position: absolute" ng-show="calendar2==='G'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="paramContractPremium.dueDateTo"
+                                           calendarType="gregorian"
+                                           language="ar-EG"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="contractCodeFrom" class="control-label">رقم العقد من</label>
+                            <input id="contractCodeFrom"
+                                   type="number"
+                                   min="1"
+                                   class="form-control"
+                                   placeholder="اختياري"
+                                   ng-model="paramContractPremium.contractCodeFrom">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="contractCodeTo" class="control-label">رقم العقد إلى</label>
+                            <input id="contractCodeTo"
+                                   type="number"
+                                   min="1"
+                                   class="form-control"
+                                   placeholder="اختياري"
+                                   ng-model="paramContractPremium.contractCodeTo">
+                        </div>
+                        
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="customerName" class="control-label">اسم العميل</label>
+                            <input id="customerName"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="اختياري"
+                                   ng-model="paramContractPremium.customerName">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="customerMobile" class="control-label">رقم جوال العميل</label>
+                            <input id="customerMobile"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="اختياري"
+                                   ng-model="paramContractPremium.customerMobile">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="sellerName" class="control-label">اسم المستثمر</label>
+                            <input id="sellerName"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="اختياري"
+                                   ng-model="paramContractPremium.sellerName">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="sellerMobile" class="control-label">رقم جوال المستثمر</label>
+                            <input id="sellerMobile"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="اختياري"
+                                   ng-model="paramContractPremium.sellerMobile">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="mdl-tabs__panel" id="panel-2-contract-filter">
+
+                    <div class="form-group row">
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label for="currentPage" class="control-label">رقم الصفحة </label>
+                            <input id="currentPage"
+                                   type="number"
+                                   min="1"
+                                   class="form-control"
+                                   ng-model="pageContractPremium.currentPage">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label for="page" class="control-label">عدد الصفوف بالصفحة الواحدة </label>
+                            <input id="page"
+                                   type="number"
+                                   min="1"
+                                   class="form-control"
+                                   ng-model="pageContractPremium.size">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <th class="info" colspan="4">
+                                    <span>ترتيب العقود حسب : </span>
+                                    <a href="" ng-click="addSortBy()">اضافة...</a>
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="sortBy in pageContractPremium.sorts">
+                                    <td>
+                                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <label for="sortBy" class="control-label">ترتيب حسب</label>
+                                            <select id="sortBy" class="form-control" ng-model="sortBy.name">
+                                                <option value="dueDate">تاريخ الاستحقاق</option>
+                                                <option value="contract.code">رقم العقد</option>
+                                                <option value="contract.customer.contact.name">اسم العميل</option>
+                                                <option value="contract.customer.contact.mobile">رقم جوال العميل</option>
+                                                <option value="contract.seller.contact.name">اسم المستثمر</option>
+                                                <option value="contract.seller.contact.mobile">رقم جوال المستثمر</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <label for="sortDirection" class="control-label">اتجاة الترتيب</label>
+                                            <select id="sortDirection" class="form-control" ng-model="sortBy.direction">
+                                                <option value="asc">تصاعدي</option>
+                                                <option value="desc">تنازلي</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="" ng-click="pageContractPremium.sorts.splice($index, 1)">حذف</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <button uib-tooltip="بحث"
+                    tooltip-append-to-body="true"
+                    type="submit"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="مسح الحقول"
+                    tooltip-append-to-body="true"
+                    type="reset"
+                    ng-click="paramContractPremium={};form.$setPristine();"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/delete.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="خروج"
+                    tooltip-append-to-body="true"
+                    type="button"
+                    ng-click="cancel()"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+            </button>
+        </div>
+
+    </div>
+
+</form>

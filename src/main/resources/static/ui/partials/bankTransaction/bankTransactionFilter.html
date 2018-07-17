@@ -1,0 +1,270 @@
+<form dir="rtl" name="form" ng-submit="submit()" novalidate="novalidate" focus-group="" focus-stack=""
+      focus-group-head="loop" focus-group-tail="loop">
+
+    <div class="modal-header mdl-color--primary mdl-navigation__link-active">
+        <a class="pull-left" href="" ng-click="cancel()">
+            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+        </a>
+        <h3 class="panel-title mdl-color-text--white mdl-list__item pull-right">
+            <span class="mdl-list__item-primary-content">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}" width="24" height="24">
+                <strong>البحث المتقدم فى بيانات المعاملات المالية</strong>
+            </span>
+        </h3>
+    </div>
+
+    <div class="modal-body modal-body-free" id="modal-body">
+
+        <div class="form-group row">
+
+            <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+
+                <div class="mdl-tabs__tab-bar">
+                    <a href="#panel-1-task-filter" class="mdl-tabs__tab col-xs-6 col-sm-6 col-md-6 col-lg-6 is-active">
+                        <span>البيانات الأساسية</span>
+                    </a>
+                    <a href="#panel-2-task-filter" class="mdl-tabs__tab col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <span>خيارات</span>
+                    </a>
+                </div>
+
+                <div class="mdl-tabs__panel is-active" id="panel-1-task-filter">
+
+                    <div class="form-group row">
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="codeFrom" class="control-label">رقم المعاملة من</label>
+                            <input id="codeFrom"
+                                   type="number"
+                                   min="1"
+                                   class="form-control"
+                                   placeholder="اختياري"
+                                   ng-model="paramBankTransaction.codeFrom">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="codeTo" class="control-label">رقم المعاملة إلى</label>
+                            <input id="codeTo"
+                                   type="number"
+                                   min="1"
+                                   class="form-control"
+                                   placeholder="اختياري"
+                                   ng-model="paramBankTransaction.codeTo">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="transactionTypeCode" class="control-label">نوع المعاملة</label>
+                            <select id="transactionTypeCode"
+                                    class="form-control"
+                                    ng-model="paramBankTransaction.transactionTypeCode">
+                                <option value="Deposit">عملية الإيداع</option>
+                                <option value="Deposit_Transfer">عملية الإيداع[تحويل]</option>
+                                <option value="Deposit_Payment">عملية الإيداع[سداد]</option>
+                                <option value="Withdraw">عملية السحب</option>
+                                <option value="Withdraw_Transfer">عملية السحب[تحويل]</option>
+                                <option value="Withdraw_Purchase">عملية السحب[شراء]</option>
+                                <option value="Withdraw_Cash">عملية السحب[مصروفات]</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="dateFrom" class="control-label">التاريخ من</label>
+                            <div dir="ltr" class="input-group" id="dateFrom" ng-init="calendar1='G'">
+                                    <span class="input-group-addon">
+                                        <a href="" ng-click="calendar1==='G'?calendar1='H':calendar1='G'">
+                                            <span ng-show="calendar1==='G'">ميلادي</span>
+                                            <span ng-show="calendar1==='H'">هجري</span>
+                                        </a>
+                                    </span>
+                                <div style="position: relative">
+                                    <input style="position: absolute" ng-show="calendar1==='H'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="paramBankTransaction.dateFrom"
+                                           calendarType="ummalqura"
+                                           language="ar"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                    <input style="position: absolute" ng-show="calendar1==='G'"
+                                           type="text"
+                                           class="form-control is-calendarPicker animated-div"
+                                           ng-model="paramBankTransaction.dateFrom"
+                                           calendarType="gregorian"
+                                           language="ar-EG"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="dateTo" class="control-label">التاريخ إلى</label>
+                            <div dir="ltr" class="input-group" id="dateTo" ng-init="calendar2='G'">
+                                    <span class="input-group-addon">
+                                        <a href="" ng-click="calendar2==='G'?calendar2='H':calendar2='G'">
+                                            <span ng-show="calendar2==='G'">ميلادي</span>
+                                            <span ng-show="calendar2==='H'">هجري</span>
+                                        </a>
+                                    </span>
+                                <div style="position: relative">
+                                    <input style="position: absolute" ng-show="calendar2==='H'"
+                                           type="text"
+                                           class="form-control is-calendarPicker"
+                                           ng-model="paramBankTransaction.dateTo"
+                                           calendarType="ummalqura"
+                                           language="ar"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                    <input style="position: absolute" ng-show="calendar2==='G'"
+                                           type="text"
+                                           class="form-control is-calendarPicker"
+                                           ng-model="paramBankTransaction.dateTo"
+                                           calendarType="gregorian"
+                                           language="ar-EG"
+                                           dateFormat="yyyy/mm/dd"
+                                           showOnFocus="true"
+                                           pickerClass="myPicker"
+                                           kdatepicker/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="sellerName" class="control-label">اسم المستثمر</label>
+                            <input id="sellerName"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="اختياري"
+                                   ng-model="paramBankTransaction.sellerName">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="sellerMobile" class="control-label">رقم جوال المستثمر</label>
+                            <input id="sellerMobile"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="اختياري"
+                                   ng-model="paramBankTransaction.sellerMobile">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label for="sellerIdentityNumber" class="control-label">رقم السجل المدني للمستثمر</label>
+                            <input id="sellerIdentityNumber"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="اختياري"
+                                   ng-model="paramBankTransaction.sellerIdentityNumber">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="mdl-tabs__panel" id="panel-2-task-filter">
+
+                    <div class="form-group row">
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label for="currentPage" class="control-label">رقم الصفحة </label>
+                            <input id="currentPage"
+                                   type="number"
+                                   min="1"
+                                   class="form-control"
+                                   ng-model="pageBankTransaction.currentPage">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <label for="page" class="control-label">عدد الصفوف بالصفحة الواحدة </label>
+                            <input id="page"
+                                   type="number"
+                                   min="1"
+                                   class="form-control"
+                                   ng-model="pageBankTransaction.size">
+                        </div>
+
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <th class="info" colspan="4">
+                                    <span>ترتيب المعاملات حسب : </span>
+                                    <a href="" ng-click="addSortBy()">اضافة...</a>
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="sortBy in pageBankTransaction.sorts">
+                                    <td>
+                                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <label for="sortBy" class="control-label">ترتيب حسب</label>
+                                            <select id="sortBy" class="form-control" ng-model="sortBy.name">
+                                                <option value="code">رقم المعاملة</option>
+                                                <option value="date">التاريخ</option>
+                                                <option value="seller.contact.name">اسم المستثمر</option>
+                                                <option value="seller.contact.mobile">رقم جوال المستثمر</option>
+                                                <option value="seller.contact.identityNumber">رقم بطاقة المستثمر</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <label for="sortDirection" class="control-label">اتجاة الترتيب</label>
+                                            <select id="sortDirection" class="form-control" ng-model="sortBy.direction">
+                                                <option value="asc">تصاعدي</option>
+                                                <option value="desc">تنازلي</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="" ng-click="pageBankTransaction.sorts.splice($index, 1)">حذف</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <button uib-tooltip="بحث"
+                    tooltip-append-to-body="true"
+                    type="submit"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="مسح الحقول"
+                    tooltip-append-to-body="true"
+                    type="reset"
+                    ng-click="paramBankTransaction={};form.$setPristine()"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/delete.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="خروج"
+                    tooltip-append-to-body="true"
+                    type="button"
+                    ng-click="cancel()"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+            </button>
+        </div>
+
+    </div>
+
+</form>

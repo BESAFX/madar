@@ -1,0 +1,211 @@
+<form dir="rtl" name="form" ng-submit="submit()" novalidate="novalidate" focus-group="" focus-stack=""
+      focus-group-head="loop" focus-group-tail="loop">
+
+    <div class="modal-header mdl-color--primary mdl-navigation__link-active">
+        <a class="pull-left" href="" ng-click="cancel()">
+            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+        </a>
+        <h3 class="panel-title mdl-list__item pull-right mdl-color-text--white">
+            <span class="mdl-list__item-primary-content">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/seller.{{iconSetType}}" width="24" height="24">
+                <strong>{{title}}</strong>
+            </span>
+        </h3>
+    </div>
+
+    <div class="modal-body modal-body-free" id="modal-body">
+
+        <div class="row">
+
+            <div class="form-group row" ng-show="form.$invalid && form.$submitted">
+                <div class="alert alert-danger" role="alert">
+                    <strong>فضلاً اكمل الحقول المطلوبة</strong>
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+
+                    <div class="mdl-tabs__tab-bar">
+                        <a href="#panel-1-seller" class="mdl-tabs__tab col-xs-6 col-sm-6 col-md-6 col-lg-6 is-active">
+                            <span>بيانات الحساب</span>
+                        </a>
+                    </div>
+
+                    <div class="mdl-tabs__panel is-active" id="panel-1-seller">
+
+                        <div class="form-group row">
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="name" class="control-label">الاسم</label>
+                                <input id="name"
+                                       type="text"
+                                       required="required"
+                                       disable-validation-message=""
+                                       class="form-control"
+                                       placeholder="الاسم رباعياً"
+                                       ng-model="seller.contact.name">
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="birthLocation" class="control-label">مكان الميلاد </label>
+                                <input id="birthLocation"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="يكتب مكان الميلاد هنا"
+                                       ng-model="seller.contact.birthLocation">
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="birthDate" class="control-label">تاريخ الميلاد</label>
+                                <div dir="ltr" class="input-group" id="birthDate" ng-init="calendar1='G'">
+                                    <span class="input-group-addon">
+                                        <a href="" ng-click="calendar1==='G'?calendar1='H':calendar1='G'">
+                                            <span ng-show="calendar1==='G'">ميلادي</span>
+                                            <span ng-show="calendar1==='H'">هجري</span>
+                                        </a>
+                                    </span>
+                                    <div style="position: relative">
+                                        <input style="position: absolute" ng-show="calendar1==='H'"
+                                               type="text"
+                                               class="form-control is-calendarPicker animated-div"
+                                               ng-model="seller.contact.birthDate"
+                                               calendarType="ummalqura"
+                                               language="ar"
+                                               dateFormat="yyyy/mm/dd"
+                                               showOnFocus="true"
+                                               pickerClass="myPicker"
+                                               kdatepicker/>
+                                        <input style="position: absolute" ng-show="calendar1==='G'"
+                                               type="text"
+                                               class="form-control is-calendarPicker animated-div"
+                                               ng-model="seller.contact.birthDate"
+                                               calendarType="gregorian"
+                                               language="ar-EG"
+                                               dateFormat="yyyy/mm/dd"
+                                               showOnFocus="true"
+                                               pickerClass="myPicker"
+                                               kdatepicker/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="nationality" class="control-label">الجنسية </label>
+                                <input id="nationality"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="جنسية المستثمر"
+                                       ng-model="seller.contact.nationality">
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="identityNumber" class="control-label">الهوية الوطنية / الاقامة</label>
+                                <input id="identityNumber"
+                                       type="text"
+                                       required="required"
+                                       disable-validation-message=""
+                                       class="form-control"
+                                       placeholder="رقم الهوية الوطنية / الاقامة المكون من 11 رقم"
+                                       ng-model="seller.contact.identityNumber">
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="mobile" class="control-label">الجوال </label>
+                                <input id="mobile"
+                                       type="text"
+                                       required="required"
+                                       disable-validation-message=""
+                                       class="form-control"
+                                       placeholder="0590780551"
+                                       ng-model="seller.contact.mobile">
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="phone" class="control-label">الهاتف </label>
+                                <input id="phone"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="0590780551"
+                                       ng-model="seller.contact.phone">
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="qualification" class="control-label">العمل</label>
+                                <input id="qualification"
+                                       type="text"
+                                       required="required"
+                                       disable-validation-message=""
+                                       class="form-control"
+                                       placeholder="اسم جهة العمل"
+                                       ng-model="seller.contact.qualification">
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label for="address" class="control-label">العنوان الحالي </label>
+                                <input id="address"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="عنوان المستثمر للتواصل به"
+                                       ng-model="seller.contact.address">
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="action=='create'">
+                                <label for="openCash" class="control-label">الرصيد الإفتتاحي (إيداع رصيد إفتتاحي للمستثمر)</label>
+                                <input id="openCash"
+                                       type="number"
+                                       min="0"
+                                       class="form-control"
+                                       placeholder="اختياري"
+                                       ng-model="seller.openCash">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <button ng-if="action=='create'"
+                    uib-tooltip="اضافة"
+                    tooltip-append-to-body="true"
+                    type="submit"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button ng-if="action=='update'"
+                    uib-tooltip="تعديل"
+                    tooltip-append-to-body="true"
+                    type="submit"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/edit.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="مسح الحقول"
+                    tooltip-append-to-body="true"
+                    type="reset"
+                    ng-click="form.$setPristine()"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/delete.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="خروج"
+                    tooltip-append-to-body="true"
+                    type="button"
+                    ng-click="cancel()"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+            </button>
+        </div>
+
+    </div>
+
+</form>

@@ -1,0 +1,197 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-body">
+
+        <div class="row">
+            <ul dir="rtl" class="breadcrumb">
+                <li>
+                    <a href="" ng-click="openStateMenu()">
+                        <span>الرئيسية</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-click="openStateReport()">
+                        <span>التقارير</span>
+                    </a>
+                </li>
+                <li>
+                    <span>تقرير المصروفات</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <button type="button"
+                    ng-click="fetchWithdrawCashes()"
+                    class="pull-right mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
+                    <span class="mdl-list__item-primary-content">
+                        <img class="material-icons mdl-list__item-icon"
+                             ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}"
+                             width="24"
+                             height="24">
+                        <span>عرض</span>
+                    </span>
+            </button>
+
+            <button type="button"
+                    ng-click="printToCart('printWithdrawCashTable', '')"
+                    class="pull-right mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
+                    <span class="mdl-list__item-primary-content">
+                        <img class="material-icons mdl-list__item-icon"
+                             ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}"
+                             width="24"
+                             height="24">
+                        <span>طباعة</span>
+                    </span>
+            </button>
+
+        </div>
+
+        <div class="row">
+
+            <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <label for="dateFrom" class="control-label">التاريخ من</label>
+                <div dir="ltr" class="input-group" id="dateFrom" ng-init="calendar1='G'">
+                    <span class="input-group-addon">
+                        <a href="" ng-click="calendar1==='G'?calendar1='H':calendar1='G'">
+                            <span ng-show="calendar1==='G'">ميلادي</span>
+                            <span ng-show="calendar1==='H'">هجري</span>
+                        </a>
+                    </span>
+                    <div style="position: relative">
+                        <input style="position: absolute" ng-show="calendar1==='H'"
+                               type="text"
+                               class="form-control is-calendarPicker animated-div"
+                               ng-model="paramWithdrawCash.dateFrom"
+                               calendarType="ummalqura"
+                               language="ar"
+                               dateFormat="yyyy/mm/dd"
+                               showOnFocus="true"
+                               pickerClass="myPicker"
+                               kdatepicker/>
+                        <input style="position: absolute" ng-show="calendar1==='G'"
+                               type="text"
+                               class="form-control is-calendarPicker animated-div"
+                               ng-model="paramWithdrawCash.dateFrom"
+                               calendarType="gregorian"
+                               language="ar-EG"
+                               dateFormat="yyyy/mm/dd"
+                               showOnFocus="true"
+                               pickerClass="myPicker"
+                               kdatepicker/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <label for="dateTo" class="control-label">التاريخ إلى</label>
+                <div dir="ltr" class="input-group" id="dateTo" ng-init="calendar2='G'">
+                    <span class="input-group-addon">
+                        <a href="" ng-click="calendar2==='G'?calendar2='H':calendar2='G'">
+                            <span ng-show="calendar2==='G'">ميلادي</span>
+                            <span ng-show="calendar2==='H'">هجري</span>
+                        </a>
+                    </span>
+                    <div style="position: relative">
+                        <input style="position: absolute" ng-show="calendar2==='H'"
+                               type="text"
+                               class="form-control is-calendarPicker animated-div"
+                               ng-model="paramWithdrawCash.dateTo"
+                               calendarType="ummalqura"
+                               language="ar"
+                               dateFormat="yyyy/mm/dd"
+                               showOnFocus="true"
+                               pickerClass="myPicker"
+                               kdatepicker/>
+                        <input style="position: absolute" ng-show="calendar2==='G'"
+                               type="text"
+                               class="form-control is-calendarPicker animated-div"
+                               ng-model="paramWithdrawCash.dateTo"
+                               calendarType="gregorian"
+                               language="ar-EG"
+                               dateFormat="yyyy/mm/dd"
+                               showOnFocus="true"
+                               pickerClass="myPicker"
+                               kdatepicker/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="panel panel-body">
+
+        <div class="form-group row" id="printWithdrawCashTable">
+
+            <div class="form-group row">
+
+                <h4 class="text-center">تقرير المصروفات</h4>
+
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                    <tr>
+                        <td width="20%">الفترة من</td>
+                        <td width="30%">
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{paramWithdrawCash.dateFrom | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{paramWithdrawCash.dateFrom | date: 'yyyy-MM-dd'}}</span>
+                        </td>
+                        <td width="20%">الفترة إلى</td>
+                        <td width="30%">
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{paramWithdrawCash.dateTo | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{paramWithdrawCash.dateTo | date: 'yyyy-MM-dd'}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>
+                            <span>التاريخ</span>
+                        </th>
+
+                        <th>
+                            <span>الحساب</span>
+                        </th>
+
+                        <th>
+                            <span>البيان</span>
+                        </th>
+
+                        <th>
+                            <span>المبلغ</span>
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="withdrawCash in withdrawCashes">
+                        <td>
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{withdrawCash.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{withdrawCash.date | date: 'yyyy-MM-dd'}}</span>
+                        </td>
+                        <td>{{withdrawCash.bank.name}}</td>
+                        <td>{{withdrawCash.note}}</td>
+                        <td>{{withdrawCash.amount | currency:' SAR ':2}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,674 @@
+<div class="form-group row" style="margin-top: 10px">
+
+    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <div class="panel panel-info">
+
+            <div class="panel-heading">البيانات العامة</div>
+
+            <div class="panel-body">
+
+                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+
+                    <div class="mdl-tabs__tab-bar">
+                        <a href="#panel-1-company"
+                           class="mdl-tabs__tab is-active">
+                            <span>معلومات عامة</span>
+                        </a>
+                        <a href="#panel-2-company"
+                           class="mdl-tabs__tab">
+                            <span>الشعار الرسمي</span>
+                        </a>
+                        <a href="#panel-3-company"
+                           ng-click="findMyContracts()"
+                           class="mdl-tabs__tab">
+                            <span>العقود</span>
+                        </a>
+                        <a href="#panel-4-company"
+                           ng-click="findMyBanks()"
+                           class="mdl-tabs__tab">
+                            <span>الرصيد والحسابات</span>
+                        </a>
+                        <a href="#panel-5-company"
+                           ng-click="findMyBankTransactions()"
+                           class="mdl-tabs__tab">
+                            <span>الحركات المالية</span>
+                        </a>
+                        <a href="#panel-6-company"
+                           ng-click="findMyProductPurchases()"
+                           class="mdl-tabs__tab">
+                            <span>المخزون</span>
+                        </a>
+                        <a href="#panel-7-company"
+                           ng-click="findSmsCredit()"
+                           class="mdl-tabs__tab">
+                            <span>رسائل SMS</span>
+                        </a>
+                    </div>
+
+                    <div class="mdl-tabs__panel mdl-tabs__panel_free is-active" id="panel-1-company">
+
+                        <form name="form1"
+                              ng-submit="submitCompany()"
+                              novalidate="novalidate"
+                              focus-group=""
+                              focus-stack=""
+                              focus-group-head="loop"
+                              focus-group-tail="loop">
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                                 ng-show="form1.$invalid && form1.$submitted">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>فضلاً اكمل الحقول المطلوبة</strong>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <label for="name" class="control-label">اسم الشركة</label>
+                                    <input id="name"
+                                           type="text"
+                                           required="required"
+                                           disable-validation-message=""
+                                           class="form-control"
+                                           ng-model="selectedCompany.name">
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <label for="address" class="control-label">العنوان</label>
+                                    <input id="address"
+                                           type="text"
+                                           required="required"
+                                           disable-validation-message=""
+                                           class="form-control"
+                                           ng-model="selectedCompany.address">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                                    <label for="phone" class="control-label">الهاتف</label>
+                                    <input id="phone"
+                                           type="text"
+                                           required="required"
+                                           disable-validation-message=""
+                                           class="form-control"
+                                           ng-model="selectedCompany.phone">
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                                    <label for="mobile" class="control-label">الجوال</label>
+                                    <input id="mobile"
+                                           type="text"
+                                           required="required"
+                                           disable-validation-message=""
+                                           class="form-control"
+                                           ng-model="selectedCompany.mobile">
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                                    <label for="fax" class="control-label">الفاكس</label>
+                                    <input id="fax"
+                                           type="text"
+                                           required="required"
+                                           disable-validation-message=""
+                                           class="form-control"
+                                           ng-model="selectedCompany.fax">
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                                    <label for="email" class="control-label">البريد الإلكتروني</label>
+                                    <input id="email"
+                                           type="email"
+                                           required="required"
+                                           disable-validation-message=""
+                                           class="form-control"
+                                           ng-model="selectedCompany.email">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="website" class="control-label">الموقع الرسمي</label>
+                                    <input id="website"
+                                           type="text"
+                                           required="required"
+                                           disable-validation-message=""
+                                           class="form-control"
+                                           ng-model="selectedCompany.website">
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="commericalRegisteration" class="control-label">السجل
+                                        التجاري</label>
+                                    <input id="commericalRegisteration"
+                                           type="text"
+                                           required="required"
+                                           disable-validation-message=""
+                                           class="form-control"
+                                           ng-model="selectedCompany.commericalRegisteration">
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="taxCode" class="control-label">الرقم الضريبي</label>
+                                    <input id="taxCode"
+                                           type="text"
+                                           required="required"
+                                           disable-validation-message=""
+                                           class="form-control text-right"
+                                           placeholder="الرقم الضريبي"
+                                           ng-model="selectedCompany.taxCode">
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="licenceCode" class="control-label">رقم الرخصة</label>
+                                    <input id="licenceCode"
+                                           type="text"
+                                           required="required"
+                                           disable-validation-message=""
+                                           class="form-control text-right"
+                                           placeholder="رقم الرخصة"
+                                           ng-model="selectedCompany.licenceCode">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <label for="vatFactor" class="control-label">معامل القيمة المضافة</label>
+                                    <input id="vatFactor"
+                                           type="text"
+                                           required="required"
+                                           disable-validation-message=""
+                                           class="form-control"
+                                           ng-model="selectedCompany.vatFactor">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="panel-footer">
+
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                        <button uib-tooltip="حفظ"
+                                                tooltip-append-to-body="true"
+                                                type="submit"
+                                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect pull-right">
+                                        <span class="mdl-list__item-primary-content">
+                                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/save.{{iconSetType}}"
+                                                 width="24" height="24">
+                                            <span>حفظ البيانات</span>
+                                        </span>
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div class="mdl-tabs__panel mdl-tabs__panel_free" id="panel-2-company">
+
+                        <div class="form-group row">
+
+                            <button uib-tooltip="تحميل"
+                                    tooltip-append-to-body="true"
+                                    type="button"
+                                    ng-click="browseCompanyLogo()"
+                                    class="mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/upload.{{iconSetType}}"
+                                     width="24" height="24">
+                            </button>
+
+                        </div>
+
+                        <div class="form-group row mdl-shadow--8dp">
+
+                            <input id="uploader-company" style="display: none" type="file" accept="image/*"
+                                   onchange="angular.element(this).scope().uploadCompanyLogo(this.files)"/>
+                            <img class="text-center" ng-src="{{selectedCompany.logo}}"
+                                 style="width: available;height: available;margin-left: auto;margin-right: auto;display: block;"/>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mdl-tabs__panel mdl-tabs__panel_free" id="panel-3-company">
+
+                        <div class="form-group row" ng-if="myContracts.length > 0">
+
+                            <div class="pull-left">
+
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="بحث سريع في بيانات الصفحة الواحدة"
+                                       ng-change="refreshGUI()"
+                                       ng-model="myContracts.searchText">
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+
+                                        <th>
+                                            <span>#</span>
+                                        </th>
+
+                                        <th>
+                                            <span>رقم العقد</span>
+                                        </th>
+
+                                        <th>
+                                            <span>العميل</span>
+                                        </th>
+
+                                        <th>
+                                            <span>جوال العميل</span>
+                                        </th>
+
+                                        <th>
+                                            <span>المستثمر</span>
+                                        </th>
+
+                                        <th>
+                                            <span>آخر عملية دفع</span>
+                                        </th>
+
+                                        <th>
+                                            <span>رأس المال</span>
+                                        </th>
+
+                                        <th>
+                                            <span>الربح</span>
+                                        </th>
+
+                                        <th>
+                                            <span>نسبة الربح</span>
+                                        </th>
+
+                                        <th>
+                                            <span>القيمة المضافة</span>
+                                        </th>
+
+                                        <th>
+                                            <span>الخصم</span>
+                                        </th>
+
+                                        <th>
+                                            <span>الأجمالي</span>
+                                        </th>
+
+                                        <th>
+                                            <span>المدفوع</span>
+                                        </th>
+
+                                        <th>
+                                            <span>المتبقي</span>
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="contract in myContracts | filter:myContracts.searchText"
+                                        ng-dblclick="ModalProvider.openContractDetailsModel(contract)">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{contract.code}}</td>
+                                        <td>{{contract.customer.contact.shortName}}</td>
+                                        <td>{{contract.customer.contact.mobile}}</td>
+                                        <td>{{contract.seller.contact.shortName}}</td>
+                                        <td>
+                                            <span ng-show="dateType==='H'">{{contract.lastPaymentDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                            <span ng-show="dateType==='G'">{{contract.lastPaymentDate | date: 'yyyy-MM-dd'}}</span>
+                                            <span class="label label-info">{{contract.lastPaymentDate | date: 'hh:mm a'}}</span>
+                                        </td>
+                                        <td>{{contract.capitalCash | currency:' SAR ':2}}</td>
+                                        <td>{{contract.profit | currency:' SAR ':2}}</td>
+                                        <td>{{contract.profitPercentage | currency:' % ':2}}</td>
+                                        <td>{{contract.totalVat | currency:' SAR ':2}}</td>
+                                        <td>{{contract.discount | currency:' SAR ':2}}</td>
+                                        <td>{{contract.totalPriceAfterDiscountAndVat | currency:' SAR ':2}}</td>
+                                        <td>{{contract.paid | currency:' SAR ':2}}</td>
+                                        <td>{{contract.remain | currency:' SAR ':2}}</td>
+                                    </tr>
+                                    <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                                        ng-show="!myContracts || myContracts.length ==0">
+                                        <td colspan="14">
+                                            <span>لا توجد عقود حتى الآن</span>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="myContracts.length > 0">
+                                        <td class="info" colspan="6">
+                                            <span class="pull-left">المجموع الكلي</span>
+                                        </td>
+                                        <td class="success" colspan="1">{{myContracts | sumByKey:'capitalCash' | currency:' SAR ':2}}</td>
+                                        <td class="success" colspan="1">{{myContracts | sumByKey:'profit' | currency:' SAR ':2}}</td>
+                                        <td class="success" colspan="1">{{myContracts | sumByKey:'profitPercentage' | currency:' % ':2}}</td>
+                                        <td class="success" colspan="1">{{myContracts | sumByKey:'totalVat' | currency:' SAR ':2}}</td>
+                                        <td class="success" colspan="1">{{myContracts | sumByKey:'discount' | currency:' SAR ':2}}</td>
+                                        <td class="success" colspan="1">{{myContracts | sumByKey:'totalPriceAfterDiscountAndVat' | currency:' SAR ':2}}</td>
+                                        <td class="success" colspan="1">{{myContracts | sumByKey:'paid' | currency:' SAR ':2}}</td>
+                                        <td class="success" colspan="1">{{myContracts | sumByKey:'remain' | currency:' SAR ':2}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mdl-tabs__panel mdl-tabs__panel_free" id="panel-4-company">
+
+                        <div class="form-group row">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+
+                                        <th>
+                                            <span>#</span>
+                                        </th>
+
+                                        <th>
+                                            <span>الحساب</span>
+                                        </th>
+
+                                        <th>
+                                            <span>الرصيد</span>
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="bank in myBanks">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{bank.name}}</td>
+                                        <td>{{bank.balance | currency:' SAR ':2}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mdl-tabs__panel mdl-tabs__panel_free" id="panel-5-company">
+
+                        <div class="form-group row" ng-if="myBankTransactions.length > 0">
+
+                            <div class="pull-left">
+
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="بحث سريع في بيانات الصفحة الواحدة"
+                                       ng-change="refreshGUI()"
+                                       ng-model="myBankTransactions.searchText">
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+
+                                        <th>
+                                            <span>#</span>
+                                        </th>
+
+                                        <th>
+                                            <span>التاريخ</span>
+                                        </th>
+
+                                        <th>
+                                            <span>نوعها</span>
+                                        </th>
+
+                                        <th>
+                                            <span>المبلغ</span>
+                                        </th>
+
+                                        <th>
+                                            <span>البيان</span>
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="bankTransaction in myBankTransactions | filter:myBankTransactions.searchText">
+                                        <td>{{$index+1}}</td>
+                                        <td class="fit">
+                                            <span ng-show="dateType==='H'">{{bankTransaction.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                            <span ng-show="dateType==='G'">{{bankTransaction.date | date: 'yyyy-MM-dd'}}</span>
+                                        </td>
+                                        <td>{{bankTransaction.transactionType.name}}</td>
+                                        <td class="fit">{{bankTransaction.amount | currency:' SAR ':2}}</td>
+                                        <td>{{bankTransaction.note}}</td>
+                                    </tr>
+                                    <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                                        ng-show="!myBankTransactions || myBankTransactions.length ==0">
+                                        <td colspan="6">
+                                            <p>
+                                                <span>لا يوجد معاملات مالية حتى الآن </span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mdl-tabs__panel mdl-tabs__panel_free" id="panel-6-company">
+
+                        <div class="form-group row" ng-if="myProductPurchases.length > 0">
+
+                            <div class="pull-left">
+
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="بحث سريع في بيانات الصفحة الواحدة"
+                                       ng-change="refreshGUI()"
+                                       ng-model="myProductPurchases.searchText">
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+
+                                        <th>
+                                            <span>#</span>
+                                        </th>
+
+                                        <th>
+                                            <span>رقم حركة الشراء</span>
+                                        </th>
+
+                                        <th>
+                                            <span>السلعة</span>
+                                        </th>
+
+                                        <th>
+                                            <span>تاريخ الشراء</span>
+                                        </th>
+
+                                        <th>
+                                            <span>المالك</span>
+                                        </th>
+
+                                        <th>
+                                            <span>كمية الشراء</span>
+                                        </th>
+
+                                        <th>
+                                            <span>سعر شراء الوحدة</span>
+                                        </th>
+
+                                        <th>
+                                            <span>الكمية المتوفرة</span>
+                                        </th>
+
+                                        <th>
+                                            <span>بواسطة</span>
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="productPurchase in myProductPurchases | filter:myProductPurchases.searchText">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{productPurchase.code}}</td>
+                                        <td>{{productPurchase.product.name}}</td>
+                                        <td class="fit">
+                                            <span ng-show="dateType==='H'">{{productPurchase.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                            <span ng-show="dateType==='G'">{{productPurchase.date | date: 'yyyy-MM-dd'}}</span>
+                                            <span class="label label-info">{{productPurchase.date | date: 'hh:mm a'}}</span>
+                                        </td>
+                                        <td>{{productPurchase.seller.contact.shortName}}</td>
+                                        <td>{{productPurchase.quantity}}</td>
+                                        <td>{{productPurchase.unitPurchasePrice | currency:' SAR ':2}}</td>
+                                        <td class="fit"
+                                            ng-class="{'success': productPurchase.remain > 0, 'danger': productPurchase.remain <=0}">
+                                            <span>{{productPurchase.remain}}</span>
+                                        </td>
+                                        <td>{{productPurchase.person.contact.shortName}}</td>
+                                    </tr>
+                                    <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                                        ng-show="!myProductPurchases || myProductPurchases.length ==0">
+                                        <td colspan="9">
+                                            <p>
+                                                <span>لا توجد سلع حتى الآن </span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mdl-tabs__panel mdl-tabs__panel_free" id="panel-7-company">
+
+                        <form name="form2"
+                              ng-submit="submitCompany()"
+                              novalidate="novalidate"
+                              focus-group=""
+                              focus-stack=""
+                              focus-group-head="loop"
+                              focus-group-tail="loop">
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                                 ng-show="form2.$invalid && form2.$submitted">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>فضلاً اكمل الحقول المطلوبة</strong>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <label for="yamamahUserName" class="control-label">اسم المستخدم</label>
+                                    <input id="yamamahUserName"
+                                           dir="ltr"
+                                           type="text"
+                                           required="required"
+                                           disable-validation-message=""
+                                           placeholder="ادخل اسم المستخدم أو رقم الجوال لحساب اليمامة للرسائل"
+                                           class="form-control"
+                                           ng-model="selectedCompany.yamamahUserName">
+                                </div>
+
+                                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <label for="yamamahPassword" class="control-label">كلمة المرور</label>
+                                    <input id="yamamahPassword"
+                                           dir="ltr"
+                                           type="password"
+                                           required="required"
+                                           disable-validation-message=""
+                                           placeholder="ادخل كلمة المرور لحساب اليمامة للرسائل"
+                                           class="form-control"
+                                           ng-model="selectedCompany.yamamahPassword">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                <h3 class="box-info">
+                                    <span>الرصيد = </span>
+                                    {{sms.credit}}
+                                    <span>[{{sms.description}}]</span>
+                                </h3>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="panel-footer">
+
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                        <button uib-tooltip="حفظ"
+                                                tooltip-append-to-body="true"
+                                                type="submit"
+                                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect pull-right">
+                                        <span class="mdl-list__item-primary-content">
+                                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/save.{{iconSetType}}"
+                                                 width="24" height="24">
+                                            <span>حفظ البيانات</span>
+                                        </span>
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,236 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-body">
+
+        <div class="row">
+            <ul dir="rtl" class="breadcrumb">
+                <li>
+                    <a href="" ng-click="openStateMenu()">
+                        <span>الرئيسية</span>
+                    </a>
+                </li>
+                <li>
+                    <span>المخزون</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 pull-right">
+                <button id="productPurchase-menu-lower-right" style="width: 100%;"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                    <span>العمليات</span>
+                </button>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    for="productPurchase-menu-lower-right">
+
+                    <li class="mdl-menu__item mdl-list__item"
+                        ng-click="openProductPurchasesFilter()">
+                        <span class="mdl-list__item-primary-content">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}" width="24"
+                                 height="24">
+                            <span>البحث المتقدم</span>
+                        </span>
+                    </li>
+
+                    <li class="mdl-menu__item--full-bleed-divider"></li>
+
+                    <li class="mdl-menu__item mdl-list__item"
+                        ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_CREATE'])"
+                        ng-click="newParent()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/product.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>تصنيف رئيسي جديد...</span>
+                            </span>
+                    </li>
+
+                    <li class="mdl-menu__item mdl-list__item"
+                        ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_CREATE'])"
+                        ng-click="newProduct()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/product.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>تصنيف فرعي جديد...</span>
+                            </span>
+                    </li>
+
+                    <li class="mdl-menu__item mdl-list__item"
+                        ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_PURCHASE_CREATE'])"
+                        ng-click="newProductPurchase()">
+                            <span class="mdl-list__item-primary-content">
+                                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                     height="24">
+                               <span>شراء سلعة جديدة...</span>
+                            </span>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <ul class="panel-controls pull-left"
+                style="margin-top: 2px;">
+                <li>
+                    <a href=""
+                       ng-click="openProductPurchasesFilter()"
+                       tooltip-append-to-body="true"
+                       uib-tooltip="بحث">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/search.{{iconSetType}}" width="24" height="24">
+                    </a>
+                </li>
+            </ul>
+            <div class="panel-title-box pull-right">
+                <h3>نتائج البحث</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            <div class="form-group row" ng-if="pageProductPurchase.totalElements > 0">
+
+                <div class="pull-right btn-toolbar">
+
+                    <div class="btn-group" data-toggle="buttons">
+
+                        <button uib-tooltip="السابق"
+                                tooltip-append-to-body="true"
+                                ng-disabled="pageProductPurchase.first"
+                                type="button"
+                                ng-click="selectPrevProductPurchasesPage()"
+                                class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-1 col-sm-1 col-md-1 col-lg-1 pull-right">
+                            <i class="material-icons md-36">keyboard_arrow_right</i>
+                        </button>
+
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 pull-left">
+                            <input dir="rtl"
+                                   type="text"
+                                   readonly
+                                   class="form-control"
+                                   style="text-align: center!important;"
+                                   ng-model="pageProductPurchase.currentPageString">
+                        </div>
+
+                        <button uib-tooltip="التالي"
+                                tooltip-append-to-body="true"
+                                ng-disabled="pageProductPurchase.last"
+                                type="button"
+                                ng-click="selectNextProductPurchasesPage()"
+                                class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-1 col-sm-1 col-md-1 col-lg-1 pull-right">
+                            <i class="material-icons md-36">keyboard_arrow_left</i>
+                        </button>
+
+                        <button uib-tooltip="طباعة"
+                                tooltip-append-to-body="true"
+                                type="button"
+                                ng-click="printToCart('printProductPurchaseTable', 'سجل المخزون')"
+                                class="mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}" width="24" height="24">
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="pull-left">
+
+                    <input type="text"
+                           class="form-control"
+                           placeholder="بحث سريع في بيانات الصفحة الواحدة"
+                           ng-change="refreshGUI()"
+                           ng-model="productPurchases.searchText">
+
+                </div>
+
+            </div>
+
+            <div class="form-group row" id="printProductPurchaseTable">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+
+                            <th>
+                                <span>#</span>
+                            </th>
+
+                            <th>
+                                <span>رقم حركة الشراء</span>
+                            </th>
+
+                            <th>
+                                <span>السلعة</span>
+                            </th>
+
+                            <th>
+                                <span>تاريخ الشراء</span>
+                            </th>
+
+                            <th>
+                                <span>المالك</span>
+                            </th>
+
+                            <th>
+                                <span>كمية الشراء</span>
+                            </th>
+
+                            <th>
+                                <span>سعر شراء الوحدة</span>
+                            </th>
+
+                            <th>
+                                <span>الكمية المتوفرة</span>
+                            </th>
+
+                            <th>
+                                <span>بواسطة</span>
+                            </th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="productPurchase in productPurchases | filter:productPurchases.searchText">
+                            <td>{{$index+1}}</td>
+                            <td>{{productPurchase.code}}</td>
+                            <td>{{productPurchase.product.name}}</td>
+                            <td>
+                                <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{productPurchase.date | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                                <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{productPurchase.date | date: 'yyyy-MM-dd'}}</span>
+                                <span class="label label-info no-print">{{productPurchase.date | date: 'hh:mm a'}}</span>
+                            </td>
+                            <td>{{productPurchase.seller.contact.shortName}}</td>
+                            <td>{{productPurchase.quantity}}</td>
+                            <td>{{productPurchase.unitPurchasePrice | currency:' SAR ':2}}</td>
+                            <td
+                                ng-class="{'success': productPurchase.remain > 0, 'danger': productPurchase.remain <=0}">
+                                <span>{{productPurchase.remain}}</span>
+                            </td>
+                            <td>{{productPurchase.person.contact.shortName}}</td>
+                        </tr>
+                        <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
+                            ng-if="!productPurchases || productPurchases.length ==0">
+                            <td colspan="9">
+                                <p>
+                                    <span>لا توجد سلع حتى الآن </span>
+                                </p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

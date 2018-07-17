@@ -1,0 +1,221 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="panel panel-body">
+
+        <div class="row">
+            <ul dir="rtl" class="breadcrumb">
+                <li>
+                    <a href="" ng-click="openStateMenu()">
+                        <span>الرئيسية</span>
+                    </a>
+                </li>
+                <li>
+                    <span>سجل المستخدمين</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 pull-right">
+                <button id="person-menu-lower-right" style="width: 100%;"
+                        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+                    <span>العمليات</span>
+                </button>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    for="person-menu-lower-right">
+                    <li class="mdl-menu__item mdl-list__item mdl-menu__item--full-bleed-divider"
+                        ng-click="fetchPersonTableData()">
+                    <span class="mdl-list__item-primary-content">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}" width="24" height="24">
+                        <span>عرض البيانات</span>
+                    </span>
+                    </li>
+                    <li class="mdl-menu__item mdl-list__item" ng-click="newPerson()"
+                        ng-if="contains(me.team.authorities, ['ROLE_PERSON_CREATE'])">
+                    <span class="mdl-list__item-primary-content">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+                        <span>جديد...</span>
+                    </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="pull-left" ng-init="toggleList=1">
+                <div class="btn-toolbar">
+                    <div class="btn-group" data-toggle="buttons">
+                        <button class="btn btn-default mdl-button mdl-js-button mdl-js-ripple-effect"
+                                type="button" ng-click="toggleList=1"
+                                ng-class="{'mdl-color--primary-dark':toggleList===1}">
+                            <input type="radio" name="options"/>
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/reorder.{{iconSetType}}" width="24"
+                                 height="24">
+                        </button>
+                        <button class="btn btn-default mdl-button mdl-js-button mdl-js-ripple-effect"
+                                type="button" ng-click="toggleList=2"
+                                ng-class="{'mdl-color--primary-dark':toggleList===2}">
+                            <input type="radio" name="options"/>
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/module.{{iconSetType}}" width="24"
+                                 height="24">
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="toggleList===1">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <ul class="panel-controls pull-left"
+                style="margin-top: 2px;">
+                <li>
+                    <a href=""
+                       ng-click="fetchPersonTableData()"
+                       tooltip-append-to-body="true"
+                       uib-tooltip="تحديث البيانات">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/refresh.{{iconSetType}}" width="24" height="24">
+                    </a>
+                    <a href=""
+                       ng-if="contains(me.team.authorities, ['ROLE_TEAM_CREATE'])"
+                       ng-click="newPerson()"
+                       tooltip-append-to-body="true"
+                       uib-tooltip="مستخدم جديد">
+                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+                    </a>
+                </li>
+            </ul>
+            <div class="panel-title-box pull-right">
+                <h3>قائمة المستخدمين</h3>
+            </div>
+        </div>
+        <div class="panel-body panel-body-table">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            <span>#</span>
+                        </th>
+
+                        <th>
+                            <span>الاسم</span>
+                        </th>
+
+                        <th>
+                            <span>البريد الإلكتروني</span>
+                        </th>
+
+                        <th>
+                            <span>مجموعة الصلاحيات</span>
+                        </th>
+
+                        <th>
+                            <span>رقم الجوال</span>
+                        </th>
+
+                        <th>
+                            <span>تاريخ آخر دخول</span>
+                        </th>
+
+                        <th>
+                            <span>أخر عنوان دخول</span>
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="person in persons" context-menu="rowMenuPerson">
+                        <td>{{$index+1}}</td>
+                        <td>
+                            <span class="label label-success">{{person.enabled ? 'مفعل' : ''}}</span>
+                            <span class="label label-danger">{{person.enabled ? '' : 'معطل'}}</span>
+                            {{person.contact.shortName}}
+                        </td>
+                        <td>{{person.email}}</td>
+                        <td>{{person.team.name}}</td>
+                        <td>{{person.contact.mobile}}</td>
+                        <td>
+                            <span ng-show="dateType==='H'">{{person.lastLoginDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-show="dateType==='G'">{{person.lastLoginDate | date: 'yyyy-MM-dd'}}</span>
+                            <span class="label label-success">{{person.lastLoginDate | date:'h:m a'}}</span>
+                        </td>
+                        <td>{{person.ipAddress}}</td>
+                    </tr>
+                    <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                        ng-show="!persons || persons.length ==0">
+                        <td colspan="7">لا توجد نتائج</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="toggleList===2">
+    <div st-table="collection2" st-safe-src="persons">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="person in collection2">
+            <!-- CONTACT ITEM -->
+            <div class="panel panel-default">
+                <div class="panel-body profile">
+                    <div class="profile-image">
+                        <img width="100" height="100"
+                             ng-src="/ui/img/{{iconSet}}/person.{{iconSetType}}"
+                             alt="{{person.name}}"/>
+                    </div>
+                    <div class="profile-data">
+                        <div class="profile-data-name">{{person.name}}</div>
+                    </div>
+                    <div class="profile-controls">
+                        <!--<a href="" class="profile-control-left"><span class="fa fa-info-circle"></span></a>-->
+                        <!--<a href="" class="profile-control-right"><span class="fa fa-phone"></span></a>-->
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="contact-info">
+                        <p>
+                            <strong>الاسم</strong>
+                            {{person.contact.shortName}}
+                        </p>
+                        <hr>
+                        <p>
+                            <strong>مجموعة الصلاحيات</strong>
+                            {{person.team.name}}
+                        </p>
+                        <hr>
+                        <p>
+                            <strong>البريد الإلكتروني</strong>
+                            {{person.email}}
+                        </p>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <button uib-tooltip="مستخدم جديد"
+                                tooltip-append-to-body="true"
+                                type="button"
+                                ng-if="contains(me.team.authorities, ['ROLE_PERSON_CREATE'])"
+                                ng-click="newPerson();"
+                                class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+                        </button>
+                        <button uib-tooltip="تعديل"
+                                tooltip-append-to-body="true"
+                                type="button"
+                                ng-if="contains(me.team.authorities, ['ROLE_PERSON_UPDATE'])"
+                                ng-click="ModalProvider.openPersonUpdateModel(person)"
+                                class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/edit.{{iconSetType}}" width="24" height="24">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- END CONTACT ITEM -->
+        </div>
+    </div>
+</div>

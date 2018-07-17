@@ -1,0 +1,690 @@
+<form dir="rtl" name="form" ng-submit="submit()" novalidate="novalidate" focus-group="" focus-stack=""
+      focus-group-head="loop" focus-group-tail="loop">
+
+    <div class="modal-header mdl-color--primary mdl-navigation__link-active">
+        <a class="pull-left" href="" ng-click="cancel()">
+            <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+        </a>
+        <h3 class="panel-title mdl-list__item pull-right mdl-color-text--white">
+            <span class="mdl-list__item-primary-content">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/contract.{{iconSetType}}" width="24" height="24">
+                <strong>عقد قديم</strong>
+            </span>
+        </h3>
+    </div>
+
+    <div class="modal-body modal-body-free" id="modal-body">
+
+        <div class="row">
+
+            <div class="form-group row" ng-show="form.$invalid && form.$submitted">
+                <div class="alert alert-danger" role="alert">
+                    <strong>فضلاً اكمل الحقول المطلوبة</strong>
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <button uib-tooltip="مستثمر جديد"
+                        tooltip-append-to-body="true"
+                        type="button"
+                        ng-if="contains(me.team.authorities, ['ROLE_SELLER_CREATE'])"
+                        ng-click="newSeller()"
+                        class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                    <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/seller.{{iconSetType}}" width="24"
+                         height="24">
+                </button>
+
+                <button uib-tooltip="عميل / كفيل جديد"
+                        tooltip-append-to-body="true"
+                        type="button"
+                        ng-if="contains(me.team.authorities, ['ROLE_CUSTOMER_CREATE'])"
+                        ng-click="newCustomer()"
+                        class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                    <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/customer.{{iconSetType}}" width="24"
+                         height="24">
+                </button>
+
+                <button uib-tooltip="تصنيف جديد"
+                        tooltip-append-to-body="true"
+                        type="button"
+                        ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_CREATE'])"
+                        ng-click="newParent()"
+                        class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                    <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/product.{{iconSetType}}" width="24"
+                         height="24">
+                </button>
+
+                <button uib-tooltip="صنف جديد"
+                        tooltip-append-to-body="true"
+                        type="button"
+                        ng-if="contains(me.team.authorities, ['ROLE_PRODUCT_CREATE'])"
+                        ng-click="newProduct()"
+                        class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                    <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/product.{{iconSetType}}" width="24"
+                         height="24">
+                </button>
+
+            </div>
+
+            <hr>
+
+            <div class="form-group row">
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label for="seller" class="control-label">
+                        <span>المستثمر</span>
+                        <strong>
+                            <a href=""
+                               ng-if="contains(me.team.authorities, ['ROLE_SELLER_CREATE'])"
+                               ng-click="newSeller()">مستثمر جديد</a>
+                        </strong>
+                    </label>
+                    <ui-select id="seller"
+                               ng-model="contract.seller"
+                               required="required"
+                               disable-validation-message=""
+                               on-select="findProductPurchasesBySeller(contract.seller)"
+                               theme="bootstrap">
+                        <ui-select-match placeholder="الحقل مطلوب">
+                            {{$select.selected.contact.shortName}}
+                        </ui-select-match>
+                        <ui-select-choices
+                                refresh="searchSellers($select)"
+                                refresh-delay="300"
+                                repeat="seller in sellers | filter: $select.search | orderBy:'code' track by $index">
+
+                            <div class="mdl-menu__item--full-bleed-divider"></div>
+                            <li class="mdl-list__item mdl-list__item--two-line" style="padding: unset;cursor: pointer">
+                                <span class="mdl-list__item-primary-content">
+                                    <span class="material-icons mdl-list__item-avatar"
+                                          style="background-color: unset;background-image: url('/ui/img/{{iconSet}}/seller.{{iconSetType}}')"></span>
+                                    <div ng-bind-html="seller.name | highlight: $select.search"></div>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>رقم المستثمر / </span>
+                                        {{seller.code}}
+                                    </span>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>الاسم / </span>
+                                        {{seller.contact.shortName}}
+                                    </span>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>رقم الجوال / </span>
+                                        {{seller.contact.mobile}}
+                                    </span>
+                                </span>
+                            </li>
+
+                            <div ng-if="$index === $select.items.length-1">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                                        ng-disabled="buffer.lastSeller"
+                                        style="width: 100%; margin-top: 5px;"
+                                        ng-click="searchSellers($select, $event);">تحميل المزيد
+                                </button>
+                            </div>
+
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label for="customer" class="control-label">
+                        <span>العميل</span>
+                        <strong>
+                            <a href=""
+                               ng-if="contains(me.team.authorities, ['ROLE_CUSTOMER_CREATE'])"
+                               ng-click="newCustomer()">عميل جديد</a>
+                        </strong>
+                    </label>
+                    <ui-select id="customer"
+                               ng-disabled="!contract.seller.id"
+                               ng-model="contract.customer"
+                               required="required"
+                               disable-validation-message=""
+                               theme="bootstrap">
+                        <ui-select-match placeholder="الحقل مطلوب">
+                            {{$select.selected.contact.shortName}}
+                        </ui-select-match>
+                        <ui-select-choices
+                                refresh="searchCustomers($select)"
+                                refresh-delay="300"
+                                repeat="customer in customers | filter: $select.search | orderBy:'code' track by $index">
+
+                            <div class="mdl-menu__item--full-bleed-divider"></div>
+                            <li class="mdl-list__item mdl-list__item--two-line" style="padding: unset;cursor: pointer">
+                                <span class="mdl-list__item-primary-content">
+                                    <span class="material-icons mdl-list__item-avatar"
+                                          style="background-color: unset;background-image: url('/ui/img/{{iconSet}}/customer.{{iconSetType}}')"></span>
+                                    <div ng-bind-html="customer.name | highlight: $select.search"></div>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>رقم العميل / </span>
+                                        {{customer.code}}
+                                    </span>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>الاسم / </span>
+                                        {{customer.contact.shortName}}
+                                    </span>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>رقم الجوال / </span>
+                                        {{customer.contact.mobile}}
+                                    </span>
+                                </span>
+                            </li>
+
+                            <div ng-if="$index === $select.items.length-1">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                                        ng-disabled="buffer.lastCustomer"
+                                        style="width: 100%; margin-top: 5px;"
+                                        ng-click="searchCustomers($select, $event);">تحميل المزيد
+                                </button>
+                            </div>
+
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label for="sponsor1" class="control-label">
+                        <span>الكفيل الأول</span>
+                        <strong>
+                            <a href=""
+                               ng-if="contains(me.team.authorities, ['ROLE_CUSTOMER_CREATE'])"
+                               ng-click="newCustomer()">كفيل جديد</a>
+                        </strong>
+                    </label>
+                    <ui-select id="sponsor1"
+                               ng-disabled="!contract.customer.id"
+                               ng-model="contract.sponsor1"
+                               theme="bootstrap">
+                        <ui-select-match placeholder="الحقل اختياري">
+                            {{$select.selected.contact.shortName}}
+                        </ui-select-match>
+                        <ui-select-choices
+                                refresh="searchCustomers($select)"
+                                refresh-delay="300"
+                                repeat="sponsor1 in customers | filter: $select.search | orderBy:'code' track by $index">
+
+                            <div class="mdl-menu__item--full-bleed-divider"></div>
+                            <li class="mdl-list__item mdl-list__item--two-line" style="padding: unset;cursor: pointer">
+                                <span class="mdl-list__item-primary-content">
+                                    <span class="material-icons mdl-list__item-avatar"
+                                          style="background-color: unset;background-image: url('/ui/img/{{iconSet}}/customer.{{iconSetType}}')"></span>
+                                    <div ng-bind-html="sponsor1.name | highlight: $select.search"></div>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>رقم الحساب / </span>
+                                        {{sponsor1.code}}
+                                    </span>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>الاسم / </span>
+                                        {{sponsor1.contact.shortName}}
+                                    </span>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>رقم الجوال / </span>
+                                        {{sponsor1.contact.mobile}}
+                                    </span>
+                                </span>
+                            </li>
+
+                            <div ng-if="$index === $select.items.length-1">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                                        ng-disabled="buffer.lastCustomer"
+                                        style="width: 100%; margin-top: 5px;"
+                                        ng-click="searchCustomers($select, $event);">تحميل المزيد
+                                </button>
+                            </div>
+
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <label for="sponsor2" class="control-label">
+                        <span>الكفيل الثاني</span>
+                        <strong>
+                            <a href=""
+                               ng-if="contains(me.team.authorities, ['ROLE_CUSTOMER_CREATE'])"
+                               ng-click="newCustomer()">كفيل جديد</a>
+                        </strong>
+                    </label>
+                    <ui-select id="sponsor2"
+                               ng-disabled="!contract.sponsor1.id"
+                               ng-model="contract.sponsor2"
+                               theme="bootstrap">
+                        <ui-select-match placeholder="الحقل اختياري">
+                            {{$select.selected.contact.shortName}}
+                        </ui-select-match>
+                        <ui-select-choices
+                                refresh="searchCustomers($select)"
+                                refresh-delay="300"
+                                repeat="sponsor2 in customers | filter: $select.search | orderBy:'code' track by $index">
+
+                            <div class="mdl-menu__item--full-bleed-divider"></div>
+                            <li class="mdl-list__item mdl-list__item--two-line" style="padding: unset;cursor: pointer">
+                                <span class="mdl-list__item-primary-content">
+                                    <span class="material-icons mdl-list__item-avatar"
+                                          style="background-color: unset;background-image: url('/ui/img/{{iconSet}}/customer.{{iconSetType}}')"></span>
+                                    <div ng-bind-html="sponsor2.name | highlight: $select.search"></div>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>رقم الحساب / </span>
+                                        {{sponsor2.code}}
+                                    </span>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>الاسم / </span>
+                                        {{sponsor2.contact.shortName}}
+                                    </span>
+                                    <span class="mdl-list__item-sub-title">
+                                        <span>رقم الجوال / </span>
+                                        {{sponsor2.contact.mobile}}
+                                    </span>
+                                </span>
+                            </li>
+
+                            <div ng-if="$index === $select.items.length-1">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+                                        ng-disabled="buffer.lastCustomer"
+                                        style="width: 100%; margin-top: 5px;"
+                                        ng-click="searchCustomers($select, $event);">تحميل المزيد
+                                </button>
+                            </div>
+
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <label for="code" class="control-label">رقم العقد</label>
+                    <div dir="ltr" class="input-group" id="code">
+                        <span class="input-group-addon">غير مكرر</span>
+                        <input dir="rtl"
+                               type="number"
+                               min="1"
+                               class="form-control"
+                               placeholder="اجباري"
+                               required="required"
+                               disable-validation-message=""
+                               ng-model="contract.code">
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <label for="discount" class="control-label">الخصم</label>
+                    <div dir="ltr" class="input-group" id="discount">
+                        <span class="input-group-addon">ريال سعودي</span>
+                        <input dir="rtl"
+                               type="number"
+                               min="0"
+                               class="form-control"
+                               required="required"
+                               disable-validation-message=""
+                               placeholder="اجباري"
+                               ng-model="contract.discount">
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <label for="writtenDate" class="control-label">تاريخ كتابة العقد</label>
+                    <div dir="ltr" class="input-group" id="writtenDate" ng-init="calendar1='G'">
+                            <span class="input-group-addon">
+                                <a href="" ng-click="calendar1==='G'?calendar1='H':calendar1='G'">
+                                    <span ng-show="calendar1==='G'">ميلادي</span>
+                                    <span ng-show="calendar1==='H'">هجري</span>
+                                </a>
+                            </span>
+                        <div style="position: relative">
+                            <input style="position: absolute" ng-show="calendar1==='H'"
+                                   type="text"
+                                   class="form-control is-calendarPicker animated-div"
+                                   ng-model="contract.writtenDate"
+                                   calendarType="ummalqura"
+                                   language="ar"
+                                   dateFormat="yyyy/mm/dd"
+                                   showOnFocus="true"
+                                   pickerClass="myPicker"
+                                   kdatepicker/>
+                            <input style="position: absolute" ng-show="calendar1==='G'"
+                                   type="text"
+                                   class="form-control is-calendarPicker animated-div"
+                                   ng-model="contract.writtenDate"
+                                   calendarType="gregorian"
+                                   language="ar-EG"
+                                   dateFormat="yyyy/mm/dd"
+                                   showOnFocus="true"
+                                   pickerClass="myPicker"
+                                   kdatepicker/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <label for="premiumStartDate" class="control-label">تاريخ بداية الأقساط</label>
+                    <div dir="ltr" class="input-group" id="premiumStartDate" ng-init="calendar2='G'">
+                            <span class="input-group-addon">
+                                <a href="" ng-click="calendar2==='G'?calendar2='H':calendar2='G'">
+                                    <span ng-show="calendar2==='G'">ميلادي</span>
+                                    <span ng-show="calendar2==='H'">هجري</span>
+                                </a>
+                            </span>
+                        <div style="position: relative">
+                            <input style="position: absolute" ng-show="calendar2==='H'"
+                                   type="text"
+                                   class="form-control is-calendarPicker animated-div"
+                                   ng-model="contract.premiumStartDate"
+                                   calendarType="ummalqura"
+                                   language="ar"
+                                   dateFormat="yyyy/mm/dd"
+                                   showOnFocus="true"
+                                   pickerClass="myPicker"
+                                   kdatepicker/>
+                            <input style="position: absolute" ng-show="calendar2==='G'"
+                                   type="text"
+                                   class="form-control is-calendarPicker animated-div"
+                                   ng-model="contract.premiumStartDate"
+                                   calendarType="gregorian"
+                                   language="ar-EG"
+                                   dateFormat="yyyy/mm/dd"
+                                   showOnFocus="true"
+                                   pickerClass="myPicker"
+                                   kdatepicker/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <label for="premiumAmount" class="control-label">مقدار القسط</label>
+                    <div dir="ltr" class="input-group" id="premiumAmount">
+                        <span class="input-group-addon">ريال سعودي</span>
+                        <input dir="rtl"
+                               type="number"
+                               min="0"
+                               class="form-control"
+                               required="required"
+                               disable-validation-message=""
+                               placeholder="اجباري"
+                               ng-model="contract.premiumAmount">
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <label for="advancedAmount" class="control-label">دفعة مقدمة</label>
+                    <div dir="ltr" class="input-group" id="advancedAmount">
+                        <span class="input-group-addon">ريال سعودي</span>
+                        <input dir="rtl"
+                               type="number"
+                               min="0"
+                               class="form-control"
+                               required="required"
+                               disable-validation-message=""
+                               placeholder="اجباري"
+                               ng-model="contract.advancedAmount">
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <label for="paid" class="control-label">المبالغ الواصلة</label>
+                    <div dir="ltr" class="input-group" id="paid">
+                        <span class="input-group-addon">ريال سعودي</span>
+                        <input dir="rtl"
+                               type="number"
+                               min="0"
+                               class="form-control"
+                               placeholder="اجباري"
+                               required="required"
+                               disable-validation-message=""
+                               ng-model="contract.paid">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <label for="paperFees" class="control-label">الرسوم الإدارية</label>
+                    <div dir="ltr" class="input-group" id="paperFees">
+                        <span class="input-group-addon">ريال سعودي</span>
+                        <input dir="rtl"
+                               type="number"
+                               min="0"
+                               class="form-control"
+                               placeholder="اختياري"
+                               ng-model="contract.paperFees">
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <label for="commissionFees" class="control-label">عمولة العقد</label>
+                    <div dir="ltr" class="input-group" id="commissionFees">
+                        <span class="input-group-addon">ريال سعودي</span>
+                        <input dir="rtl"
+                               type="number"
+                               min="0"
+                               class="form-control"
+                               placeholder="اختياري"
+                               ng-model="contract.commissionFees">
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                    <label for="lawFees" class="control-label">رسوم المحاماة</label>
+                    <div dir="ltr" class="input-group" id="lawFees">
+                        <span class="input-group-addon">ريال سعودي</span>
+                        <input dir="rtl"
+                               type="number"
+                               min="0"
+                               class="form-control"
+                               placeholder="اختياري"
+                               ng-model="contract.lawFees">
+                    </div>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="form-group row">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+
+                            <th>
+                                <span>التصنيف</span>
+                            </th>
+
+                            <th>
+                                <span>السلعة</span>
+                            </th>
+
+                            <th>
+                                <span>الكمية</span>
+                            </th>
+
+                            <th>
+                                <span>سعر بيع الوحدة</span>
+                            </th>
+
+                            <th>
+                                <span>VAT</span>
+                                <i uib-tooltip="القيمة المضافة للوحدة"
+                                   tooltip-append-to-body="true"
+                                   class="fa fa-info-circle"></i>
+                            </th>
+
+                            <th>
+                                <span>مجموع البيع</span>
+                            </th>
+
+                            <th>
+                                <span>العمليات</span>
+                            </th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="productPurchase in productPurchases">
+                            <td>
+                                <ui-select id="parent"
+                                           ng-model="buffer.parent"
+                                           required="required"
+                                           disable-validation-message=""
+                                           uis-open-close="refreshParents(isOpen)"
+                                           theme="bootstrap">
+                                    <ui-select-match placeholder="اختر التصنيف">
+                                        {{$select.selected.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="parent in parents | filter: $select.search | orderBy:'code' track by $index">
+
+                                        <div class="mdl-menu__item--full-bleed-divider"></div>
+                                        <li class="mdl-list__item mdl-list__item--two-line" style="padding: unset;cursor: pointer">
+                                                <span class="mdl-list__item-primary-content">
+                                                    <span class="material-icons mdl-list__item-avatar"
+                                                          style="background-color: unset;background-image: url('/ui/img/{{iconSet}}/product.{{iconSetType}}')"></span>
+                                                    <div ng-bind-html="parent.name | highlight: $select.search"></div>
+                                                    <span class="mdl-list__item-sub-title">
+                                                        <span>رقم التصنيف / </span>
+                                                        {{parent.code}}
+                                                    </span>
+                                                    <span class="mdl-list__item-sub-title">
+                                                        <span>الاسم / </span>
+                                                        {{parent.name}}
+                                                    </span>
+                                                </span>
+                                        </li>
+
+                                    </ui-select-choices>
+                                </ui-select>
+                            </td>
+                            <td>
+                                <ui-select id="child"
+                                           ng-model="productPurchase.product"
+                                           required="required"
+                                           disable-validation-message=""
+                                           uis-open-close="refreshChilds(isOpen)"
+                                           theme="bootstrap">
+                                    <ui-select-match placeholder="اختر السلعة">
+                                        {{$select.selected.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices
+                                            repeat="product in buffer.parent.childs | filter: $select.search | orderBy:'code' track by $index">
+
+                                        <div class="mdl-menu__item--full-bleed-divider"></div>
+                                        <li class="mdl-list__item mdl-list__item--two-line" style="padding: unset;cursor: pointer">
+                                            <span class="mdl-list__item-primary-content">
+                                                <span class="material-icons mdl-list__item-avatar"
+                                                      style="background-color: unset;background-image: url('/ui/img/{{iconSet}}/product.{{iconSetType}}')"></span>
+                                                <div ng-bind-html="product.name | highlight: $select.search"></div>
+                                                <span class="mdl-list__item-sub-title">
+                                                    <span>رقم التصنيف / </span>
+                                                    {{product.code}}
+                                                </span>
+                                                <span class="mdl-list__item-sub-title">
+                                                    <span>الاسم / </span>
+                                                    {{product.name}}
+                                                </span>
+                                            </span>
+                                        </li>
+
+                                    </ui-select-choices>
+                                </ui-select>
+                            </td>
+                            <td width="10%">
+                                <input dir="rtl"
+                                       type="number"
+                                       min="1"
+                                       required="required"
+                                       disable-validation-message=""
+                                       class="form-control"
+                                       ng-model="productPurchase.quantity">
+                            </td>
+                            <td width="10%">
+                                <input dir="rtl"
+                                       type="number"
+                                       min="1"
+                                       required="required"
+                                       disable-validation-message=""
+                                       class="form-control"
+                                       ng-model="productPurchase.unitSellPrice">
+                            </td>
+                            <td>{{productPurchase.unitVat = (productPurchase.unitSellPrice * selectedCompany.vatFactor) | currency:'':2}}</td>
+                            <td>{{productPurchase.totalSell = (productPurchase.quantity * productPurchase.unitSellPrice) | currency:' SAR ':2}}</td>
+                            <td>
+                                <div class="row">
+                                    <button uib-tooltip="جديد"
+                                            tooltip-append-to-body="true"
+                                            type="button"
+                                            ng-click="addProductPurchase()"
+                                            class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24"
+                                             height="24">
+                                    </button>
+                                    <button uib-tooltip="حذف"
+                                            tooltip-append-to-body="true"
+                                            type="button"
+                                            ng-click="removeProductPurchase($index)"
+                                            class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/delete.{{iconSetType}}" width="24"
+                                             height="24">
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="blank_row" style="height: 10px !important; background-color: #FFFFFF;"
+                            ng-show="!productPurchases || productPurchases.length ==0">
+                            <td colspan="7">
+                                <p>
+                                    <span>قم باضافة السلع من خلال هذا الرابط </span>
+                                    <a href="" ng-click="addProductPurchase()">اضغط هنا</a>
+                                </p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="row">
+            <button uib-tooltip="اضافة"
+                    tooltip-append-to-body="true"
+                    type="submit"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/add.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="مسح الحقول"
+                    tooltip-append-to-body="true"
+                    type="reset"
+                    ng-click="form.$setPristine()"
+                    class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/delete.{{iconSetType}}" width="24" height="24">
+            </button>
+            <button uib-tooltip="خروج"
+                    tooltip-append-to-body="true"
+                    type="button"
+                    ng-click="cancel()"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/close.{{iconSetType}}" width="24" height="24">
+            </button>
+        </div>
+
+    </div>
+
+</form>

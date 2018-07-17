@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- META SECTION -->
+    <title>مؤسسة المدار للتقسيط | Madar Institution</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- FAV ICON -->
+    <link rel="apple-touch-icon" sizes="57x57" th:href="@{~/ui/img/favicon/apple-icon-57x57.png}"/>
+    <link rel="apple-touch-icon" sizes="60x60" th:href="@{~/ui/img/favicon/apple-icon-60x60.png}"/>
+    <link rel="apple-touch-icon" sizes="72x72" th:href="@{~/ui/img/favicon/apple-icon-72x72.png}"/>
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{~/ui/img/favicon/apple-icon-76x76.png}"/>
+    <link rel="apple-touch-icon" sizes="114x114" th:href="@{~/ui/img/favicon/apple-icon-114x114.png}"/>
+    <link rel="apple-touch-icon" sizes="120x120" th:href="@{~/ui/img/favicon/apple-icon-120x120.png}"/>
+    <link rel="apple-touch-icon" sizes="144x144" th:href="@{~/ui/img/favicon/apple-icon-144x144.png}"/>
+    <link rel="apple-touch-icon" sizes="152x152" th:href="@{~/ui/img/favicon/apple-icon-152x152.png}"/>
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{~/ui/img/favicon/apple-icon-180x180.png}"/>
+    <link rel="icon" type="image/png" sizes="192x192" th:href="@{~/ui/img/favicon/android-icon-192x192.png}"/>
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{~/ui/img/favicon/favicon-32x32.png}"/>
+    <link rel="icon" type="image/png" sizes="96x96" th:href="@{~/ui/img/favicon/favicon-96x96.png}"/>
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{~/ui/img/favicon/favicon-16x16.png}"/>
+    <!--<link rel="manifest" th:href="@{~/ui/img/favicon/manifest.json}"/>-->
+    <meta name="msapplication-TileColor" content="#ffffff"/>
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png"/>
+    <meta name="theme-color" content="#ffffff"/>
+    <!-- END META SECTION -->
+
+    <!-- CSS INCLUDE -->
+    <link href="https://fonts.googleapis.com/css?family=Changa" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" id="theme" th:href="@{~/ui/css/theme-black.css}"/>
+    <!-- EOF CSS INCLUDE -->
+
+    <style>
+        html * {
+            font-family: 'Changa', sans-serif;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="error-container">
+        <div class="error-code" style="font-family: 'Agency FB'; font-size: 150px" th:text="${errorCode}"></div>
+        <div class="error-text">الدعم الفني</div>
+        <div class="error-subtext" th:text="${message}"></div>
+        <div class="error-actions">
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="home" class="btn btn-info btn-block btn-lg">الرئيسية</a>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-primary btn-block btn-lg" onClick="history.back();">الرجوع للصفحة السابقة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
