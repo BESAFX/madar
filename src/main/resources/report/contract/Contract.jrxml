@@ -1285,10 +1285,10 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Adobe Arabic" size="8" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/  ــ ــ ــ ــ  ــ ــ ــ ــ ــ ــ]]></text>
 						</staticText>
 					</frame>
 					<frame>
@@ -1335,10 +1335,10 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Adobe Arabic" size="8" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ]]></text>
 						</staticText>
 					</frame>
 					<frame>
@@ -1385,10 +1385,10 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Adobe Arabic" size="8" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ـــ ــ ــ ــ ــ ــ]]></text>
 						</staticText>
 					</frame>
 				</frame>
@@ -1440,10 +1440,10 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Adobe Arabic" size="8" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ــ ــ ـ ــ ــ ــ]]></text>
 						</staticText>
 					</frame>
 					<frame>
@@ -1475,7 +1475,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Adobe Arabic" size="8" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[الأسم/  ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ]]></text>
@@ -1490,10 +1490,10 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Adobe Arabic" size="8" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ـ ــ ــ ــ ــ ــ]]></text>
 						</staticText>
 					</frame>
 					<frame>
@@ -1525,10 +1525,10 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Adobe Arabic" size="8" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/  ــ ــ ــ  ــ ــ ــ ــ ــ ــ ــ]]></text>
 						</staticText>
 					</frame>
 				</frame>
