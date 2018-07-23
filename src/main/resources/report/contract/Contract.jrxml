@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Contract" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="d667083a-5ee3-46f8-b604-36494df2d410">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Contract" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryWithPageHeaderAndFooter="true" whenResourceMissingType="Empty" uuid="d667083a-5ee3-46f8-b604-36494df2d410">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -52,11 +52,11 @@
 					<imageExpression><![CDATA["src/main/resources/report/img/LOGO.jpg"]]></imageExpression>
 				</image>
 				<frame>
-					<reportElement x="339" y="35" width="191" height="60" uuid="5d10b094-a755-40bf-9367-e63f2ffcd558">
+					<reportElement x="270" y="35" width="260" height="60" uuid="5d10b094-a755-40bf-9367-e63f2ffcd558">
 						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					</reportElement>
 					<staticText>
-						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="191" height="30" uuid="89de8ad1-de0f-4b0a-9254-4997c0f3ac4c"/>
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="260" height="30" uuid="89de8ad1-de0f-4b0a-9254-4997c0f3ac4c"/>
 						<box padding="0">
 							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#754C29"/>
 							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#754C29"/>
@@ -71,7 +71,7 @@
 ]]></text>
 					</staticText>
 					<staticText>
-						<reportElement stretchType="RelativeToTallestObject" x="0" y="30" width="191" height="30" uuid="a8549af5-36ad-43f4-9483-79048e2552f9"/>
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="30" width="260" height="30" uuid="a8549af5-36ad-43f4-9483-79048e2552f9"/>
 						<box padding="0">
 							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#754C29"/>
 							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#754C29"/>
@@ -92,14 +92,11 @@
 		<band height="40">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement stretchType="RelativeToTallestObject" x="32" y="0" width="530" height="40" uuid="0038de5d-cce4-45fd-ac35-73b107328f2c">
+				<reportElement stretchType="RelativeToTallestObject" x="221" y="5" width="152" height="30" uuid="0038de5d-cce4-45fd-ac35-73b107328f2c">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box padding="0">
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#754C29"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#754C29"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#754C29"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#754C29"/>
+					<pen lineWidth="4.0" lineColor="#AB8742"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
 					<font fontName="PT Bold Heading" size="15" isBold="false" isUnderline="true"/>
@@ -133,10 +130,10 @@
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
-						<font fontName="stc" size="12" isBold="true" isUnderline="false"/>
+						<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 						<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
-					<text><![CDATA[المملكة العربية السعودية - عرعر - س.ت: 3450015171 - هاتف: 0146637788 - جوال: 0507058877]]></text>
+					<text><![CDATA[المملكة العربية السعودية - عرعر - س.ت: 3450015171 - هاتف: 0146637788 - جوال: 0507057788]]></text>
 				</staticText>
 				<staticText>
 					<reportElement stretchType="RelativeToTallestObject" x="0" y="25" width="530" height="25" forecolor="#754C29" uuid="1045e276-9811-4490-a76e-cae78d47b26e"/>
@@ -148,7 +145,7 @@
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
-						<font fontName="stc" size="12" isBold="true" isUnderline="false"/>
+						<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 						<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 					</textElement>
 					<text><![CDATA[عنوان واصل - رقم المبنى: 6560 الرمز البريدي: 73311 - الرمز الإضافي: 4237]]></text>
@@ -281,7 +278,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+								<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[بسم الله والحمد الله والصلاة والسلام على رسول الله .. بعون الله تم الاتفاق بين كل من :]]></text>
@@ -330,7 +327,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[الطرف الأول / البائــــــع:]]></text>
@@ -345,7 +342,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[هاتــــــف:]]></text>
@@ -363,7 +360,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[الطرف الثاني / المشتري:]]></text>
@@ -408,7 +405,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[العمــــل:]]></text>
@@ -443,7 +440,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[جوال:]]></text>
@@ -473,7 +470,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[هاتف العمل:]]></text>
@@ -503,7 +500,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[رقم السجل المدني:]]></text>
@@ -519,7 +516,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+								<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[نعم أنا الطرف الثاني لقد اشتريت من الطرف الأول السلع الآتية: ]]></text>
@@ -553,7 +550,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[بمبلغ:]]></text>
@@ -598,7 +595,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[على أن يكون السداد على أقساط شهرية بمعدل:]]></text>
@@ -618,7 +615,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[لكل شهر اعتباراً من: ]]></text>
@@ -663,7 +660,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[وقمت بدفع دفعة مالية مقدمة وقدرها: ]]></text>
@@ -679,7 +676,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+								<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[على أن التزم بالسداد شهرياً دون تأخير أو مماطلة، وفي حال عدم إلتزامي بسداد قسطين متتالين أكون ملزم بسداد كامل الأقساط المتبقية
@@ -697,13 +694,17 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#AB8742"/>
 					</box>
 					<staticText>
-						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="530" height="20" forecolor="#FFFFFF" backcolor="#AB8742" uuid="ff626cc5-83aa-423e-9a83-96300386c839">
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="195" y="0" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="ff626cc5-83aa-423e-9a83-96300386c839">
 							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						</reportElement>
 						<box padding="0">
 							<pen lineColor="#AB8742"/>
+							<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#AB8742"/>
+							<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#AB8742"/>
+							<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#AB8742"/>
+							<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#AB8742"/>
 						</box>
-						<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
+						<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
 							<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
 							<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 						</textElement>
@@ -761,7 +762,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[أقر أنا المدعو:]]></text>
@@ -776,7 +777,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[رقم السجل المدني:]]></text>
@@ -794,7 +795,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[العمل:]]></text>
@@ -839,7 +840,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[جوال:]]></text>
@@ -854,7 +855,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[هاتف العمل:]]></text>
@@ -904,7 +905,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[أقر واعترف أنني أكفل المشتري:]]></text>
@@ -924,7 +925,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[كفالة غرامية فى حال الحياة والممات  بمبلغ:]]></text>
@@ -954,7 +955,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[دون أي تهاون أو تأخير.]]></text>
@@ -972,11 +973,15 @@
 						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#AB8742"/>
 					</box>
 					<staticText>
-						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="530" height="20" forecolor="#FFFFFF" backcolor="#AB8742" uuid="3c011725-d095-41e2-a661-1dc1858c8af3">
-							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="195" y="0" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="3c011725-d095-41e2-a661-1dc1858c8af3">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						</reportElement>
 						<box padding="0">
 							<pen lineColor="#AB8742"/>
+							<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#AB8742"/>
+							<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#AB8742"/>
+							<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#AB8742"/>
+							<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#AB8742"/>
 						</box>
 						<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
 							<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
@@ -1036,7 +1041,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[أقر أنا المدعو:]]></text>
@@ -1051,7 +1056,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[رقم السجل المدني:]]></text>
@@ -1069,7 +1074,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[العمل:]]></text>
@@ -1114,7 +1119,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[جوال:]]></text>
@@ -1129,7 +1134,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[هاتف العمل:]]></text>
@@ -1179,7 +1184,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[أقر واعترف أنني أكفل المشتري:]]></text>
@@ -1199,7 +1204,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[كفالة غرامية فى حال الحياة والممات  بمبلغ:]]></text>
@@ -1229,7 +1234,7 @@
 									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-									<font fontName="PT Bold Heading" size="10" isBold="false" isUnderline="false"/>
+									<font fontName="Arial" size="10" isBold="false" isUnderline="false"/>
 									<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 								</textElement>
 								<text><![CDATA[دون أي تهاون أو تأخير.]]></text>
@@ -1255,7 +1260,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Arial" size="13" isBold="true" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[البائــــــــــــع]]></text>
@@ -1288,7 +1293,7 @@
 								<font fontName="Arial" size="14" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ ــ  ــ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/.........................]]></text>
 						</staticText>
 					</frame>
 					<frame>
@@ -1305,7 +1310,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Arial" size="13" isBold="true" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[المشتــــــــــــري]]></text>
@@ -1338,7 +1343,7 @@
 								<font fontName="Arial" size="14" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/.........................]]></text>
 						</staticText>
 					</frame>
 					<frame>
@@ -1355,7 +1360,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Arial" size="13" isBold="true" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[الكفيل الغارم الأول]]></text>
@@ -1388,7 +1393,7 @@
 								<font fontName="Arial" size="14" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ـــ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/.........................]]></text>
 						</staticText>
 					</frame>
 				</frame>
@@ -1410,7 +1415,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Arial" size="13" isBold="true" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[الكفيل الغارم الثاني]]></text>
@@ -1443,7 +1448,7 @@
 								<font fontName="Arial" size="14" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ــ ــ ـ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/.........................]]></text>
 						</staticText>
 					</frame>
 					<frame>
@@ -1460,7 +1465,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="12" isBold="false" isUnderline="false"/>
+								<font fontName="Arial" size="13" isBold="true" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[شاهـــــــــــــد أول]]></text>
@@ -1478,7 +1483,7 @@
 								<font fontName="Arial" size="14" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[الأسم/  ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[الاسم/.........................]]></text>
 						</staticText>
 						<staticText>
 							<reportElement stretchType="RelativeToTallestObject" x="0" y="54" width="150" height="26" forecolor="#754C29" uuid="4458e14c-35e3-47bf-b282-8c2499934f26"/>
@@ -1493,7 +1498,7 @@
 								<font fontName="Arial" size="14" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ ــ ــ ـ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/.........................]]></text>
 						</staticText>
 					</frame>
 					<frame>
@@ -1510,7 +1515,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
-								<font fontName="PT Bold Heading" size="14" isBold="false" isUnderline="false"/>
+								<font fontName="Arial" size="16" isBold="true" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="5" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[فرع مؤسسة فريح التجارية]]></text>
@@ -1528,7 +1533,7 @@
 								<font fontName="Arial" size="14" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<text><![CDATA[التوقيع/  ــ ــ ــ  ــ ــ ــ ــ ــ ــ ــ]]></text>
+							<text><![CDATA[التوقيع/.........................]]></text>
 						</staticText>
 					</frame>
 				</frame>
