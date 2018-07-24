@@ -1726,6 +1726,14 @@ app.controller("menuCtrl", [
             $scope.pageContractPayment.page--;
             $scope.searchContractPayments($scope.paramContractPayment);
         };
+        $scope.newPayment = function () {
+            ModalProvider.openContractPaymentCreateModel().result.then(function (data) {
+                $scope.contractPayments.splice(0, 0, data);
+                $timeout(function () {
+                    window.componentHandler.upgradeAllRegistered();
+                }, 300);
+            });
+        };
 
         /**************************************************************************************************************
          *                                                                                                            *

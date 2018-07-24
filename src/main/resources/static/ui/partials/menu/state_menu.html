@@ -533,6 +533,19 @@
                         </div>
 
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
+                             ng-click="newPayment()"
+                             ng-if="contains(me.team.authorities, ['ROLE_CONTRACT_PAYMENT_CREATE'])">
+                            <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/add.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
+                                <div class="mdl-card__title mdl-card--expand"></div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <a class="card-image__filename">
+                                    <span>دفعة مالية جديدة</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 parent text-center"
                              ng-click="ModalProvider.openDepositCreateModel()"
                              ng-if="contains(me.team.authorities, ['ROLE_DEPOSIT_CREATE'])">
                             <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/deposit.{{iconSetType}}'); background-size: 30px 30px !important; width: 30px!important; height: 30px!important;">
