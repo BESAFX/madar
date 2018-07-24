@@ -2,7 +2,10 @@ package com.besafx.app.report;
 
 import com.besafx.app.component.ReportExporter;
 import com.besafx.app.enums.ExportType;
+import com.besafx.app.init.Initializer;
 import com.besafx.app.service.ContractService;
+import com.besafx.app.util.CompanyOptions;
+import com.besafx.app.util.JSONConverter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -14,6 +17,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +40,18 @@ public class ReportContractController {
             HttpServletResponse response) throws Exception {
         Map<String, Object> map = new HashMap<>();
         map.put("CONTRACT", contractService.findOne(contractId));
+
+        CompanyOptions options = JSONConverter.toObject(Initializer.company.getOptions(), CompanyOptions.class);
+        URL LOGO_URL = null;
+        URL BACKGROUND_URL = null;
+        try {
+            LOGO_URL = new URL(options.getLogo());
+            BACKGROUND_URL = new URL(options.getBackground());
+        } catch (MalformedURLException ex) {
+        }
+        map.put("LOGO", LOGO_URL == null ? null : LOGO_URL.openStream());
+        map.put("BACKGROUND", BACKGROUND_URL == null ? null : BACKGROUND_URL.openStream());
+
         ClassPathResource jrxmlFile = new ClassPathResource("/report/contract/Contract.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlFile.getInputStream());
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map);

@@ -196,10 +196,51 @@ app.controller("menuCtrl", [
          *                                                                                                            *
          **************************************************************************************************************/
         $rootScope.selectedCompany = {};
+        $rootScope.selectedCompany.options = {};
         $rootScope.sms = {};
         $scope.submitCompany = function () {
             CompanyService.update($rootScope.selectedCompany).then(function (data) {
                 $rootScope.selectedCompany = data;
+            });
+        };
+        $scope.updateCompanyOptions = function () {
+
+            var param = [];
+
+            param.push("yamamahUserName=");
+            param.push($rootScope.selectedCompany.options.yamamahUserName);
+            param.push("&");
+
+            param.push("yamamahPassword=");
+            param.push($rootScope.selectedCompany.options.yamamahPassword);
+            param.push("&");
+
+            param.push("vatFactor=");
+            param.push($rootScope.selectedCompany.options.vatFactor);
+            param.push("&");
+
+            param.push("logo=");
+            param.push($rootScope.selectedCompany.options.logo);
+            param.push("&");
+
+            param.push("background=");
+            param.push($rootScope.selectedCompany.options.background);
+            param.push("&");
+
+            param.push("reportTitle=");
+            param.push($rootScope.selectedCompany.options.reportTitle);
+            param.push("&");
+
+            param.push("reportSubTitle=");
+            param.push($rootScope.selectedCompany.options.reportSubTitle);
+            param.push("&");
+
+            param.push("reportFooter=");
+            param.push($rootScope.selectedCompany.options.reportFooter);
+            param.push("&");
+
+            CompanyService.updateOptions(param.join("")).then(function (value) {
+
             });
         };
         $scope.browseCompanyLogo = function () {
@@ -2202,6 +2243,7 @@ app.controller("menuCtrl", [
         $timeout(function () {
             CompanyService.get().then(function (data) {
                 $rootScope.selectedCompany = data;
+                $rootScope.selectedCompany.options = JSON.parse(data.options);
             });
             PersonService.findAllCombo().then(function (data) {
                 $scope.personsCombo = data;

@@ -11,6 +11,11 @@ app.factory("CompanyService",
                     return response.data;
                 });
             },
+            updateOptions: function (options) {
+                return $http.get("/api/company/updateOptions?"  + options).then(function (response) {
+                    return response.data;
+                });
+            },
             uploadCompanyLogo: function (file) {
                 var fd = new FormData();
                 fd.append('file', file);

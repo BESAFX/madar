@@ -53,15 +53,9 @@ public class Company implements Serializable {
 
     private String taxCode;
 
-    private String yamamahUserName;
-
-    private String yamamahPassword;
-
-    private Double vatFactor;
-
     @Lob
     @Type(type = "org.hibernate.type.TextType")
-    private String logo;
+    private String options;
 
     @ManyToOne
     @JoinColumn(name = "seller")

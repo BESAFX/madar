@@ -2,6 +2,7 @@ package com.besafx.app.init;
 
 import com.besafx.app.entity.*;
 import com.besafx.app.service.*;
+import com.besafx.app.util.CompanyOptions;
 import com.besafx.app.util.JSONConverter;
 import com.besafx.app.util.Options;
 import com.google.common.collect.Lists;
@@ -90,6 +91,17 @@ public class Initializer implements CommandLineRunner {
 
             LOG.info("إنشاء حساب الشركة");
             company = new Company();
+            company.setOptions(
+                    JSONConverter.toString(
+                            CompanyOptions.builder()
+                                          .yamamahUserName("")
+                                          .yamamahPassword("")
+                                          .vatFactor(0.05)
+                                          .logo("")
+                                          .background("")
+                                          .reportTitle("")
+                                          .reportSubTitle("")
+                                          .reportFooter("")));
             company.setName(seller.getContact().getName());
             company.setSeller(sellerService.save(seller));
             companyService.save(company);

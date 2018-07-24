@@ -1,6 +1,8 @@
 package com.besafx.app.config;
 
 import com.besafx.app.init.Initializer;
+import com.besafx.app.util.CompanyOptions;
+import com.besafx.app.util.JSONConverter;
 import com.google.common.collect.Lists;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,9 +16,6 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
@@ -40,8 +39,9 @@ public class SendSMS {
         String uri = new String("http://api.yamamah.com/GetCredit/{userName}/{password}");
 
         Map<String, String> vars = new HashMap<>();
-        vars.put("userName", Initializer.company.getYamamahUserName());
-        vars.put("password", Initializer.company.getYamamahPassword());
+        CompanyOptions options = JSONConverter.toObject(Initializer.company.getOptions(), CompanyOptions.class);
+        vars.put("userName", options.getYamamahUserName());
+        vars.put("password", options.getYamamahPassword());
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set("Content-Type", "application/json");
@@ -76,8 +76,9 @@ public class SendSMS {
         httpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         JSONObject json = new JSONObject();
-        json.put("Username", Initializer.company.getYamamahUserName());
-        json.put("Password", Initializer.company.getYamamahPassword());
+        CompanyOptions options = JSONConverter.toObject(Initializer.company.getOptions(), CompanyOptions.class);
+        json.put("Username", options.getYamamahUserName());
+        json.put("Password", options.getYamamahPassword());
         json.put("Tagname", "MADAR");
         json.put("RecepientNumber", String.join(",", mobileList.stream().distinct().collect(Collectors.toList())));
         json.put("VariableList", "");
