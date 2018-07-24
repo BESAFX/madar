@@ -12,7 +12,9 @@
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<import value="com.besafx.app.util.DateConverter"/>
+	<import value="com.besafx.app.util.ArabicLiteralNumberParser"/>
 	<parameter name="CONTRACT" class="com.besafx.app.entity.Contract"/>
+	<parameter name="BACKGROUND" class="java.io.InputStream" isForPrompting="false"/>
 	<background>
 		<band height="430" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -26,8 +28,8 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank">
-					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="430" uuid="21610afe-ecca-460a-9f93-927dcb83b68f"/>
-					<imageExpression><![CDATA["src/main/resources/report/img/F1_RECEIPT.png"]]></imageExpression>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="430" uuid="ffad38b0-08df-436c-a9c5-86c121e2e22e"/>
+					<imageExpression><![CDATA[$P{BACKGROUND}]]></imageExpression>
 				</image>
 			</frame>
 		</band>
@@ -639,7 +641,7 @@
 								<font fontName="Arial" size="12" isBold="false" isUnderline="false"/>
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
-							<textFieldExpression><![CDATA[$P{CONTRACT}.getTotalPriceAfterDiscountAndVat()]]></textFieldExpression>
+							<textFieldExpression><![CDATA[$P{CONTRACT}.getTotalPriceAfterDiscountAndVat() + " ( " + ArabicLiteralNumberParser.literalValueOf($P{CONTRACT}.getTotalPriceAfterDiscountAndVat()) + " ريال فقط لا غير " +  " )"]]></textFieldExpression>
 						</textField>
 						<staticText>
 							<reportElement stretchType="RelativeToTallestObject" x="390" y="0" width="140" height="22" forecolor="#754C29" uuid="ab05555a-37d5-4a89-9259-38f5acdbc43a"/>

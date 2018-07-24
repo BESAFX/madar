@@ -65,6 +65,15 @@ public class ReportContractController {
             HttpServletResponse response) throws Exception {
         Map<String, Object> map = new HashMap<>();
         map.put("CONTRACT", contractService.findOne(contractId));
+
+        CompanyOptions options = JSONConverter.toObject(Initializer.company.getOptions(), CompanyOptions.class);
+        URL BACKGROUND_URL = null;
+        try {
+            BACKGROUND_URL = new URL(options.getBackground());
+        } catch (MalformedURLException ex) {
+        }
+        map.put("BACKGROUND", BACKGROUND_URL == null ? null : BACKGROUND_URL.openStream());
+
         ClassPathResource jrxmlFile = new ClassPathResource("/report/contract/Receipt.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlFile.getInputStream());
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map);

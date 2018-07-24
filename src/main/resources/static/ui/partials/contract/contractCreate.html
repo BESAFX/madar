@@ -378,7 +378,7 @@
                                                    type="text"
                                                    readonly
                                                    class="form-control"
-                                                   value="{{productPurchase.unitVat = (productPurchase.unitSellPrice * selectedCompany.vatFactor) | currency:'':2}}">
+                                                   value="{{productPurchase.unitVat = (productPurchase.unitSellPrice * selectedCompany.options.vatFactor) | currency:'':2}}">
                                         </td>
                                         <td>
                                             <input dir="rtl"

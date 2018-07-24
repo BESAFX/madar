@@ -167,7 +167,7 @@ app.controller('contractCreateCtrl', ['ContractService', 'CustomerService', 'Sel
                     $scope.totalPrice = $scope.totalPrice + (productPurchase.requiredQuantity * productPurchase.unitSellPrice);
                     $scope.totalPriceAfterDiscountAndVat = $scope.totalPriceAfterDiscountAndVat +
                         (productPurchase.requiredQuantity * productPurchase.unitSellPrice) +
-                        (productPurchase.requiredQuantity * (productPurchase.unitSellPrice * $rootScope.selectedCompany.vatFactor)) - $scope.contract.discount;
+                        (productPurchase.requiredQuantity * (productPurchase.unitSellPrice * $rootScope.selectedCompany.options.vatFactor)) - $scope.contract.discount;
                 }
             });
             return $scope.totalPrice;

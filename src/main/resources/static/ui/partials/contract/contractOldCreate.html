@@ -618,7 +618,7 @@
                                        class="form-control"
                                        ng-model="productPurchase.unitSellPrice">
                             </td>
-                            <td>{{productPurchase.unitVat = (productPurchase.unitSellPrice * selectedCompany.vatFactor) | currency:'':2}}</td>
+                            <td>{{productPurchase.unitVat = (productPurchase.unitSellPrice * selectedCompany.options.vatFactor) | currency:'':2}}</td>
                             <td>{{productPurchase.totalSell = (productPurchase.quantity * productPurchase.unitSellPrice) | currency:' SAR ':2}}</td>
                             <td>
                                 <div class="row">

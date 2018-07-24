@@ -252,6 +252,17 @@
                                      height="24">
                             </a>
                         </li>
+                        <li>
+                            <a href=""
+                               ng-click="printToCart('printMonthContractPayments', '')"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="طباعة">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
                     </ul>
                     <div class="panel-title-box pull-right">
                         <h3>تحصيل الشهر</h3>
@@ -260,7 +271,7 @@
                 </div>
                 <div class="panel-body panel-body-scroll">
 
-                    <div class="form-group row">
+                    <div class="form-group row" id="printMonthContractPayments">
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -343,6 +354,17 @@
                                      height="24">
                             </a>
                         </li>
+                        <li>
+                            <a href=""
+                               ng-click="printToCart('printWithdrawCashThisMonth', '')"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="طباعة">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
                     </ul>
                     <div class="panel-title-box pull-right">
                         <h3>المصاريف الشهرية</h3>
@@ -351,7 +373,7 @@
                 </div>
                 <div class="panel-body panel-body-scroll">
 
-                    <div class="form-group row">
+                    <div class="form-group row" id="printWithdrawCashThisMonth">
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -646,6 +668,17 @@
                                      height="24">
                             </a>
                         </li>
+                        <li>
+                            <a href=""
+                               ng-click="printToCart('printLatePremiums', '')"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="طباعة">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
                     </ul>
                     <div class="panel-title-box pull-right">
                         <h3>الأقساط المتأخرة</h3>
@@ -654,7 +687,7 @@
                 </div>
                 <div class="panel-body panel-body-scroll">
 
-                    <div class="form-group row">
+                    <div class="form-group row" id="printLatePremiums">
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -742,6 +775,17 @@
                                      height="24">
                             </a>
                         </li>
+                        <li>
+                            <a href=""
+                               ng-click="printToCart('printRequiredPremiumsThisMonth', '')"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="طباعة">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
                     </ul>
                     <div class="panel-title-box pull-right">
                         <h3>أقساط الشهر المستحقة</h3>
@@ -750,7 +794,7 @@
                 </div>
                 <div class="panel-body panel-body-scroll">
 
-                    <div class="form-group row">
+                    <div class="form-group row" id="printRequiredPremiumsThisMonth">
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -838,6 +882,17 @@
                                      height="24">
                             </a>
                         </li>
+                        <li>
+                            <a href=""
+                               ng-click="printToCart('printMonthCustomers', '')"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="طباعة">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
                     </ul>
                     <div class="panel-title-box pull-right">
                         <h3>عملاء الشهر</h3>
@@ -846,7 +901,7 @@
                 </div>
                 <div class="panel-body panel-body-scroll">
 
-                    <div class="form-group row">
+                    <div class="form-group row" id="printMonthCustomers">
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -893,6 +948,17 @@
                                      height="24">
                             </a>
                         </li>
+                        <li>
+                            <a href=""
+                               ng-click="printToCart('printMonthContracts', '')"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="طباعة">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
                     </ul>
                     <div class="panel-title-box pull-right">
                         <h3>عقود الشهر</h3>
@@ -901,7 +967,7 @@
                 </div>
                 <div class="panel-body panel-body-scroll">
 
-                    <div class="form-group row">
+                    <div class="form-group row" id="printMonthContracts">
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
@@ -968,6 +1034,17 @@
                                      height="24">
                             </a>
                         </li>
+                        <li>
+                            <a href=""
+                               ng-click="printToCart('printDailyHistory', '')"
+                               tooltip-append-to-body="true"
+                               uib-tooltip="طباعة">
+                                <img class="material-icons mdl-list__item-icon"
+                                     ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}"
+                                     width="24"
+                                     height="24">
+                            </a>
+                        </li>
                     </ul>
                     <div class="panel-title-box pull-right">
                         <h3>العمليات الأخيرة</h3>
@@ -976,7 +1053,7 @@
                 </div>
                 <div class="panel-body panel-body-scroll">
 
-                    <div class="form-group row">
+                    <div class="form-group row" id="printDailyHistory">
 
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
