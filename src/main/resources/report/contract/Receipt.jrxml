@@ -16,10 +16,10 @@
 	<parameter name="CONTRACT" class="com.besafx.app.entity.Contract"/>
 	<parameter name="BACKGROUND" class="java.io.InputStream" isForPrompting="false"/>
 	<background>
-		<band height="460" splitType="Stretch">
+		<band height="480" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<frame>
-				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="460" uuid="2362171d-4b4e-4fce-8dd3-a845fe0aecd4"/>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="480" uuid="2362171d-4b4e-4fce-8dd3-a845fe0aecd4"/>
 				<box padding="0">
 					<pen lineColor="#754C29"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -27,8 +27,8 @@
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" onErrorType="Blank">
-					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="460" uuid="ffad38b0-08df-436c-a9c5-86c121e2e22e"/>
+				<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle" isLazy="true" onErrorType="Blank">
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="595" height="480" uuid="ffad38b0-08df-436c-a9c5-86c121e2e22e"/>
 					<imageExpression><![CDATA[$P{BACKGROUND}]]></imageExpression>
 				</image>
 			</frame>
@@ -392,7 +392,7 @@
 					<topPen lineWidth="3.0"/>
 				</box>
 				<frame>
-					<reportElement x="15" y="110" width="500" height="80" uuid="7f4fadb0-6c74-4035-80d4-d4a77ac026f3">
+					<reportElement x="15" y="110" width="500" height="100" uuid="7f4fadb0-6c74-4035-80d4-d4a77ac026f3">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					</reportElement>
@@ -531,7 +531,7 @@
 							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						</reportElement>
 						<staticText>
-							<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="150" height="34" forecolor="#754C29" uuid="e83db0a3-0bfc-498b-bc5d-07eb371e2259"/>
+							<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="150" height="50" forecolor="#754C29" uuid="e83db0a3-0bfc-498b-bc5d-07eb371e2259"/>
 							<box padding="0">
 								<pen lineWidth="0.5" lineColor="#0F8628"/>
 								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -546,7 +546,7 @@
 							<text><![CDATA[الطرف الأول / البائع]]></text>
 						</staticText>
 						<staticText>
-							<reportElement stretchType="RelativeToTallestObject" x="0" y="34" width="150" height="33" forecolor="#754C29" uuid="0b6f345c-5230-4729-8a78-0076ae709dc0"/>
+							<reportElement stretchType="RelativeToTallestObject" x="0" y="50" width="150" height="50" forecolor="#754C29" uuid="0b6f345c-5230-4729-8a78-0076ae709dc0"/>
 							<box padding="0">
 								<pen lineWidth="0.5" lineColor="#0F8628"/>
 								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -559,21 +559,6 @@
 								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
 							</textElement>
 							<text><![CDATA[التوقيع/ ......................]]></text>
-						</staticText>
-						<staticText>
-							<reportElement stretchType="RelativeToTallestObject" x="0" y="67" width="150" height="33" forecolor="#754C29" uuid="e6213e77-4f37-4a31-9d6e-8b144f594c59"/>
-							<box padding="0">
-								<pen lineWidth="0.5" lineColor="#0F8628"/>
-								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-							</box>
-							<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
-								<font fontName="Arial" size="14" isBold="false" isUnderline="false"/>
-								<paragraph lineSpacing="Single" lineSpacingSize="1.0" rightIndent="10" spacingBefore="0" spacingAfter="0"/>
-							</textElement>
-							<text><![CDATA[الختـــم/  .....................]]></text>
 						</staticText>
 					</frame>
 				</frame>
