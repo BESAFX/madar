@@ -2,6 +2,7 @@ package com.besafx.app;
 
 import com.besafx.app.config.DropboxManager;
 import com.besafx.app.config.EmailSender;
+import com.besafx.app.config.GatewaySMS;
 import com.besafx.app.config.SendSMS;
 import com.besafx.app.service.ContractService;
 import com.besafx.app.service.CustomerService;
@@ -28,6 +29,9 @@ public class MainTests {
     private SendSMS sendSMS;
 
     @Autowired
+    private GatewaySMS gatewaySMS;
+
+    @Autowired
     private ContractService contractService;
 
     @Autowired
@@ -40,14 +44,17 @@ public class MainTests {
         context.getBean(DropboxManager.class).init();
         context.getBean(JSONConverter.class).init();
 
-        contractService.findAll().forEach(contract -> {
-            if(contract.getWrittenDate() != null){
-                contract.getCustomer().setRegisterDate(contract.getWrittenDate());
-            }else{
-                contract.getCustomer().setRegisterDate(contract.getDate());
-            }
-            customerService.save(contract.getCustomer());
-        });
+        gatewaySMS.sendSMS("0590780551", "HELLO FROM WEB");
+        Thread.sleep(500000);
+
+//        contractService.findAll().forEach(contract -> {
+//            if(contract.getWrittenDate() != null){
+//                contract.getCustomer().setRegisterDate(contract.getWrittenDate());
+//            }else{
+//                contract.getCustomer().setRegisterDate(contract.getDate());
+//            }
+//            customerService.save(contract.getCustomer());
+//        });
 
 //        Log.info(sendSMS.getCredit());
 
