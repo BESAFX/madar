@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
 import com.github.bohnman.squiggly.util.SquigglyUtils;
 import org.joda.time.DateTime;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,7 +142,7 @@ public class ContractPremiumRest {
             builder.append(message);
             builder.append("<br/>");
             builder.append(" ، نتيجة الإرسال: ");
-            builder.append(taskResult);
+            builder.append(new JSONObject(taskResult).getString("ErrorMessage"));
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message(builder.toString())

@@ -27,7 +27,36 @@ public class GatewaySMS {
 
     @Async("threadMultiplePool")
     public Future<String> getCredit() throws JSONException {
-        return new AsyncResult<>("10000");
+        String op = "";
+        try {
+            CompanyOptions options = JSONConverter.toObject(Initializer.company.getOptions(), CompanyOptions.class);
+            // Construct The Post Data
+            String data = URLEncoder.encode("user", "UTF-8") + "=" + URLEncoder.encode(options.getYamamahUserName(), "UTF-8");
+            data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(options.getYamamahPassword(), "UTF-8");
+
+            //Push the HTTP Request
+            URL url = new URL("http://apps.gateway.sa/vendorsms/CheckBalance.aspx?");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            //Read The Response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line;
+
+            while ((line = rd.readLine()) != null) {
+                op += line;
+            }
+            wr.close();
+            rd.close();
+            LOG.info(op);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new AsyncResult<>(op);
     }
 
     @Async("threadMultiplePool")

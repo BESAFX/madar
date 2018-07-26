@@ -1061,7 +1061,7 @@
                                 <tr ng-repeat="history in dailyHistories">
                                     <td>
                                         <div class="form-group row">
-                                            <span>{{history.note}}</span>
+                                            <span ng-bind-html="history.note"></span>
                                         </div>
                                         <div class="for-group row">
                                             <span class="label label-success pull-right">{{history.modifiedDate | date: 'hh:mm a'}}</span>
@@ -1119,7 +1119,7 @@
                                 <tr ng-repeat="customer in mostActiveCustomers">
                                     <td>
                                         <div class="form-group row">
-                                            <span>{{history.note}}</span>
+                                            <span ng-bind-html="history.note"></span>
                                         </div>
                                         <div class="for-group row">
                                             <span class="label label-success pull-right">{{history.modifiedDate | date: 'hh:mm a'}}</span>

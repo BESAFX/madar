@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.bohnman.squiggly.Squiggly;
 import com.github.bohnman.squiggly.util.SquigglyUtils;
 import org.joda.time.DateTime;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -192,14 +193,14 @@ public class CustomerRest {
             Future<String> task = gatewaySMS.sendSMS(mobile, message);
             String taskResult = task.get();
             StringBuilder builder = new StringBuilder();
-            builder.append("الرقم / ");
+            builder.append("إرسال رسالة SMS إلى الرقم / ");
             builder.append(mobile);
             builder.append("<br/>");
             builder.append(" محتوى الرسالة : ");
             builder.append(message);
             builder.append("<br/>");
             builder.append(" ، نتيجة الإرسال: ");
-            builder.append(taskResult);
+            builder.append(new JSONObject(taskResult).getString("ErrorMessage"));
             notificationService.notifyAll(Notification
                                                   .builder()
                                                   .message(builder.toString())
