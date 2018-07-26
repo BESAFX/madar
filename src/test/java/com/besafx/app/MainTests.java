@@ -43,8 +43,6 @@ public class MainTests {
         context.getBean(EmailSender.class).init();
         context.getBean(DropboxManager.class).init();
         context.getBean(JSONConverter.class).init();
-
-        gatewaySMS.sendSMS("0590780551", "HELLO FROM WEB");
         Thread.sleep(500000);
 
 //        contractService.findAll().forEach(contract -> {

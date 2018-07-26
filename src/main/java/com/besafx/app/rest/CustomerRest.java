@@ -1,7 +1,8 @@
 package com.besafx.app.rest;
 
+import com.besafx.app.auditing.EntityHistoryListener;
 import com.besafx.app.config.CustomException;
-import com.besafx.app.config.SendSMS;
+import com.besafx.app.config.GatewaySMS;
 import com.besafx.app.entity.ContractPayment;
 import com.besafx.app.entity.Customer;
 import com.besafx.app.search.CustomerSearch;
@@ -80,7 +81,10 @@ public class CustomerRest {
     private NotificationService notificationService;
 
     @Autowired
-    private SendSMS sendSMS;
+    private GatewaySMS gatewaySMS;
+
+    @Autowired
+    private EntityHistoryListener entityHistoryListener;
 
     @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -177,17 +181,19 @@ public class CustomerRest {
     @PostMapping(value = "sendMessage/{customerIds}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_SMS_SEND')")
+    @Transactional
     public void sendMessage(@RequestBody String content, @PathVariable List<Long> customerIds) throws Exception {
         ListIterator<Long> listIterator = customerIds.listIterator();
         while (listIterator.hasNext()) {
             Long id = listIterator.next();
             Customer customer = customerService.findOne(id);
             String message = content.replaceAll("#remain#", customer.getContractsRemain().toString());
-            Future<String> task = sendSMS.sendMessage(customer.getContact().getMobile(), message);
+            String mobile = "966" + customer.getContact().getMobile().substring(1);
+            Future<String> task = gatewaySMS.sendSMS(mobile, message);
             String taskResult = task.get();
             StringBuilder builder = new StringBuilder();
             builder.append("الرقم / ");
-            builder.append(customer.getContact().getMobile());
+            builder.append(mobile);
             builder.append("<br/>");
             builder.append(" محتوى الرسالة : ");
             builder.append(message);
@@ -199,6 +205,7 @@ public class CustomerRest {
                                                   .message(builder.toString())
                                                   .type(NotificationDegree.information)
                                                   .build());
+            entityHistoryListener.perform(builder.toString());
         }
     }
 

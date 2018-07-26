@@ -1,6 +1,7 @@
 package com.besafx.app.rest;
 
-import com.besafx.app.config.SendSMS;
+import com.besafx.app.auditing.EntityHistoryListener;
+import com.besafx.app.config.GatewaySMS;
 import com.besafx.app.entity.ContractPayment;
 import com.besafx.app.entity.ContractPremium;
 import com.besafx.app.search.ContractPremiumSearch;
@@ -58,7 +59,10 @@ public class ContractPremiumRest {
     private NotificationService notificationService;
 
     @Autowired
-    private SendSMS sendSMS;
+    private GatewaySMS gatewaySMS;
+
+    @Autowired
+    private EntityHistoryListener entityHistoryListener;
 
     @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -116,19 +120,22 @@ public class ContractPremiumRest {
     @PostMapping(value = "sendMessage/{contractPremiumIds}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_SMS_SEND')")
-    public void sendMessage(@RequestBody String content, @PathVariable List<Long> contractPremiumIds) throws Exception {
+    @Transactional
+    public void sendMessage(
+            @RequestBody String content,
+            @PathVariable List<Long> contractPremiumIds) throws Exception {
         ListIterator<Long> listIterator = contractPremiumIds.listIterator();
         while (listIterator.hasNext()) {
             Long id = listIterator.next();
             ContractPremium contractPremium = contractPremiumService.findOne(id);
             String message = content.replaceAll("#amount#", contractPremium.getAmount().toString())
                                     .replaceAll("#dueDate#", DateConverter.getDateInFormat(contractPremium.getDueDate()));
-            Future<String> task = sendSMS.sendMessage(contractPremium.getContract().getCustomer().getContact().getMobile(),
-                                                      message);
+            String mobile = "966" + contractPremium.getContract().getCustomer().getContact().getMobile().substring(1);
+            Future<String> task = gatewaySMS.sendSMS(mobile, message);
             String taskResult = task.get();
             StringBuilder builder = new StringBuilder();
             builder.append("الرقم / ");
-            builder.append(contractPremium.getContract().getCustomer().getContact().getMobile());
+            builder.append(mobile);
             builder.append("<br/>");
             builder.append(" محتوى الرسالة : ");
             builder.append(message);
@@ -139,6 +146,7 @@ public class ContractPremiumRest {
                                                   .builder()
                                                   .message(builder.toString())
                                                   .type(NotificationDegree.information).build());
+            entityHistoryListener.perform(builder.toString());
         }
     }
 

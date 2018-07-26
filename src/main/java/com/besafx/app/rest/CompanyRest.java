@@ -88,7 +88,7 @@ public class CompanyRest {
         if (company.getOptions() != null) {
             CompanyOptions options = JSONConverter.toObject(company.getOptions(), CompanyOptions.class);
             Optional.ofNullable(yamamahUserName).ifPresent(value -> options.setYamamahUserName(yamamahUserName));
-            Optional.ofNullable(yamamahPassword).ifPresent(value -> options.setYamamahUserName(yamamahPassword));
+            Optional.ofNullable(yamamahPassword).ifPresent(value -> options.setYamamahPassword(yamamahPassword));
             Optional.ofNullable(vatFactor).ifPresent(value -> options.setVatFactor(vatFactor));
             Optional.ofNullable(logo).ifPresent(value -> options.setLogo(logo));
             Optional.ofNullable(background).ifPresent(value -> options.setBackground(background));
