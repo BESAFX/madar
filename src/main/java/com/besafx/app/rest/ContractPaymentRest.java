@@ -164,7 +164,7 @@ public class ContractPaymentRest {
         Specifications specifications = Specifications
                 .where((root, cq, cb) -> cb.greaterThanOrEqualTo(root.get("date"), startMonth.toDate()))
                 .and((root, cq, cb) -> cb.lessThanOrEqualTo(root.get("date"), endMonth.toDate()));
-        Sort sort = new Sort(Sort.Direction.ASC, "date");
+        Sort sort = new Sort(Sort.Direction.ASC, "contract.customer.id","date");
         List<ContractPayment> contractPayments = contractPaymentService.findAll(specifications, sort);
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_DETAILS), contractPayments);
     }

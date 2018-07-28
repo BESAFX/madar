@@ -169,7 +169,7 @@ public class ContractPremiumRest {
     @ResponseBody
     public String findLatePremiums() {
         Specifications specifications = Specifications.where((root, cq, cb) -> cb.lessThanOrEqualTo(root.get("dueDate"), new DateTime().toDate()));
-        Sort sort = new Sort(Sort.Direction.ASC, "dueDate");
+        Sort sort = new Sort(Sort.Direction.ASC,"contract.customer.id" , "dueDate");
         List<ContractPremium> contractPremiums = contractPremiumService.findAll(specifications, sort);
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE),
                                        contractPremiums
@@ -188,7 +188,7 @@ public class ContractPremiumRest {
         Specifications specifications = Specifications
                 .where((root, cq, cb) -> cb.greaterThanOrEqualTo(root.get("dueDate"), startMonth.toDate()))
                 .and((root, cq, cb) -> cb.lessThanOrEqualTo(root.get("dueDate"), endMonth.toDate()));
-        Sort sort = new Sort(Sort.Direction.ASC, "dueDate");
+        Sort sort = new Sort(Sort.Direction.ASC, "contract.customer.id", "dueDate");
         List<ContractPremium> contractPremiums = contractPremiumService.findAll(specifications, sort);
         return SquigglyUtils.stringify(Squiggly.init(new ObjectMapper(), FILTER_TABLE),
                                        contractPremiums.stream()
