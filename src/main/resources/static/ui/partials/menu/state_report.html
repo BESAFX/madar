@@ -49,6 +49,18 @@
     </div>
 
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 parent text-center"
+         ng-click="openReportCustomers()">
+        <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/report-one.{{iconSetType}}')">
+            <div class="mdl-card__title mdl-card--expand"></div>
+        </div>
+        <div class="mdl-card__actions">
+            <a class="card-image__filename">
+                <span>كشف العملاء</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 parent text-center"
          ng-click="openReportBankTransactions()">
         <div class="card-image mdl-card" style="background-image: url('/ui/img/{{iconSet}}/report-one.{{iconSetType}}')">
             <div class="mdl-card__title mdl-card--expand"></div>
@@ -131,6 +143,12 @@
 <div ng-if="toggleReport==='contracts'" class="form-group row">
 
     <div ng-include="'ui/partials/report/contracts.html'"></div>
+
+</div>
+
+<div ng-if="toggleReport==='customers'" class="form-group row">
+
+    <div ng-include="'ui/partials/report/customers.html'"></div>
 
 </div>
 

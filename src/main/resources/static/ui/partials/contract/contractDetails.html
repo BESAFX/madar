@@ -150,6 +150,18 @@
                                 <td>{{contract.discount | currency:' SAR ':2}}</td>
                             </tr>
                             <tr>
+                                <td>الاجمالي</td>
+                                <td>{{contract.totalPriceAfterDiscountAndVat | currency:' SAR ':2}}</td>
+                            </tr>
+                            <tr>
+                                <td>المدفوع</td>
+                                <td>{{contract.paid | currency:' SAR ':2}}</td>
+                            </tr>
+                            <tr>
+                                <td>المتبقي</td>
+                                <td>{{contract.remain | currency:' SAR ':2}}</td>
+                            </tr>
+                            <tr>
                                 <td>المستندات</td>
                                 <td>
                                     <div class="form-group row">

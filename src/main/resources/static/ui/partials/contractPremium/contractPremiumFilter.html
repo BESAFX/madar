@@ -100,6 +100,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                             ng-init="paramContractPremium.state='غير مسدد'">
+                            <label for="state" class="control-label">وضع القسط</label>
+                            <select id="state"
+                                    style="height: 40px"
+                                    class="form-control"
+                                    ng-model="paramContractPremium.state">
+                                <option value="غير مسدد">غير مسدد</option>
+                                <option value="تم السداد">تم السداد</option>
+                                <option value="سداد جزئي">سداد جزئي</option>
+                                <option value="غير مستحق">غير مستحق</option>
+                            </select>
+                        </div>
+
                         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <label for="contractCodeFrom" class="control-label">رقم العقد من</label>
                             <input id="contractCodeFrom"

@@ -41,7 +41,7 @@ public class ContractPremiumRest {
 
     private final String FILTER_TABLE = "" +
             "**," +
-            "contract[id,code,customer[id,contact,shortName],seller[id,contact,shortName]]," +
+            "contract[id,code,customer[id,contact,shortName],sponsor1[id,contact,shortName],seller[id,contact,shortName]]," +
             "-contractPayments";
 
     @Autowired
@@ -200,6 +200,7 @@ public class ContractPremiumRest {
     @ResponseBody
     public String filter(
             //ContractPremium Filters
+            @RequestParam(value = "state", required = false) final String state,
             @RequestParam(value = "dueDateFrom", required = false) final Long dueDateFrom,
             @RequestParam(value = "dueDateTo", required = false) final Long dueDateTo,
             //Contract Filters
@@ -220,6 +221,7 @@ public class ContractPremiumRest {
                         new ObjectMapper(),
                         "**,".concat("content[").concat(FILTER_TABLE).concat("]")),
                 contractPremiumSearch.filter(
+                        state,
                         dueDateFrom,
                         dueDateTo,
                         contractCodeFrom,

@@ -13,7 +13,6 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +26,7 @@ public class ContractPremiumSearch {
 
     public Page<ContractPremium> filter(
             //ContractPremium Filters
+            final String state,
             final Long dueDateFrom,
             final Long dueDateTo,
             //Contract Filters

@@ -1410,6 +1410,11 @@ app.controller("menuCtrl", [
             if ($scope.pageContractPremium.sorts.length === 0) {
                 search.push('sort=dueDate,desc&');
             }
+            if (paramContractPremium.state) {
+                search.push('state=');
+                search.push(paramContractPremium.state);
+                search.push('&');
+            }
             if (paramContractPremium.dueDateFrom) {
                 search.push('dueDateFrom=');
                 search.push(paramContractPremium.dueDateFrom.getTime());
@@ -2055,6 +2060,11 @@ app.controller("menuCtrl", [
         //تقرير العقود
         $scope.openReportContracts = function () {
             $scope.toggleReport = 'contracts';
+            $rootScope.refreshGUI();
+        };
+        //تقرير العملاء
+        $scope.openReportCustomers = function () {
+            $scope.toggleReport = 'customers';
             $rootScope.refreshGUI();
         };
         //حركة العمليات اليومية

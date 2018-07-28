@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li>
-                    <span>تقرير التحصيل والسداد</span>
+                    <span>تقرير العملاء</span>
                 </li>
             </ul>
         </div>
@@ -22,7 +22,7 @@
         <div class="row">
 
             <button type="button"
-                    ng-click="openContractPremiumsFilter()"
+                    ng-click="openCustomersFilter()"
                     class="pull-right mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
                         <span class="mdl-list__item-primary-content">
                             <img class="material-icons mdl-list__item-icon"
@@ -34,7 +34,7 @@
             </button>
 
             <button type="button"
-                    ng-click="printToCart('printBankTransactionsTable', 'حركة العمليات اليومية')"
+                    ng-click="printToCart('printCustomersTable', 'تقرير العملاء')"
                     class="pull-right mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
                         <span class="mdl-list__item-primary-content">
                             <img class="material-icons mdl-list__item-icon"
@@ -54,7 +54,7 @@
 
     <div class="panel panel-body">
 
-        <div class="form-group row" ng-if="pageContractPremium.totalElements > 0">
+        <div class="form-group row" ng-if="pageCustomer.totalElements > 0">
 
             <div class="pull-right btn-toolbar">
 
@@ -62,9 +62,9 @@
 
                     <button uib-tooltip="السابق"
                             tooltip-append-to-body="true"
-                            ng-disabled="pageContractPremium.first"
+                            ng-disabled="pageCustomer.first"
                             type="button"
-                            ng-click="selectPrevContractPremiumsPage()"
+                            ng-click="selectPrevCustomersPage()"
                             class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-1 col-sm-1 col-md-1 col-lg-1 pull-right">
                         <i class="material-icons md-36">keyboard_arrow_right</i>
                     </button>
@@ -75,14 +75,14 @@
                                readonly
                                class="form-control"
                                style="text-align: center!important;"
-                               ng-model="pageContractPremium.currentPageString">
+                               ng-model="pageCustomer.currentPageString">
                     </div>
 
                     <button uib-tooltip="التالي"
                             tooltip-append-to-body="true"
-                            ng-disabled="pageContractPremium.last"
+                            ng-disabled="pageCustomer.last"
                             type="button"
-                            ng-click="selectNextContractPremiumsPage()"
+                            ng-click="selectNextCustomersPage()"
                             class="mdl-button mdl-js-button mdl-js-ripple-effect col-xs-1 col-sm-1 col-md-1 col-lg-1 pull-right">
                         <i class="material-icons md-36">keyboard_arrow_left</i>
                     </button>
@@ -90,7 +90,7 @@
                     <button uib-tooltip="طباعة"
                             tooltip-append-to-body="true"
                             type="button"
-                            ng-click="printToCart('printContractPremiumTable', 'سجل الأقساط')"
+                            ng-click="printToCart('printCustomerTable', 'سجل العملاء')"
                             class="mdl-button mdl-js-button mdl-js-ripple-effect pull-right">
                         <img class="material-icons mdl-list__item-icon" ng-src="/ui/img/{{iconSet}}/print.{{iconSetType}}" width="24" height="24">
                     </button>
@@ -105,17 +105,17 @@
                        class="form-control"
                        placeholder="بحث سريع في بيانات الصفحة الواحدة"
                        ng-change="refreshGUI()"
-                       ng-model="contractPremiums.searchText">
+                       ng-model="customers.searchText">
 
             </div>
 
         </div>
 
-        <div class="form-group row" id="printBankTransactionsTable">
+        <div class="form-group row" id="printCustomersTable">
 
             <div class="form-group row">
 
-                <h4 class="text-center">تقرير التحصيل والسداد</h4>
+                <h4 class="text-center">تقرير العملاء</h4>
 
             </div>
 
@@ -123,82 +123,80 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-
                         <th>
                             <span>#</span>
                         </th>
 
                         <th>
-                            <span>رقم العقد</span>
+                            <span>الاسم</span>
                         </th>
 
                         <th>
-                            <span>العميل</span>
+                            <span>تاريخ التسجيل</span>
                         </th>
 
                         <th>
-                            <span>الكفيل</span>
+                            <span>الجنسية</span>
                         </th>
 
                         <th>
-                            <span>تاريخ الاستحقاق</span>
+                            <span>رقم الهوية</span>
                         </th>
 
                         <th>
-                            <span>الحالة</span>
+                            <span>الجوال</span>
                         </th>
 
                         <th>
-                            <span>المبلغ</span>
+                            <span>الهاتف</span>
                         </th>
 
                         <th>
-                            <span>المسدد</span>
+                            <span>إجمالي العقود</span>
                         </th>
 
                         <th>
-                            <span>الباقي</span>
+                            <span>المدفوع</span>
+                        </th>
+
+                        <th>
+                            <span>المتبقي</span>
                         </th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="contractPremium in contractPremiums | filter:contractPremiums.searchText">
+                    <tr ng-repeat="customer in customers | filter:customers.searchText">
                         <td>{{$index+1}}</td>
-                        <td>{{contractPremium.contract.code}}</td>
                         <td>
-                            <span>{{contractPremium.contract.customer.contact.shortName}}</span>
-                            <br/>
-                            <span class="label label-info">{{contractPremium.contract.customer.contact.mobile}}</span>
-                        </td>
-                        <td>
-                            <span>{{contractPremium.contract.sponsor1.contact.shortName}}</span>
-                            <br/>
-                            <span class="label label-info">{{contractPremium.contract.sponsor1.contact.mobile}}</span>
+                            <span class="label label-success no-print">{{customer.enabled ? 'مفعل' : ''}}</span>
+                            <span class="label label-danger no-print">{{customer.enabled ? '' : 'معطل'}}</span>
+                            {{customer.contact.shortName}}
                         </td>
                         <td>
-                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
-                            <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
+                            <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{customer.registerDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
+                            <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{customer.registerDate | date: 'yyyy-MM-dd'}}</span>
                         </td>
-                        <td ng-class="{
-                            'danger' : contractPremium.state==='غير مسدد',
-                            'success' : contractPremium.state==='تم السداد',
-                            'warning' : contractPremium.state==='سداد جزئي',
-                            'info' : contractPremium.state==='غير مستحق',
-                            }">
-                            {{contractPremium.state}}
-                        </td>
-                        <td>{{contractPremium.amount | currency:' SAR ':2}}</td>
-                        <td>{{contractPremium.paid | currency:' SAR ':2}}</td>
-                        <td>{{contractPremium.remain | currency:' SAR ':2}}</td>
+                        <td>{{customer.contact.nationality}}</td>
+                        <td>{{customer.contact.identityNumber}}</td>
+                        <td>{{customer.contact.mobile}}</td>
+                        <td>{{customer.contact.phone}}</td>
+                        <td>{{customer.contractsTotalPrice | currency:' SAR ':2}}</td>
+                        <td>{{customer.contractsPaid | currency:' SAR ':2}}</td>
+                        <td>{{customer.contractsRemain | currency:' SAR ':2}}</td>
                     </tr>
-                    <tr ng-if="contractPremiums.length > 0">
-                        <td class="info" colspan="6">
-                            <span class="pull-left">المجموع</span>
+                    <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;" ng-if="!customers || customers.length ==0">
+                        <td colspan="10">
+                            <span>لا نتائج</span>
                         </td>
-                        <td class="success" colspan="1">{{contractPremiums | sumByKey:'amount' | currency:' SAR ':2}}</td>
-                        <td class="success" colspan="1">{{contractPremiums | sumByKey:'paid' | currency:' SAR ':2}}</td>
-                        <td class="success" colspan="1">{{contractPremiums | sumByKey:'remain' | currency:' SAR ':2}}</td>
+                    </tr>
+                    <tr ng-if="customers.length > 0">
+                        <td class="info" colspan="7">
+                            <span class="pull-left">المجموع الكلي</span>
+                        </td>
+                        <td class="success" colspan="1">{{customers | sumByKey:'contractsTotalPrice' | currency:' SAR ':2}}</td>
+                        <td class="success" colspan="1">{{customers | sumByKey:'contractsPaid' | currency:' SAR ':2}}</td>
+                        <td class="success" colspan="1">{{customers | sumByKey:'contractsRemain' | currency:' SAR ':2}}</td>
                     </tr>
                     </tbody>
                 </table>

@@ -166,7 +166,7 @@
                             </th>
 
                             <th>
-                                <span>جوال العميل</span>
+                                <span>الكفيل</span>
                             </th>
 
                             <th>
@@ -210,8 +210,16 @@
                                     <span>{{contractPremium.contract.code}}</span>
                                 </a>
                             </td>
-                            <td>{{contractPremium.contract.customer.contact.shortName}}</td>
-                            <td>{{contractPremium.contract.customer.contact.mobile}}</td>
+                            <td>
+                                <span>{{contractPremium.contract.customer.contact.shortName}}</span>
+                                <br/>
+                                <span class="label label-info">{{contractPremium.contract.customer.contact.mobile}}</span>
+                            </td>
+                            <td>
+                                <span>{{contractPremium.contract.sponsor1.contact.shortName}}</span>
+                                <br/>
+                                <span class="label label-info">{{contractPremium.contract.sponsor1.contact.mobile}}</span>
+                            </td>
                             <td>
                                 <span ng-if="dateType==='H'" ng-class="{'no-print': dateType==='G'}">{{contractPremium.dueDate | kdate: 'yyyy-mm-dd' : 'ar' : 'ummalqura'}}</span>
                                 <span ng-if="dateType==='G'" ng-class="{'no-print': dateType==='H'}">{{contractPremium.dueDate | date: 'yyyy-MM-dd'}}</span>
@@ -230,14 +238,14 @@
                         </tr>
                         <tr class="blank_row no-print" style="height: 10px !important; background-color: #FFFFFF;"
                             ng-if="!contractPremiums || contractPremiums.length ==0">
-                            <td colspan="10">
+                            <td colspan="9">
                                 <p>
                                     <span>لا يوجد أقساط حتى الآن </span>
                                 </p>
                             </td>
                         </tr>
                         <tr ng-if="contractPremiums.length > 0">
-                            <td class="info" colspan="7">
+                            <td class="info" colspan="6">
                                 <span class="pull-left">المجموع الكلي(جميع القيم بالريال السعودي)</span>
                             </td>
                             <td class="success" colspan="1">{{contractPremiums | sumByKey:'amount' | currency:'':2}}</td>
