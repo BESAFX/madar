@@ -903,7 +903,9 @@ Electronics Devices]]></text>
 								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 							</reportElement>
 							<textField isBlankWhenNull="true">
-								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="410" height="18" forecolor="#000000" uuid="a3504919-c736-44b8-9d09-910b9c6f19ca"/>
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="410" height="18" forecolor="#000000" uuid="a3504919-c736-44b8-9d09-910b9c6f19ca">
+									<printWhenExpression><![CDATA[$P{CONTRACT}.getSponsor1() != null]]></printWhenExpression>
+								</reportElement>
 								<box padding="0">
 									<pen lineWidth="0.5" lineColor="#0F8628"/>
 									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -953,7 +955,9 @@ Electronics Devices]]></text>
 								<text><![CDATA[كفالة غرامية فى حال الحياة والممات  بمبلغ:]]></text>
 							</staticText>
 							<textField pattern="#,##0.## ريال ;#,##0.##-  ريال " isBlankWhenNull="true">
-								<reportElement stretchType="RelativeToTallestObject" x="110" y="0" width="244" height="18" forecolor="#000000" uuid="4483ffe9-fffe-495a-b001-abe3225483f7"/>
+								<reportElement stretchType="RelativeToTallestObject" x="110" y="0" width="244" height="18" forecolor="#000000" uuid="4483ffe9-fffe-495a-b001-abe3225483f7">
+									<printWhenExpression><![CDATA[$P{CONTRACT}.getSponsor1() != null]]></printWhenExpression>
+								</reportElement>
 								<box padding="0">
 									<pen lineWidth="0.5" lineColor="#0F8628"/>
 									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1183,7 +1187,9 @@ Electronics Devices]]></text>
 								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 							</reportElement>
 							<textField isBlankWhenNull="true">
-								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="410" height="18" forecolor="#000000" uuid="b5c2a0ca-1d44-4688-9db8-408b81ed5298"/>
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="410" height="18" forecolor="#000000" uuid="b5c2a0ca-1d44-4688-9db8-408b81ed5298">
+									<printWhenExpression><![CDATA[$P{CONTRACT}.getSponsor2() != null]]></printWhenExpression>
+								</reportElement>
 								<box padding="0">
 									<pen lineWidth="0.5" lineColor="#0F8628"/>
 									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -1233,7 +1239,9 @@ Electronics Devices]]></text>
 								<text><![CDATA[كفالة غرامية فى حال الحياة والممات  بمبلغ:]]></text>
 							</staticText>
 							<textField pattern="#,##0.## ريال ;#,##0.##-  ريال " isBlankWhenNull="true">
-								<reportElement stretchType="RelativeToTallestObject" x="110" y="0" width="244" height="18" forecolor="#000000" uuid="86d9b22c-3ff3-4d4b-80ea-b92e8ae5368a"/>
+								<reportElement stretchType="RelativeToTallestObject" x="110" y="0" width="244" height="18" forecolor="#000000" uuid="86d9b22c-3ff3-4d4b-80ea-b92e8ae5368a">
+									<printWhenExpression><![CDATA[$P{CONTRACT}.getSponsor2() != null]]></printWhenExpression>
+								</reportElement>
 								<box padding="0">
 									<pen lineWidth="0.5" lineColor="#0F8628"/>
 									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
