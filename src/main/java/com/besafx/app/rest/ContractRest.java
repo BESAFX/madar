@@ -1,5 +1,6 @@
 package com.besafx.app.rest;
 
+import com.besafx.app.async.TransactionalService;
 import com.besafx.app.auditing.EntityHistoryListener;
 import com.besafx.app.auditing.PersonAwareUserDetails;
 import com.besafx.app.config.CustomException;
@@ -104,16 +105,16 @@ public class ContractRest {
     @Autowired
     private EntityHistoryListener entityHistoryListener;
 
+    @Autowired
+    private TransactionalService transactionalService;
+
     @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ROLE_CONTRACT_CREATE')")
     @Transactional
     public String create(@RequestBody Contract contract) {
-        Contract tempContract = contractService.findByCode(contract.getCode());
-        if (tempContract != null) {
-            throw new CustomException("عفواً، رقم العقد المدخل غير متاح، حاول برقم آخر");
-        }
         Person caller = ((PersonAwareUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPerson();
+        contract.setCode(transactionalService.getNextContractCode());
         contract.setPerson(caller);
         contract.setDate(new DateTime().toDate());
         contract = contractService.save(contract);
